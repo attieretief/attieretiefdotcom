@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attie Retief</title>
+    <script>
+        const landscapes = [
+            "photo-1506905925346-21bda4d32df4",
+            "photo-1464822759023-fed622ff2c3b",
+            "photo-1519681393784-d120267933ba",
+            "photo-1470071459604-3b5ec3a7fe05",
+            "photo-1500534314263-0869cef07f3a",
+            "photo-1507400492013-162706c8c05e",
+            "photo-1518173946687-a265e681d2c6",
+            "photo-1433086966358-54859d0ed716",
+            "photo-1505765050516-f72dcac9c60e",
+            "photo-1536244636800-a3f74db0f3cf",
+        ];
+        const pick = landscapes[Math.floor(Math.random() * landscapes.length)];
+        document.documentElement.style.setProperty(
+            "--bg-image",
+            "url(https://images.unsplash.com/" + pick + "?w=1920&q=80)"
+        );
+    </script>
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-bg: #0a0a0f;
+            --color-surface: #12121a;
+            --color-border: rgba(255, 255, 255, 0.06);
+            --color-text: #e8e8ed;
+            --color-text-muted: #8a8a9a;
+            --color-accent: #6366f1;
+            --color-accent-glow: rgba(99, 102, 241, 0.15);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Full-bleed background image with dark overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: var(--bg-image);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -2;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: -1;
+        }
+
+        .container {
+            text-align: center;
+            padding: 3rem 2rem;
+            max-width: 560px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 40px var(--color-accent-glow);
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, var(--color-text), var(--color-text-muted));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            color: var(--color-text-muted);
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .link-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            background: rgba(10, 10, 15, 0.55);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            text-decoration: none;
+            color: var(--color-text);
+            transition: all 0.25s ease;
+        }
+
+        .link-card:hover {
+            border-color: rgba(99, 102, 241, 0.3);
+            background: rgba(99, 102, 241, 0.05);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 20px var(--color-accent-glow);
+        }
+
+        .link-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .link-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: var(--color-text-muted);
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .link-card:hover .link-icon svg {
+            stroke: var(--color-accent);
+        }
+
+        .link-content {
+            text-align: left;
+        }
+
+        .link-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.15rem;
+        }
+
+        .link-desc {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+        }
+
+        .link-arrow {
+            margin-left: auto;
+            color: var(--color-text-muted);
+            opacity: 0;
+            transform: translateX(-4px);
+            transition: all 0.25s ease;
+            flex-shrink: 0;
+        }
+
+        .link-card:hover .link-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        footer {
+            margin-top: 3rem;
+            color: var(--color-text-muted);
+            font-size: 0.75rem;
+            opacity: 0.5;
+        }
+
+        /* Fade-in animation */
+        .container > * {
+            animation: fadeUp 0.6s ease both;
+        }
+
+        .container > :nth-child(1) { animation-delay: 0s; }
+        .container > :nth-child(2) { animation-delay: 0.08s; }
+        .container > :nth-child(3) { animation-delay: 0.14s; }
+        .container > :nth-child(4) { animation-delay: 0.2s; }
+        .container > :nth-child(5) { animation-delay: 0.26s; }
+
+        .links .link-card:nth-child(1) { animation: fadeUp 0.5s ease 0.25s both; }
+        .links .link-card:nth-child(2) { animation: fadeUp 0.5s ease 0.33s both; }
+        .links .link-card:nth-child(3) { animation: fadeUp 0.5s ease 0.41s both; }
+        .links .link-card:nth-child(4) { animation: fadeUp 0.5s ease 0.49s both; }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 2rem 1.25rem;
+            }
+            h1 {
+                font-size: 1.65rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="avatar"><img src="avatar.png" alt="Attie Retief"></div>
+        <h1>Attie Retief</h1>
+
+        <div class="links">
+            <a href="https://linc.co.za" target="_blank" rel="noopener" class="link-card">
+                <div class="link-icon">
+                    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">Linc</div>
+                    <div class="link-desc">My company</div>
+                </div>
+                <span class="link-arrow">&rarr;</span>
+            </a>
+
+            <a href="https://aletheia.attieretief.com" target="_blank" rel="noopener" class="link-card">
+                <div class="link-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">Aletheia</div>
+                    <div class="link-desc">Truth-seeking project</div>
+                </div>
+                <span class="link-arrow">&rarr;</span>
+            </a>
+
+            <a href="https://video.attieretief.com" target="_blank" rel="noopener" class="link-card">
+                <div class="link-icon">
+                    <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">YouTube</div>
+                    <div class="link-desc">Videos &amp; content</div>
+                </div>
+                <span class="link-arrow">&rarr;</span>
+            </a>
+
+            <a href="https://www.linkedin.com/in/attieretief/" target="_blank" rel="noopener" class="link-card">
+                <div class="link-icon">
+                    <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">LinkedIn</div>
+                    <div class="link-desc">Connect with me</div>
+                </div>
+                <span class="link-arrow">&rarr;</span>
+            </a>
+        </div>
+
+        <footer>&copy; 2026 Attie Retief</footer>
+    </div>
+</body>
+</html>
