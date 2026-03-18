@@ -4,6 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Attie Retief - Videos</title>
+    <meta name="description" content="Watch piano covers and performances by Attie Retief — popular piano, classical, Billy Joel covers, and more.">
+    <link rel="canonical" href="https://video.attieretief.com/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Attie Retief - Videos">
+    <meta property="og:description" content="Watch piano covers and performances — popular piano, classical, Billy Joel covers, and more.">
+    <meta property="og:url" content="https://video.attieretief.com/">
+    <meta property="og:image" content="https://attieretief.com/avatar.png">
+    <meta property="og:site_name" content="Attie Retief">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Attie Retief - Videos">
+    <meta name="twitter:description" content="Watch piano covers and performances — popular piano, classical, Billy Joel covers, and more.">
+    <meta name="twitter:image" content="https://attieretief.com/avatar.png">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Attie Retief - Videos",
+        "description": "Piano covers and performances by Attie Retief",
+        "url": "https://video.attieretief.com",
+        "author": {
+            "@type": "Person",
+            "name": "Attie Retief",
+            "url": "https://attieretief.com"
+        }
+    }
+    </script>
+
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -119,7 +152,7 @@
             padding: 1rem;
         }
 
-        .playlist-card .info h3 {
+        .playlist-card .info h2 {
             font-size: 1rem;
             font-weight: 600;
         }
@@ -159,7 +192,7 @@
             flex-shrink: 0;
         }
 
-        .video-item .video-info h4 {
+        .video-item .video-info h3 {
             font-size: 0.9rem;
             font-weight: 600;
             line-height: 1.4;
@@ -418,7 +451,7 @@
                     <div class="playlist-card" onclick="openPlaylist('${pl.id}', '${pl.title.replace(/'/g, "\\'")}')">
                         <img class="thumb" src="${pl.thumbnail}" alt="${pl.title}" loading="lazy">
                         <div class="info">
-                            <h3>${pl.title}</h3>
+                            <h2>${pl.title}</h2>
                             <p>${pl.count} video${pl.count !== 1 ? "s" : ""}</p>
                         </div>
                     </div>
@@ -468,7 +501,7 @@
                     <span class="index">${v.videoId === activeVideoId ? "&#9654;" : i + 1}</span>
                     <img class="thumb-small" src="${v.thumbnail}" alt="${v.title}" loading="lazy">
                     <div class="video-info">
-                        <h4>${v.title}</h4>
+                        <h3>${v.title}</h3>
                     </div>
                 </div>
             `).join("");
