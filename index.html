@@ -53,7 +53,6 @@
             "photo-1536244636800-a3f74db0f3cf",
             "photo-1553949345-eb786bb3f7ba",
             "photo-1534088568595-a066f410bcda",
-            "photo-1531315396756-905d68d21b56",
             "photo-1513002749550-c59d786b8e6c",
             "photo-1542224566-6e85f2e6772f",
             "photo-1488711500009-f9111944b1ab",
@@ -109,12 +108,21 @@
         body::before {
             content: "";
             position: fixed;
-            inset: 0;
+            inset: -20px;
             background-image: var(--bg-image);
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             z-index: -2;
+            transform: translate(var(--parallax-x, 0), var(--parallax-y, 0));
+            transition: transform 0.3s ease-out;
+            animation: bgFadeIn 1.5s ease both;
+            will-change: transform;
+        }
+
+        @keyframes bgFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         body::after {
@@ -142,6 +150,12 @@
             overflow: hidden;
             border: 3px solid rgba(255, 255, 255, 0.15);
             box-shadow: 0 0 40px var(--color-accent-glow);
+            animation: fadeUp 0.6s ease both, float 6s ease-in-out infinite 1s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
         }
 
         .avatar img {
@@ -155,10 +169,22 @@
             font-weight: 700;
             letter-spacing: -0.03em;
             margin-bottom: 0.5rem;
-            background: linear-gradient(to right, var(--color-text), var(--color-text-muted));
+            background: linear-gradient(
+                90deg,
+                var(--color-text) 0%,
+                var(--color-accent) 50%,
+                var(--color-text) 100%
+            );
+            background-size: 200% 100%;
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: fadeUp 0.6s ease both, shimmer 8s ease-in-out infinite 1.2s;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 100% 0; }
+            50% { background-position: 0% 0; }
         }
 
         .tagline {
@@ -187,12 +213,12 @@
             text-decoration: none;
             color: var(--color-text);
             transition: all 0.25s ease;
+            will-change: transform;
         }
 
         .link-card:hover {
             border-color: rgba(99, 102, 241, 0.3);
             background: rgba(99, 102, 241, 0.05);
-            transform: translateY(-2px);
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 20px var(--color-accent-glow);
         }
 
@@ -285,6 +311,14 @@
             }
         }
 
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
         @media (max-width: 480px) {
             .container {
                 padding: 2rem 1.25rem;
@@ -359,5 +393,38 @@
 
         <footer>&copy; 2026 Attie Retief</footer>
     </div>
+
+    <script>
+        const isTouch = window.matchMedia("(pointer: coarse)").matches;
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        if (!isTouch && !prefersReducedMotion) {
+            // Subtle parallax on background image
+            document.addEventListener("mousemove", (e) => {
+                const x = (e.clientX / window.innerWidth - 0.5) * 10;
+                const y = (e.clientY / window.innerHeight - 0.5) * 10;
+                document.body.style.setProperty("--parallax-x", x + "px");
+                document.body.style.setProperty("--parallax-y", y + "px");
+            });
+
+            // 3D tilt on link cards
+            document.querySelectorAll(".link-card").forEach((card) => {
+                card.addEventListener("mousemove", (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = ((y - centerY) / centerY) * -4;
+                    const rotateY = ((x - centerX) / centerX) * 4;
+                    card.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-2px)`;
+                });
+
+                card.addEventListener("mouseleave", () => {
+                    card.style.transform = "";
+                });
+            });
+        }
+    </script>
 </body>
 </html>
