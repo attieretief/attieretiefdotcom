@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Wonder — Attie Retief</title>
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #06060b;
+            --surface: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.07);
+            --text: #e8e8ed;
+            --muted: #7a7a8e;
+            --accent: #8b7cf6;
+            --accent-dim: rgba(139, 124, 246, 0.12);
+            --done: #4ade80;
+            --draft: #facc15;
+            --pending: #334155;
+        }
+
+        body {
+            font-family: "Georgia", "Times New Roman", serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        a { color: inherit; }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 5rem 2rem 3rem;
+            max-width: 720px;
+            margin: 0 auto;
+            animation: fadeIn 1s ease both;
+        }
+
+        .hero .back {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 0.03em;
+            transition: color 0.2s;
+        }
+
+        .hero .back:hover { color: var(--text); }
+
+        .hero .equation {
+            font-family: "Georgia", serif;
+            font-style: italic;
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin: 2.5rem 0 1rem;
+            letter-spacing: 0.05em;
+            opacity: 0.7;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 0.3rem;
+        }
+
+        .hero .subtitle {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 0.85rem;
+            color: var(--muted);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero .teaser {
+            font-size: 1.15rem;
+            color: #b0b0c0;
+            line-height: 1.85;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .hero .teaser em {
+            color: var(--text);
+            font-style: italic;
+        }
+
+        /* Stats bar */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 600px;
+            animation: fadeIn 1s ease 0.3s both;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 0.72rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.2rem;
+        }
+
+        /* Overall progress bar */
+        .progress-overall {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            padding: 0 2rem;
+            animation: fadeIn 1s ease 0.4s both;
+        }
+
+        .progress-bar-bg {
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+            background: linear-gradient(90deg, var(--done), var(--accent));
+            transition: width 1.5s ease;
+        }
+
+        .progress-label {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 0.75rem;
+            color: var(--muted);
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        /* Divider */
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: var(--border);
+            margin: 0 auto 3rem;
+        }
+
+        /* Outline */
+        .outline {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .part {
+            margin-bottom: 2.5rem;
+            animation: fadeUp 0.5s ease both;
+        }
+
+        .part:nth-child(1) { animation-delay: 0.5s; }
+        .part:nth-child(2) { animation-delay: 0.6s; }
+        .part:nth-child(3) { animation-delay: 0.7s; }
+        .part:nth-child(4) { animation-delay: 0.8s; }
+        .part:nth-child(5) { animation-delay: 0.9s; }
+        .part:nth-child(6) { animation-delay: 1.0s; }
+        .part:nth-child(7) { animation-delay: 1.1s; }
+
+        .part-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+        }
+
+        .part-title {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--accent);
+        }
+
+        .part-progress {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 0.7rem;
+            color: var(--muted);
+        }
+
+        .part-desc {
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .chapters {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .chapter {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 0.85rem;
+            border-radius: 8px;
+            background: var(--surface);
+            border: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .chapter:hover {
+            border-color: var(--border);
+        }
+
+        .chapter-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .chapter-dot.done { background: var(--done); box-shadow: 0 0 8px rgba(74, 222, 128, 0.3); }
+        .chapter-dot.draft { background: var(--draft); box-shadow: 0 0 8px rgba(250, 204, 21, 0.2); }
+        .chapter-dot.pending { background: var(--pending); }
+
+        .chapter-num {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 0.7rem;
+            color: var(--muted);
+            width: 20px;
+            flex-shrink: 0;
+        }
+
+        .chapter-title {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 0.85rem;
+            flex-grow: 1;
+        }
+
+        .chapter.is-pending .chapter-title {
+            color: var(--muted);
+        }
+
+        .chapter-status {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            flex-shrink: 0;
+        }
+
+        .chapter-status.done { color: var(--done); }
+        .chapter-status.draft { color: var(--draft); }
+        .chapter-status.pending { color: var(--muted); }
+
+        /* Legend */
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease 0.45s both;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 0.7rem;
+            color: var(--muted);
+        }
+
+        .legend-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 0.75rem;
+            color: var(--muted);
+            border-top: 1px solid var(--border);
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        footer a:hover { text-decoration: underline; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 640px) {
+            .hero { padding: 3rem 1.5rem 2rem; }
+            .hero h1 { font-size: 2rem; }
+            .hero .teaser { font-size: 1.05rem; }
+            .stats { gap: 1.5rem; }
+            .stat-number { font-size: 1.5rem; }
+            .outline { padding: 0 1.25rem 3rem; }
+            .chapter-title { font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <a href="/" class="back">&larr; attieretief.com</a>
+
+        <div class="equation">e<sup>i&pi;</sup> + 1 = 0</div>
+
+        <h1>Cosmic Wonder</h1>
+        <p class="subtitle">Superfluid Vacuum Theology</p>
+
+        <p class="teaser">
+            What if the deepest equation in mathematics and the oldest story in theology
+            are saying the same thing in different languages?
+            <br><br>
+            This book walks patiently through modern physics &mdash; from the grammar of light
+            to quantum fields to the superfluid vacuum hypothesis &mdash; and discovers that
+            Euler's identity, <em>e<sup>i&pi;</sup>&nbsp;+&nbsp;1&nbsp;=&nbsp;0</em>, maps
+            structurally onto the arc of creation, fall, incarnation, and restoration.
+            <br><br>
+            Not proof. Resonance. The kind that makes you stop and listen.
+        </p>
+    </div>
+
+    <div class="stats">
+        <div class="stat">
+            <div class="stat-number">22</div>
+            <div class="stat-label">Chapters</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">16</div>
+            <div class="stat-label">Drafted</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">5</div>
+            <div class="stat-label">Parts</div>
+        </div>
+    </div>
+
+    <div class="progress-overall">
+        <div class="progress-bar-bg">
+            <div class="progress-bar-fill" style="width: 73%"></div>
+        </div>
+        <div class="progress-label">73% of first draft complete</div>
+    </div>
+
+    <div class="legend">
+        <div class="legend-item"><div class="legend-dot" style="background: var(--done)"></div> Complete</div>
+        <div class="legend-item"><div class="legend-dot" style="background: var(--draft)"></div> First draft</div>
+        <div class="legend-item"><div class="legend-dot" style="background: var(--pending)"></div> Not started</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="outline">
+        <!-- Front Matter -->
+        <div class="part">
+            <div class="part-header">
+                <span class="part-title">Front Matter</span>
+                <span class="part-progress">1 / 1</span>
+            </div>
+            <div class="chapters">
+                <div class="chapter">
+                    <div class="chapter-dot draft"></div>
+                    <span class="chapter-num"></span>
+                    <span class="chapter-title">Prologue</span>
+                    <span class="chapter-status draft">Draft</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Part I -->
+        <div class="part">
+            <div class="part-header">
+                <span class="part-title">Part I &mdash; Learning to Read the World</span>
+                <span class="part-progress">7 / 7</span>
+            </div>
+            <p class="part-desc">Tools to evaluate scientific claims honestly, from the largest scales to the smallest.</p>
+            <div class="chapters">
+                <div class="chapter">
+                    <div class="chapter-dot done"></div>
+                    <span class="chapter-num">1</span>
+                    <span class="chapter-title">The Grammar of Light</span>
+                    <span class="chapter-status done">Complete</span>
+                </div>
+                <div class="chapter">
+                    <div class="chapter-dot draft"></div>
+                    <span class="chapter-num">2</span>
+                    <span class="chapter-title">Does the Universe Expand?</span>
+                    <span class="chapter-status draft">Draft</span>
+                </div>
+                <div class="chapter">
+                    <div class="chapter-dot draft"></div>
+                    <span class="chapter-num">3</span>
+                    <span class="chapter-title">The Tension in the Numbers</span>
+                    <span class="chapter-status draft">Draft</span>
+                </div>
+                <div class="chapter">
+                    <div class="chapter-dot draft"></div>
+                    <span class="chapter-num">4</span>
+                    <span class="chapter-title">The Three Placeholders</span>
+                    <span class="chapter-status draft">Draft</span>
+                </div>
+                <div class="chapter">
+                    <div class="chapter-dot draft"></div>
+                    <span class="chapter-num">5</span>
+                    <span class="chapter-title">A Universe on a Knife-Edge</span>
+                    <span class="chapter-status draft">Draft</span>
+                </div>
+                <div class="chapter">
+                    <div class="chapter-dot draft"></div>
+                    <span class="chapter-num">6</span>
+                    <span class="chapter-title">The World Below the Atom</span>
+                    <span class="chapter-status draft">Draft</span>
+                </div>
+                <div class="chapter">
+                    <div class="chapter-dot draft"></div>
+                    <span class="chapter-num">7</span>
+                    <span class="chapter-title">Waves, Phase, and the Language of Rotation</span>
+                    <span class="chapter-status draft">Draft</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Part II -->
+        <div class="part">
+            <div class="part-header">
+                <span class="part-title">Part II &mdash; A Deeper Architecture</span>
+                <span class="part-progress">4 / 4</span>
+            </div>
+            <p class="part-desc">The superfluid vacuum hypothesis as a legitimate scientific framework.</p>
+            <div class="chapters">
+                <div class="chapter">
+                    <div class="chapter-dot draft"></div>
+                    <span class="chapter-num">8</span>
+                    <span class="chapter-title">What If Space Is Not Empty?</span>
+                    <span class="chapter-status draft">Draft</span>
+                </div>
+                <div class="chapter">
+                    <div class="chapter-dot draft"></div>
+                    <span class="chapter-num">9</span>
+                    <span class="chapter-title">What &ldquo;Emergence&rdquo; Means</span>
+                    <span class="chapter-status draft">Draft</span>
+                </div>
+                <div class="chapter">
+                    <div class="chapter-dot draft"></div>
+                    <span class="chapter-num">10</span>
+                    <span class="chapter-title">Gravity Without Force</span>
+                    <span class="chapter-status draft">Draft</span>
+                </div>
+                <div class="chapter">
+                    <div class="chapter-dot draft"></div>
+                    <span class="chapter-num">11</span>
+                    <span class="chapter-title">Why This Medium?</span>
+                    <span class="chapter-status draft">Draft</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Part III -->
+        <div class="part">
+            <div class="part-header">
+                <span class="part-title">Part III &mdash; The Equation</span>
+                <span class="part-progress">5 / 5</span>
+            </div>
+            <p class="part-desc">Euler's identity mapped onto the theological narrative of creation, fall, and restoration.</p>
+            <div class="chapters">
+                <div class="chapter">
+                    <div class="chapter-dot draft"></div>
+                    <span class="chapter-num">12</span>
+                    <span class="chapter-title">Five Numbers, One Equation</span>
+                    <span class="chapter-status draft">Draft</span>
+                </div>
+                <div class="chapter">
+                    <div class="chapter-dot draft"></div>
+                    <span class="chapter-num">13</span>
+                    <span class="chapter-title">Growth, Hiddenness, and the Full Half-Turn</span>
+                    <span class="chapter-status draft">Draft</span>
+                </div>
+                <div class="chapter">
+                    <div class="chapter-dot draft"></div>
+                    <span class="chapter-num">14</span>
+                    <span class="chapter-title">The World at Minus One</span>
+                    <span class="chapter-status draft">Draft</span>
+                </div>
+                <div class="chapter">
+                    <div class="chapter-dot draft"></div>
+                    <span class="chapter-num">15</span>
+                    <span class="chapter-title">The Plus One</span>
+                    <span class="chapter-status draft">Draft</span>
+                </div>
+                <div class="chapter">
+                    <div class="chapter-dot draft"></div>
+                    <span class="chapter-num">16</span>
+                    <span class="chapter-title">Resolution</span>
+                    <span class="chapter-status draft">Draft</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Part IV -->
+        <div class="part">
+            <div class="part-header">
+                <span class="part-title">Part IV &mdash; Resonances and Boundaries</span>
+                <span class="part-progress">0 / 4</span>
+            </div>
+            <p class="part-desc">Wider implications, honestly marked limits, and the strongest objections engaged.</p>
+            <div class="chapters">
+                <div class="chapter is-pending">
+                    <div class="chapter-dot pending"></div>
+                    <span class="chapter-num">17</span>
+                    <span class="chapter-title">Vortex Ontology</span>
+                    <span class="chapter-status pending">&mdash;</span>
+                </div>
+                <div class="chapter is-pending">
+                    <div class="chapter-dot pending"></div>
+                    <span class="chapter-num">18</span>
+                    <span class="chapter-title">Consciousness and the Superfluid</span>
+                    <span class="chapter-status pending">&mdash;</span>
+                </div>
+                <div class="chapter is-pending">
+                    <div class="chapter-dot pending"></div>
+                    <span class="chapter-num">19</span>
+                    <span class="chapter-title">The Five Mechanisms</span>
+                    <span class="chapter-status pending">&mdash;</span>
+                </div>
+                <div class="chapter is-pending">
+                    <div class="chapter-dot pending"></div>
+                    <span class="chapter-num">20</span>
+                    <span class="chapter-title">What This Does Not Prove</span>
+                    <span class="chapter-status pending">&mdash;</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Part V -->
+        <div class="part">
+            <div class="part-header">
+                <span class="part-title">Part V &mdash; The Invitation</span>
+                <span class="part-progress">0 / 2</span>
+            </div>
+            <p class="part-desc">From physics to worship. Restraint and wonder held together.</p>
+            <div class="chapters">
+                <div class="chapter is-pending">
+                    <div class="chapter-dot pending"></div>
+                    <span class="chapter-num">21</span>
+                    <span class="chapter-title">The Contingency Cascade</span>
+                    <span class="chapter-status pending">&mdash;</span>
+                </div>
+                <div class="chapter is-pending">
+                    <div class="chapter-dot pending"></div>
+                    <span class="chapter-num">22</span>
+                    <span class="chapter-title">A Cosmos That Speaks</span>
+                    <span class="chapter-status pending">&mdash;</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back Matter -->
+        <div class="part">
+            <div class="part-header">
+                <span class="part-title">Back Matter</span>
+                <span class="part-progress">0 / 3</span>
+            </div>
+            <div class="chapters">
+                <div class="chapter is-pending">
+                    <div class="chapter-dot pending"></div>
+                    <span class="chapter-num"></span>
+                    <span class="chapter-title">Technical Appendix</span>
+                    <span class="chapter-status pending">&mdash;</span>
+                </div>
+                <div class="chapter is-pending">
+                    <div class="chapter-dot pending"></div>
+                    <span class="chapter-num"></span>
+                    <span class="chapter-title">Glossary</span>
+                    <span class="chapter-status pending">&mdash;</span>
+                </div>
+                <div class="chapter is-pending">
+                    <div class="chapter-dot pending"></div>
+                    <span class="chapter-num"></span>
+                    <span class="chapter-title">Reading Guide</span>
+                    <span class="chapter-status pending">&mdash;</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        A book by <a href="/">Attie Retief</a> &middot; In progress
+    </footer>
+</body>
+</html>
