@@ -201,6 +201,51 @@
             border: none;
         }
 
+        .end-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(10, 10, 15, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            z-index: 10;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .end-overlay.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .end-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .end-btn:hover {
+            background: rgba(99, 102, 241, 0.15);
+            border-color: var(--accent);
+        }
+
+        .end-btn.primary {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .end-btn.primary:hover {
+            opacity: 0.85;
+        }
+
         .now-playing {
             margin-top: 1rem;
             font-size: 1.1rem;
@@ -401,9 +446,16 @@
         }
 
         function renderVideoList(activeVideoId) {
+            const hasNext = currentVideos.findIndex(v => v.videoId === activeVideoId) < currentVideos.length - 1;
             const playerHTML = activeVideoId ? `
                 <div class="player-section">
-                    <div class="player-wrapper"><div id="yt-player"></div></div>
+                    <div class="player-wrapper">
+                        <div id="yt-player"></div>
+                        <div class="end-overlay" id="end-overlay">
+                            <button class="end-btn" onclick="replayVideo()">Replay</button>
+                            ${hasNext ? '<button class="end-btn primary" onclick="playNextVideo()">Next Video</button>' : ""}
+                        </div>
+                    </div>
                     <div class="now-playing" id="now-playing"></div>
                     <div class="now-playing-meta" id="now-playing-meta"></div>
                 </div>
@@ -477,12 +529,27 @@
         }
 
         function onPlayerStateChange(event) {
-            // When video ends, auto-play next in list
+            const overlay = document.getElementById("end-overlay");
             if (event.data === YT.PlayerState.ENDED) {
-                const nextIndex = currentVideoIndex + 1;
-                if (nextIndex < currentVideos.length) {
-                    playVideo(nextIndex);
-                }
+                // Show overlay to hide YouTube's suggested videos
+                if (overlay) overlay.classList.add("visible");
+            } else if (event.data === YT.PlayerState.PLAYING) {
+                // Hide overlay when playing
+                if (overlay) overlay.classList.remove("visible");
+            }
+        }
+
+        function replayVideo() {
+            if (player && typeof player.seekTo === "function") {
+                player.seekTo(0);
+                player.playVideo();
+            }
+        }
+
+        function playNextVideo() {
+            const nextIndex = currentVideoIndex + 1;
+            if (nextIndex < currentVideos.length) {
+                playVideo(nextIndex);
             }
         }
 
