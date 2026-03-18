@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attie Retief - Videos</title>
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0a0a0f;
+            --surface: rgba(255, 255, 255, 0.04);
+            --border: rgba(255, 255, 255, 0.08);
+            --text: #e8e8ed;
+            --muted: #8a8a9a;
+            --accent: #6366f1;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        a { color: inherit; text-decoration: none; }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 2.5rem 2rem 1.5rem;
+        }
+
+        .header .back {
+            color: var(--muted);
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        .header .back:hover { color: var(--text); }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-top: 0.75rem;
+        }
+
+        .header .subtitle {
+            color: var(--muted);
+            margin-top: 0.4rem;
+            font-size: 1rem;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            font-size: 0.85rem;
+            color: var(--muted);
+            display: none;
+        }
+
+        .breadcrumb.visible { display: block; }
+
+        .breadcrumb a {
+            color: var(--accent);
+            transition: opacity 0.2s;
+        }
+
+        .breadcrumb a:hover { opacity: 0.8; }
+
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        /* Content area */
+        .content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem 3rem;
+        }
+
+        /* Playlist grid */
+        .playlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .playlist-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            animation: fadeUp 0.4s ease both;
+        }
+
+        .playlist-card:nth-child(1) { animation-delay: 0.05s; }
+        .playlist-card:nth-child(2) { animation-delay: 0.1s; }
+        .playlist-card:nth-child(3) { animation-delay: 0.15s; }
+        .playlist-card:nth-child(4) { animation-delay: 0.2s; }
+
+        .playlist-card:hover {
+            border-color: rgba(99, 102, 241, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .playlist-card .thumb {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            display: block;
+        }
+
+        .playlist-card .info {
+            padding: 1rem;
+        }
+
+        .playlist-card .info h3 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .playlist-card .info p {
+            color: var(--muted);
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+        }
+
+        /* Video list */
+        .video-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .video-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.2s;
+            animation: fadeUp 0.3s ease both;
+        }
+
+        .video-item:hover { background: var(--surface); }
+        .video-item.active { background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.2); }
+
+        .video-item .thumb-small {
+            width: 160px;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+
+        .video-item .video-info h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .video-item .video-info .meta {
+            color: var(--muted);
+            font-size: 0.78rem;
+            margin-top: 0.25rem;
+        }
+
+        .video-item .index {
+            color: var(--muted);
+            font-size: 0.85rem;
+            width: 28px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        /* Player */
+        .player-section {
+            margin-bottom: 2rem;
+        }
+
+        .player-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #111;
+        }
+
+        .player-wrapper iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .now-playing {
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .now-playing-meta {
+            color: var(--muted);
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--muted);
+        }
+
+        .spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+
+        footer a { color: var(--accent); }
+        footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 640px) {
+            .content { padding: 1rem; }
+            .playlist-grid { grid-template-columns: 1fr; }
+            .video-item .thumb-small { width: 120px; }
+            .header h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="/" class="back">&larr; attieretief.com</a>
+        <h1>Videos</h1>
+        <p class="subtitle">Piano covers &amp; performances</p>
+    </div>
+
+    <div class="breadcrumb" id="breadcrumb">
+        <a href="#" onclick="showPlaylists(); return false;">Playlists</a>
+        <span>&rsaquo;</span>
+        <span id="breadcrumb-title"></span>
+    </div>
+
+    <div class="content" id="content">
+        <div class="loading"><div class="spinner"></div>Loading playlists&hellip;</div>
+    </div>
+
+    <footer>
+        <a href="https://www.youtube.com/@attieretief" target="_blank">Subscribe on YouTube</a> &middot; <a href="/">attieretief.com</a>
+    </footer>
+
+    <script>
+        const API_KEY = "AIzaSyDdAE6PhpnqwgqvtiQIgkXZNhUxcNDPE1k";
+        const PLAYLISTS = [
+            { id: "PLGkd4Gr5aL7dKch4EaEoGIHJozkYQKSCV", title: "Popular Piano" },
+            { id: "PLGkd4Gr5aL7euFymoFv5DMIr6Hk6A66yZ", title: "Classical Piano" },
+            { id: "PLGkd4Gr5aL7fZPtLyw2zse9K17ELHlAOH", title: "Billy Joel Piano Covers" },
+            { id: "PLGkd4Gr5aL7f7QRpM4nFuTufFIJXlcuTT", title: "Requiem" },
+        ];
+
+        const content = document.getElementById("content");
+        const breadcrumb = document.getElementById("breadcrumb");
+        const breadcrumbTitle = document.getElementById("breadcrumb-title");
+
+        let currentVideos = [];
+        let currentVideoIndex = 0;
+        let player = null;
+
+        // Load YouTube IFrame API
+        const tag = document.createElement("script");
+        tag.src = "https://www.youtube.com/iframe_api";
+        document.head.appendChild(tag);
+
+        function onYouTubeIframeAPIReady() {
+            // API ready — player created on demand
+        }
+
+        async function apiFetch(endpoint, params) {
+            const url = new URL(`https://www.googleapis.com/youtube/v3/${endpoint}`);
+            params.key = API_KEY;
+            Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
+            const res = await fetch(url);
+            if (!res.ok) throw new Error(`YouTube API error: ${res.status}`);
+            return res.json();
+        }
+
+        async function loadPlaylistDetails() {
+            const ids = PLAYLISTS.map(p => p.id).join(",");
+            const data = await apiFetch("playlists", {
+                part: "snippet,contentDetails",
+                id: ids,
+                maxResults: "10",
+            });
+            return data.items.map(item => {
+                const pl = PLAYLISTS.find(p => p.id === item.id);
+                return {
+                    id: item.id,
+                    title: pl ? pl.title : item.snippet.title,
+                    thumbnail: item.snippet.thumbnails.high?.url || item.snippet.thumbnails.medium?.url,
+                    count: item.contentDetails.itemCount,
+                };
+            });
+        }
+
+        async function loadPlaylistVideos(playlistId) {
+            const videos = [];
+            let pageToken = "";
+            do {
+                const params = {
+                    part: "snippet",
+                    playlistId: playlistId,
+                    maxResults: "50",
+                };
+                if (pageToken) params.pageToken = pageToken;
+                const data = await apiFetch("playlistItems", params);
+                for (const item of data.items) {
+                    if (item.snippet.title === "Private video" || item.snippet.title === "Deleted video") continue;
+                    videos.push({
+                        videoId: item.snippet.resourceId.videoId,
+                        title: item.snippet.title,
+                        thumbnail: item.snippet.thumbnails.medium?.url || item.snippet.thumbnails.default?.url,
+                        channel: item.snippet.videoOwnerChannelTitle || "",
+                    });
+                }
+                pageToken = data.nextPageToken || "";
+            } while (pageToken);
+            return videos;
+        }
+
+        function showPlaylists() {
+            breadcrumb.classList.remove("visible");
+            window.history.pushState({}, "", window.location.pathname);
+            destroyPlayer();
+            renderPlaylists();
+        }
+
+        async function renderPlaylists() {
+            content.innerHTML = `<div class="loading"><div class="spinner"></div>Loading playlists&hellip;</div>`;
+            try {
+                const playlists = await loadPlaylistDetails();
+                // Sort to match our defined order
+                const ordered = PLAYLISTS.map(p => playlists.find(pl => pl.id === p.id)).filter(Boolean);
+
+                content.innerHTML = `<div class="playlist-grid">${ordered.map(pl => `
+                    <div class="playlist-card" onclick="openPlaylist('${pl.id}', '${pl.title.replace(/'/g, "\\'")}')">
+                        <img class="thumb" src="${pl.thumbnail}" alt="${pl.title}" loading="lazy">
+                        <div class="info">
+                            <h3>${pl.title}</h3>
+                            <p>${pl.count} video${pl.count !== 1 ? "s" : ""}</p>
+                        </div>
+                    </div>
+                `).join("")}</div>`;
+            } catch (e) {
+                content.innerHTML = `<div class="loading">Failed to load playlists. Please try again later.</div>`;
+                console.error(e);
+            }
+        }
+
+        async function openPlaylist(playlistId, title) {
+            breadcrumbTitle.textContent = title;
+            breadcrumb.classList.add("visible");
+            window.history.pushState({ playlist: playlistId, title }, "", `?list=${playlistId}`);
+            destroyPlayer();
+
+            content.innerHTML = `<div class="loading"><div class="spinner"></div>Loading videos&hellip;</div>`;
+            try {
+                currentVideos = await loadPlaylistVideos(playlistId);
+                renderVideoList(null);
+            } catch (e) {
+                content.innerHTML = `<div class="loading">Failed to load videos.</div>`;
+                console.error(e);
+            }
+        }
+
+        function renderVideoList(activeVideoId) {
+            const playerHTML = activeVideoId ? `
+                <div class="player-section">
+                    <div class="player-wrapper"><div id="yt-player"></div></div>
+                    <div class="now-playing" id="now-playing"></div>
+                    <div class="now-playing-meta" id="now-playing-meta"></div>
+                </div>
+            ` : "";
+
+            const listHTML = currentVideos.map((v, i) => `
+                <div class="video-item ${v.videoId === activeVideoId ? "active" : ""}"
+                     onclick="playVideo(${i})"
+                     style="animation-delay: ${Math.min(i * 0.03, 0.5)}s">
+                    <span class="index">${v.videoId === activeVideoId ? "&#9654;" : i + 1}</span>
+                    <img class="thumb-small" src="${v.thumbnail}" alt="${v.title}" loading="lazy">
+                    <div class="video-info">
+                        <h4>${v.title}</h4>
+                    </div>
+                </div>
+            `).join("");
+
+            content.innerHTML = `${playerHTML}<div class="video-list">${listHTML}</div>`;
+
+            if (activeVideoId) {
+                createPlayer(activeVideoId);
+                const video = currentVideos.find(v => v.videoId === activeVideoId);
+                if (video) {
+                    document.getElementById("now-playing").textContent = video.title;
+                }
+            }
+        }
+
+        function playVideo(index) {
+            currentVideoIndex = index;
+            const video = currentVideos[index];
+            if (!video) return;
+
+            if (player && typeof player.loadVideoById === "function") {
+                player.loadVideoById(video.videoId);
+                updateActiveState(video.videoId);
+                document.getElementById("now-playing").textContent = video.title;
+                content.querySelector(".player-section")?.scrollIntoView({ behavior: "smooth", block: "start" });
+            } else {
+                renderVideoList(video.videoId);
+            }
+        }
+
+        function updateActiveState(videoId) {
+            content.querySelectorAll(".video-item").forEach((el, i) => {
+                const isActive = currentVideos[i]?.videoId === videoId;
+                el.classList.toggle("active", isActive);
+                el.querySelector(".index").innerHTML = isActive ? "&#9654;" : String(i + 1);
+            });
+        }
+
+        function createPlayer(videoId) {
+            player = new YT.Player("yt-player", {
+                videoId: videoId,
+                playerVars: {
+                    rel: 0,
+                    modestbranding: 1,
+                    autoplay: 1,
+                },
+                events: {
+                    onStateChange: onPlayerStateChange,
+                },
+            });
+        }
+
+        function destroyPlayer() {
+            if (player && typeof player.destroy === "function") {
+                player.destroy();
+                player = null;
+            }
+        }
+
+        function onPlayerStateChange(event) {
+            // When video ends, auto-play next in list
+            if (event.data === YT.PlayerState.ENDED) {
+                const nextIndex = currentVideoIndex + 1;
+                if (nextIndex < currentVideos.length) {
+                    playVideo(nextIndex);
+                }
+            }
+        }
+
+        // Handle browser back/forward
+        window.addEventListener("popstate", () => {
+            const params = new URLSearchParams(window.location.search);
+            const listId = params.get("list");
+            if (listId) {
+                const pl = PLAYLISTS.find(p => p.id === listId);
+                if (pl) openPlaylist(listId, pl.title);
+            } else {
+                showPlaylists();
+            }
+        });
+
+        // Initial load
+        (function init() {
+            const params = new URLSearchParams(window.location.search);
+            const listId = params.get("list");
+            if (listId) {
+                const pl = PLAYLISTS.find(p => p.id === listId);
+                if (pl) openPlaylist(listId, pl.title);
+                else renderPlaylists();
+            } else {
+                renderPlaylists();
+            }
+        })();
+    </script>
+</body>
+</html>
