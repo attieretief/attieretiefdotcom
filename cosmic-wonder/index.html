@@ -128,31 +128,109 @@
         /* Audio player */
         .audio-section {
             max-width: 520px;
-            margin: 0 auto 1rem;
+            margin: 0 auto 1.5rem;
             padding: 0 2rem;
             animation: fadeIn 1s ease 0.25s both;
         }
 
-        .audio-label {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            font-size: 0.72rem;
-            color: var(--muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+        .audio-card {
+            background: linear-gradient(135deg, rgba(139, 124, 246, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border: 1px solid rgba(139, 124, 246, 0.15);
+            border-radius: 16px;
+            padding: 1.75rem 1.5rem 1.5rem;
             text-align: center;
-            margin-bottom: 0.75rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .audio-section audio {
+        .audio-card:hover {
+            border-color: rgba(139, 124, 246, 0.3);
+            box-shadow: 0 4px 30px rgba(139, 124, 246, 0.08);
+        }
+
+        .audio-heading {
+            font-family: "Georgia", "Times New Roman", serif;
+            font-size: 1.05rem;
+            color: var(--text);
+            margin-bottom: 0.35rem;
+        }
+
+        .audio-sub {
+            font-family: "Georgia", "Times New Roman", serif;
+            font-size: 0.88rem;
+            color: var(--muted);
+            font-style: italic;
+            margin-bottom: 1.4rem;
+        }
+
+        .audio-player {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+
+        .play-btn {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: none;
+            background: var(--accent);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: transform 0.15s ease, box-shadow 0.2s ease;
+            box-shadow: 0 0 16px rgba(139, 124, 246, 0.25);
+        }
+
+        .play-btn:hover {
+            transform: scale(1.07);
+            box-shadow: 0 0 24px rgba(139, 124, 246, 0.4);
+        }
+
+        .play-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: white;
+            margin-left: 2px;
+        }
+
+        .play-btn .icon-pause { display: none; margin-left: 0; }
+        .play-btn.is-playing .icon-play { display: none; }
+        .play-btn.is-playing .icon-pause { display: block; }
+
+        .audio-track {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .audio-progress-bar {
             width: 100%;
-            height: 44px;
-            border-radius: 22px;
-            outline: none;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Darken the native player to match the dark theme (WebKit/Blink) */
-        .audio-section audio::-webkit-media-controls-panel {
-            background: rgba(255, 255, 255, 0.05);
+        .audio-progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent), #a78bfa);
+            border-radius: 3px;
+            transition: width 0.1s linear;
+        }
+
+        .audio-times {
+            display: flex;
+            justify-content: space-between;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 0.65rem;
+            color: var(--muted);
+            letter-spacing: 0.03em;
         }
 
         /* Stats bar */
@@ -424,10 +502,27 @@
     </div>
 
     <div class="audio-section">
-        <p class="audio-label">Listen to the Prologue</p>
-        <audio controls preload="metadata">
+        <div class="audio-card">
+            <p class="audio-heading">Hear the book begin</p>
+            <p class="audio-sub">The Prologue, read aloud &mdash; 15 minutes</p>
+            <div class="audio-player">
+                <button class="play-btn" id="playBtn" aria-label="Play prologue">
+                    <svg class="icon-play" viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg>
+                    <svg class="icon-pause" viewBox="0 0 24 24"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+                </button>
+                <div class="audio-track">
+                    <div class="audio-progress-bar" id="progressBar">
+                        <div class="audio-progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="audio-times">
+                        <span id="currentTime">0:00</span>
+                        <span id="duration">&mdash;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <audio id="prologueAudio" preload="metadata">
             <source src="Cosmic_Wonder_Prologue.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
         </audio>
     </div>
 
@@ -697,5 +792,39 @@
     <footer>
         A book by <a href="/">Attie Retief</a> &middot; In progress
     </footer>
+
+    <script>
+    (function () {
+        const audio = document.getElementById("prologueAudio");
+        const btn = document.getElementById("playBtn");
+        const bar = document.getElementById("progressBar");
+        const fill = document.getElementById("progressFill");
+        const cur = document.getElementById("currentTime");
+        const dur = document.getElementById("duration");
+
+        function fmt(s) {
+            const m = Math.floor(s / 60);
+            const sec = Math.floor(s % 60);
+            return m + ":" + (sec < 10 ? "0" : "") + sec;
+        }
+
+        btn.addEventListener("click", function () {
+            if (audio.paused) { audio.play(); btn.classList.add("is-playing"); }
+            else { audio.pause(); btn.classList.remove("is-playing"); }
+        });
+
+        audio.addEventListener("loadedmetadata", function () { dur.textContent = fmt(audio.duration); });
+        audio.addEventListener("timeupdate", function () {
+            cur.textContent = fmt(audio.currentTime);
+            fill.style.width = (audio.currentTime / audio.duration * 100) + "%";
+        });
+        audio.addEventListener("ended", function () { btn.classList.remove("is-playing"); });
+
+        bar.addEventListener("click", function (e) {
+            var rect = bar.getBoundingClientRect();
+            audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
+        });
+    })();
+    </script>
 </body>
 </html>
