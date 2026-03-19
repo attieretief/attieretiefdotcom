@@ -39,6 +39,12 @@
     }
     </script>
 
+    <script>
+        document.documentElement.style.setProperty(
+            "--bg-image",
+            "url(https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1920&q=80)"
+        );
+    </script>
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -61,6 +67,37 @@
             color: var(--text);
             min-height: 100vh;
             line-height: 1.7;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: var(--bg-image);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -2;
+            animation: bgFadeIn 2s ease both;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(6, 6, 11, 0.45) 0%,
+                rgba(6, 6, 11, 0.75) 35%,
+                rgba(6, 6, 11, 0.92) 65%,
+                rgba(6, 6, 11, 0.98) 100%
+            );
+            z-index: -1;
+        }
+
+        @keyframes bgFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         a { color: inherit; }
