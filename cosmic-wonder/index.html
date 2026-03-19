@@ -273,7 +273,7 @@
         /* Rolling captions */
         .captions-window {
             position: relative;
-            height: 7.5rem;
+            height: 16rem;
             overflow: hidden;
             margin-top: 1.25rem;
             mask-image: linear-gradient(
@@ -298,7 +298,7 @@
 
         .captions-track {
             transition: transform 0.45s cubic-bezier(0.25, 0.1, 0.25, 1);
-            padding-top: 3rem;
+            padding-top: 7rem;
         }
 
         .caption-line {
@@ -327,7 +327,7 @@
             font-style: italic;
             color: var(--muted);
             text-align: center;
-            padding-top: 2.5rem;
+            padding-top: 6.5rem;
             opacity: 0.6;
         }
 
@@ -919,8 +919,11 @@
             return m + ":" + (sec < 10 ? "0" : "") + sec;
         }
 
-        // Parse VTT manually for maximum compatibility
+        var sentences = [];  // merged sentences: { text, start, end }
+
+        // Parse VTT and merge fragments into full sentences
         fetch("Prologue.vtt").then(function (r) { return r.text(); }).then(function (text) {
+            var rawCues = [];
             var blocks = text.split(/\n\n+/);
             blocks.forEach(function (block) {
                 var lines = block.trim().split("\n");
@@ -930,7 +933,7 @@
                         var content = lines.slice(i + 1).join(" ")
                             .replace(/<v[^>]*>/g, "").replace(/<\/v>/g, "").trim();
                         if (content) {
-                            cues.push({
+                            rawCues.push({
                                 start: parseTime(match[1]),
                                 end: parseTime(match[2]),
                                 text: content
@@ -940,6 +943,44 @@
                     }
                 }
             });
+
+            // Merge cue fragments into sentences (split on . ? !)
+            var buf = "";
+            var bufStart = 0;
+            var bufEnd = 0;
+            rawCues.forEach(function (cue) {
+                if (!buf) bufStart = cue.start;
+                buf += (buf ? " " : "") + cue.text;
+                bufEnd = cue.end;
+
+                // Check if buffer ends with sentence-ending punctuation
+                // (but not abbreviations like "e.g." or "Dr." — look for end of string)
+                if (/[.?!]["'\u201d\u2019)]*\s*$/.test(buf)) {
+                    // Split on sentence boundaries within the buffer
+                    var parts = buf.split(/(?<=[.?!]["'\u201d\u2019)]*)\s+/);
+                    var partCount = parts.length;
+                    var timeSpan = bufEnd - bufStart;
+                    var charTotal = buf.length;
+                    var charSoFar = 0;
+
+                    parts.forEach(function (part, pi) {
+                        var trimmed = part.trim();
+                        if (!trimmed) return;
+                        // Approximate timing proportional to character length
+                        var ratio = trimmed.length / charTotal;
+                        var sStart = bufStart + (charSoFar / charTotal) * timeSpan;
+                        var sEnd = bufStart + ((charSoFar + trimmed.length) / charTotal) * timeSpan;
+                        charSoFar += trimmed.length + 1;
+                        sentences.push({ text: trimmed, start: sStart, end: sEnd });
+                    });
+                    buf = "";
+                }
+            });
+            // Flush remaining buffer (if text doesn't end with punctuation)
+            if (buf.trim()) {
+                sentences.push({ text: buf.trim(), start: bufStart, end: bufEnd });
+            }
+
             buildLines();
         });
 
@@ -951,10 +992,10 @@
         function buildLines() {
             captionsTrack.innerHTML = "";
             lineEls = [];
-            cues.forEach(function (cue, i) {
+            sentences.forEach(function (s) {
                 var div = document.createElement("div");
                 div.className = "caption-line";
-                div.textContent = cue.text;
+                div.textContent = s.text;
                 captionsTrack.appendChild(div);
                 lineEls.push(div);
             });
@@ -963,16 +1004,17 @@
         function updateCaptions() {
             var t = audio.currentTime;
             var activeIndex = -1;
-            for (var i = 0; i < cues.length; i++) {
-                if (t >= cues[i].start && t < cues[i].end) {
+
+            for (var i = 0; i < sentences.length; i++) {
+                if (t >= sentences[i].start && t < sentences[i].end) {
                     activeIndex = i;
                     break;
                 }
             }
-            // If between cues, show the most recent one
+            // If between sentences, show the most recent completed one
             if (activeIndex === -1) {
-                for (var j = cues.length - 1; j >= 0; j--) {
-                    if (t >= cues[j].end) { activeIndex = j; break; }
+                for (var j = sentences.length - 1; j >= 0; j--) {
+                    if (t >= sentences[j].end) { activeIndex = j; break; }
                 }
             }
 
