@@ -125,6 +125,36 @@
             font-style: italic;
         }
 
+        /* Audio player */
+        .audio-section {
+            max-width: 520px;
+            margin: 0 auto 1rem;
+            padding: 0 2rem;
+            animation: fadeIn 1s ease 0.25s both;
+        }
+
+        .audio-label {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 0.72rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-align: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .audio-section audio {
+            width: 100%;
+            height: 44px;
+            border-radius: 22px;
+            outline: none;
+        }
+
+        /* Darken the native player to match the dark theme (WebKit/Blink) */
+        .audio-section audio::-webkit-media-controls-panel {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
         /* Stats bar */
         .stats {
             display: flex;
@@ -391,6 +421,14 @@
             <br><br>
             Not proof. Resonance. The kind that makes you stop and listen.
         </p>
+    </div>
+
+    <div class="audio-section">
+        <p class="audio-label">Listen to the Prologue</p>
+        <audio controls preload="metadata">
+            <source src="Cosmic_Wonder_Prologue.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
     </div>
 
     <div class="stats">
