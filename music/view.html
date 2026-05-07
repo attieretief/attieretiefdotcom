@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Score — Attie Retief</title>
+    <meta name="description" content="View and play back a music score.">
+    <link rel="stylesheet" href="styles.css?v=10">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Score — Attie Retief">
+    <meta property="og:site_name" content="Attie Retief">
+</head>
+<body>
+    <div class="app">
+        <!-- Top bar -->
+        <header class="topbar">
+            <a href="/" class="topbar-brand">
+                <span class="dot"></span>
+                <span>Attie Retief</span>
+            </a>
+            <span class="topbar-section">/ Score</span>
+            <a href="/music/" class="topbar-back" title="Back to library">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                Library
+            </a>
+            <div class="topbar-spacer"></div>
+            <a href="/music/" class="topbar-link" id="open-editor-link" style="display:none;">Open in editor</a>
+        </header>
+
+        <!-- Viewer body -->
+        <div class="viewer-container">
+            <div class="viewer-header">
+                <h1 id="score-title">Loading…</h1>
+                <div class="subtitle" id="score-subtitle"></div>
+            </div>
+
+            <div class="viewer-transport" id="transport" style="display:none;">
+                <button class="btn btn-icon" id="btn-play" title="Play">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </button>
+                <button class="btn btn-icon" id="btn-stop" title="Stop">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><rect x="5" y="5" width="14" height="14"/></svg>
+                </button>
+                <div class="transport-divider"></div>
+                <button class="btn" id="btn-mp3">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    <span id="mp3-label">Download MP3</span>
+                </button>
+                <a class="btn btn-yt" id="btn-youtube" href="#" target="_blank" rel="noopener" title="Listen — YouTube lyric video" style="display:none;">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+                    YouTube
+                </a>
+                <span class="transport-status" id="status">Ready</span>
+            </div>
+
+            <div class="viewer-score" id="score-render">
+                <p style="color:#888; text-align:center; padding:2rem;">Loading score…</p>
+            </div>
+
+            <div id="error-state" style="display:none; text-align:center; padding:3rem 1rem; color:var(--color-text-muted);">
+                <h3 style="color:var(--color-text); margin-bottom:0.5rem;">Score not found</h3>
+                <p id="error-message" style="margin-bottom:1.5rem;">The score you're looking for could not be loaded.</p>
+                <a href="/music/" class="btn">Back to library</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- abcjs (notation rendering + audio) -->
+    <script src="https://cdn.jsdelivr.net/npm/abcjs@6.4.4/dist/abcjs-basic-min.js"></script>
+    <!-- lamejs (MP3 encoder) -->
+    <script src="https://cdn.jsdelivr.net/npm/@breezystack/lamejs@1.2.7/dist/lamejs.iife.js"></script>
+
+    <script src="lib.js?v=10"></script>
+    <script src="view.js?v=10"></script>
+
+    <script data-goatcounter="https://attieretief.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music — Attie Retief</title>
+    <meta name="robots" content="noindex">
+    <link rel="stylesheet" href="styles.css?v=4">
+</head>
+<body>
+    <div class="app">
+        <header class="topbar">
+            <a href="/" class="topbar-brand">
+                <span class="dot"></span>
+                <span>Attie Retief</span>
+            </a>
+            <span class="topbar-section">/ Music</span>
+            <div class="topbar-spacer"></div>
+            <a href="/music/edit.html?new=1" class="btn btn-primary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                New score
+            </a>
+        </header>
+
+        <div class="library-container">
+            <div class="library-header">
+                <h1>Music</h1>
+                <p>Published scores. Click any to view and play, or start a new one.</p>
+            </div>
+
+            <div id="library-content">
+                <div style="text-align:center; padding:3rem; color:var(--color-text-muted);">
+                    <div class="spinner" style="margin-bottom: 1rem; width:24px; height:24px; border-width:3px;"></div>
+                    <div>Loading your scores…</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="lib.js?v=4"></script>
+    <script src="library.js?v=4"></script>
+    <script data-goatcounter="https://attieretief.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

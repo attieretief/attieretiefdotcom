@@ -1,1 +1,4 @@
 .DS_Store
+
+# Local-only sheet music sources for transcription (CCLI-licensed for use, not redistribution)
+music/sources/

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Editor — Attie Retief</title>
+    <meta name="description" content="ABC notation editor with live preview, MP3 export, and shareable score links.">
+    <meta name="robots" content="noindex">
+    <link rel="canonical" href="https://attieretief.com/music/">
+    <link rel="stylesheet" href="styles.css?v=10">
+</head>
+<body>
+    <div class="app">
+        <!-- Top bar -->
+        <header class="topbar">
+            <a href="/" class="topbar-brand">
+                <span class="dot"></span>
+                <span>Attie Retief</span>
+            </a>
+            <span class="topbar-section">/ Music</span>
+            <a href="/music/" class="topbar-back" title="Back to library">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                Library
+            </a>
+            <span class="editing-indicator" id="editing-indicator" hidden>
+                <span class="editing-indicator-label">Editing</span>
+                <span class="editing-indicator-title" id="editing-title"></span>
+            </span>
+            <div class="topbar-spacer"></div>
+            <button class="btn" id="btn-new" title="Start a new score">
+                <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                New
+            </button>
+            <button class="btn btn-primary" id="btn-publish">
+                <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <span id="publish-label">Publish</span>
+            </button>
+        </header>
+
+        <!-- Workspace: editor + score -->
+        <div class="workspace">
+            <div class="pane">
+                <div class="pane-header">
+                    <span class="pane-header-label">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                        ABC source
+                    </span>
+                    <span class="pane-header-meta" id="line-count">0 lines</span>
+                </div>
+                <textarea
+                    class="editor-textarea"
+                    id="abc-input"
+                    spellcheck="false"
+                    autocomplete="off"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    placeholder="Type ABC notation here…"
+                ></textarea>
+            </div>
+
+            <div class="pane">
+                <div class="pane-header">
+                    <span class="pane-header-label">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                        Score
+                    </span>
+                    <span class="pane-header-meta" id="render-status">Ready</span>
+                </div>
+                <div class="score-render" id="score-render"></div>
+            </div>
+        </div>
+
+        <!-- Transport bar -->
+        <div class="transport">
+            <div class="transport-group">
+                <button class="btn btn-icon" id="btn-play" title="Play">
+                    <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor"/></svg>
+                </button>
+                <button class="btn btn-icon" id="btn-stop" title="Stop">
+                    <svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" fill="currentColor"/></svg>
+                </button>
+            </div>
+
+            <div class="transport-divider"></div>
+
+            <label>
+                Transpose
+                <input type="range" id="transpose" min="-12" max="12" value="0" step="1">
+                <span class="transport-value" id="transpose-value">0</span>
+            </label>
+
+            <div class="transport-divider"></div>
+
+            <button class="btn" id="btn-mp3" title="Download MP3">
+                <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <span id="mp3-label">MP3</span>
+            </button>
+
+            <span class="transport-status" id="status">—</span>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="modal-root"></div>
+
+    <!-- abcjs (notation rendering + audio) -->
+    <script src="https://cdn.jsdelivr.net/npm/abcjs@6.4.4/dist/abcjs-basic-min.js"></script>
+    <!-- lamejs (MP3 encoder) -->
+    <script src="https://cdn.jsdelivr.net/npm/@breezystack/lamejs@1.2.7/dist/lamejs.iife.js"></script>
+
+    <script src="lib.js?v=10"></script>
+    <script src="app.js?v=10"></script>
+
+    <!-- Goatcounter analytics (optional) -->
+    <script data-goatcounter="https://attieretief.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
