@@ -2,3 +2,6 @@
 
 # Local-only sheet music sources for transcription (CCLI-licensed for use, not redistribution)
 music/sources/
+
+# Wrangler local cache (account info, build artifacts)
+music/worker/.wrangler/

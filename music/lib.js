@@ -14,6 +14,13 @@
         // Gist description prefix — used to filter your music gists from other gists
         gistTag: '[abc-music]',
 
+        // Cloudflare Worker that proxies gist READ requests with the owner's PAT
+        // (so public visitors share the 5000/hour authenticated rate limit).
+        // Empty string = fall back to direct api.github.com (anonymous, 60/hr).
+        // See music/worker/README.md for deploy instructions; paste the deployed
+        // URL here (no trailing slash), e.g. 'https://music-gists.attie.workers.dev'.
+        gistApiBase: 'https://music-gists.marketing-0c0.workers.dev',
+
         // YouTube — public API key (restricted to domain in Google Cloud) and the
         // unlisted playlist of lyric/cover videos to match against scores.
         youtubeApiKey: 'AIzaSyDdAE6PhpnqwgqvtiQIgkXZNhUxcNDPE1k',
@@ -94,18 +101,44 @@
             return res.json();
         },
 
+        // Build headers, sneaking in Authorization if the local PAT is available.
+        // GitHub's unauthenticated rate limit is 60/hour per IP — adding the token
+        // raises it to 5000/hour. The token is read-only here (GET endpoints).
+        _getHeaders() {
+            const h = { 'Accept': 'application/vnd.github+json' };
+            const tok = (typeof Auth !== 'undefined') ? Auth.getToken() : '';
+            if (tok) h['Authorization'] = 'Bearer ' + tok;
+            return h;
+        },
+
+        // Read endpoints prefer the Worker (shared 5000/hr limit). The Worker
+        // doesn't accept Authorization headers, so we strip them when proxying.
+        _readUrl(path) {
+            return CONFIG.gistApiBase
+                ? CONFIG.gistApiBase + path
+                : 'https://api.github.com' + path;
+        },
+
+        _readHeaders() {
+            // Direct api.github.com benefits from the editor user's PAT; the
+            // Worker ignores Authorization (it adds its own).
+            return CONFIG.gistApiBase
+                ? { 'Accept': 'application/vnd.github+json' }
+                : this._getHeaders();
+        },
+
         async read(id) {
-            const res = await fetch('https://api.github.com/gists/' + id, {
-                headers: { 'Accept': 'application/vnd.github+json' }
+            const res = await fetch(this._readUrl('/gists/' + id), {
+                headers: this._readHeaders()
             });
             if (!res.ok) throw new Error('Gist not found (' + res.status + ')');
             return res.json();
         },
 
         async listMine(user) {
-            // Public list — no token needed. Returns up to 100 most recent.
-            const res = await fetch('https://api.github.com/users/' + user + '/gists?per_page=100', {
-                headers: { 'Accept': 'application/vnd.github+json' }
+            const path = '/users/' + user + '/gists' + (CONFIG.gistApiBase ? '' : '?per_page=100');
+            const res = await fetch(this._readUrl(path), {
+                headers: this._readHeaders()
             });
             if (!res.ok) throw new Error('Could not fetch gists (' + res.status + ')');
             const all = await res.json();

@@ -64,6 +64,8 @@
             render();
             $transport.style.display = '';
             wireTransport();
+            const $disclaimer = document.getElementById('viewer-disclaimer');
+            if ($disclaimer) $disclaimer.style.display = '';
 
             // YouTube lyric video lookup — runs async, doesn't block render.
             if (YouTube && typeof YouTube.fetchPlaylist === 'function') {
@@ -99,16 +101,28 @@
             return;
         }
         try {
+            const containerWidth = $score.clientWidth || 1100;
             const result = ABCJS.renderAbc($score, abcSource, {
                 responsive: 'resize',
                 add_classes: true,
-                staffwidth: 740,
+                staffwidth: Math.max(800, containerWidth - 80),
                 paddingtop: 16,
                 paddingbottom: 16,
                 paddingleft: 24,
                 paddingright: 24,
                 format: { titlefont: '"Helvetica Neue" 20 bold', subtitlefont: '"Helvetica Neue" 14 italic' }
             });
+            // Log dimensions so we can diagnose layout constraints.
+            const svg = $score.querySelector('svg');
+            const viewerScore = $score.parentElement;
+            const viewerContainer = viewerScore && viewerScore.parentElement;
+            console.log(
+                '[score] viewport=' + document.documentElement.clientWidth + 'px ' +
+                'viewerContainer=' + (viewerContainer ? viewerContainer.clientWidth : '?') + 'px ' +
+                'viewerScore=' + (viewerScore ? viewerScore.clientWidth : '?') + 'px ' +
+                'scoreRender=' + containerWidth + 'px ' +
+                'svgClient=' + (svg ? svg.clientWidth : '?') + 'px'
+            );
             visualObj = result && result[0];
             // Reset synth on re-render (e.g. tempo change)
             if (synthControl) {

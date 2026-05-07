@@ -1,0 +1,16 @@
+{
+    "$schema": "node_modules/wrangler/config-schema.json",
+    "name": "music-gists",
+    "main": "index.js",
+    "compatibility_date": "2025-01-01",
+    "workers_dev": true,
+    "observability": { "enabled": true }
+    // After deploy, this Worker is reachable at:
+    //   https://music-gists.<your-cloudflare-subdomain>.workers.dev
+    //
+    // To bind it to a custom domain like https://api.attieretief.com later:
+    //   1. In Cloudflare DNS, ensure attieretief.com is on Cloudflare.
+    //   2. Add a "routes" key here, e.g.
+    //         "routes": [{ "pattern": "api.attieretief.com/music/*", "zone_name": "attieretief.com" }]
+    //      and re-run `npx wrangler deploy`.
+}

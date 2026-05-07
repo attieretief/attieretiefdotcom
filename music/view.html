@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Score — Attie Retief</title>
     <meta name="description" content="View and play back a music score.">
-    <link rel="stylesheet" href="styles.css?v=10">
+    <link rel="stylesheet" href="styles.css?v=16">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
@@ -64,6 +64,14 @@
                 <p id="error-message" style="margin-bottom:1.5rem;">The score you're looking for could not be loaded.</p>
                 <a href="/music/" class="btn">Back to library</a>
             </div>
+
+            <p class="viewer-disclaimer" id="viewer-disclaimer" style="display:none;">
+                Notation transcribed from published lead sheets and rendered by
+                <a href="https://abcjs.net" target="_blank" rel="noopener">abcjs</a>.
+                Audio is automatic playback synthesised from the score in your
+                browser — not a performance recording. For an actual recording,
+                use the <strong>YouTube</strong> link above where one is available.
+            </p>
         </div>
     </div>
 
@@ -72,8 +80,8 @@
     <!-- lamejs (MP3 encoder) -->
     <script src="https://cdn.jsdelivr.net/npm/@breezystack/lamejs@1.2.7/dist/lamejs.iife.js"></script>
 
-    <script src="lib.js?v=10"></script>
-    <script src="view.js?v=10"></script>
+    <script src="lib.js?v=16"></script>
+    <script src="view.js?v=16"></script>
 
     <script data-goatcounter="https://attieretief.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

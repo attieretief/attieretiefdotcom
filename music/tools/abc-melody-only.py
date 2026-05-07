@@ -77,14 +77,19 @@ def is_body_line(line):
     return True
 
 
-# Pass 1 — score each voice by the average top-note pitch in its body.
+# Pass 1 — score each voice by note density and pitch.
 voice_scores = {}  # voice_id -> [sum_of_top_pitches, count]
+voice_is_bass = {}  # voice_id -> True if declared as bass clef
 current_voice = None
 for line in lines:
     m = voice_re.match(line)
     if m:
         current_voice = m.group(1)
         voice_scores.setdefault(current_voice, [0, 0])
+        # Inspect the voice declaration for 'bass' clef.
+        # E.g. `V:4 bass nm="Part 4"` or `V:1 clef=bass`.
+        if re.search(r"\bbass\b", line, re.IGNORECASE):
+            voice_is_bass[current_voice] = True
         continue
     if current_voice is None:
         continue
@@ -108,9 +113,12 @@ if not voice_scores:
 def voice_rank(v):
     total, count = voice_scores[v]
     if not count:
-        return (0, -999)
-    # Primary: note density (melody is the densest line). Secondary: average pitch.
-    return (count, total / count)
+        return (0, 0, -999)
+    # Primary: not bass clef (bass voices in piano arrangements often outnumber
+    # the melody but never ARE the melody). Secondary: note density.
+    # Tertiary: average pitch.
+    not_bass = 0 if voice_is_bass.get(v) else 1
+    return (not_bass, count, total / count)
 
 
 best_voice = max(voice_scores, key=voice_rank)

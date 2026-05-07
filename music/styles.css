@@ -600,10 +600,20 @@ body::before {
 
 /* === Viewer page === */
 .viewer-container {
-    max-width: 920px;
     margin: 0 auto;
-    padding: 2rem 1.25rem 4rem;
+    padding: 2rem 2rem 4rem;
 }
+
+.viewer-disclaimer {
+    margin-top: 2rem;
+    font-size: 0.78rem;
+    line-height: 1.55;
+    color: var(--color-text-muted);
+    opacity: 0.7;
+    max-width: 60ch;
+}
+.viewer-disclaimer a { color: var(--color-text-muted); text-decoration: underline; }
+.viewer-disclaimer a:hover { color: var(--color-accent-bright); }
 
 .viewer-header {
     margin-bottom: 1.5rem;
@@ -631,7 +641,7 @@ body::before {
     margin-top: 1.25rem;
 }
 
-.viewer-score svg { max-width: 100%; height: auto; }
+.viewer-score svg { width: 100% !important; height: auto; max-width: none !important; }
 .viewer-score svg text { fill: #1a1a1a; }
 .viewer-score svg path { fill: #1a1a1a; stroke: #1a1a1a; }
 
