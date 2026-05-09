@@ -98,11 +98,30 @@
         });
         updateLineCount();
 
-        // Transpose
+        // Transpose — live preview during drag (visualTranspose, no source edit),
+        // then on release rewrite the ABC source so what's published matches what's shown.
         $transpose.addEventListener('input', () => {
             const v = parseInt($transpose.value, 10);
             $transValue.textContent = (v > 0 ? '+' : '') + v;
             scheduleRender();
+        });
+        $transpose.addEventListener('change', () => {
+            const steps = parseInt($transpose.value, 10);
+            if (!steps || !visualObj || !ABCJS || typeof ABCJS.strTranspose !== 'function') return;
+            let transposed;
+            try {
+                transposed = ABCJS.strTranspose($input.value, [visualObj], steps);
+            } catch (err) {
+                console.error('Transpose failed:', err);
+                Toast.error('Could not transpose');
+                return;
+            }
+            $input.value = transposed;
+            localStorage.setItem(CONFIG.storageKeys.draft, transposed);
+            updateLineCount();
+            $transpose.value = '0';
+            $transValue.textContent = '0';
+            render();
         });
 
         // Buttons
