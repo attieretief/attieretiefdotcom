@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Music — Attie Retief</title>
     <meta name="robots" content="noindex">
-    <link rel="stylesheet" href="styles.css?v=16">
+    <link rel="stylesheet" href="styles.css?v=17">
 </head>
 <body>
     <div class="app">
@@ -25,15 +25,42 @@
         <div class="library-container">
             <div class="library-header">
                 <h1>Music</h1>
-                <p>Published scores. Click any to view and play, or start a new one.</p>
+                <p>Scores, melody sheets, and projects.</p>
             </div>
 
-            <div id="library-content">
-                <div style="text-align:center; padding:3rem; color:var(--color-text-muted);">
-                    <div class="spinner" style="margin-bottom: 1rem; width:24px; height:24px; border-width:3px;"></div>
-                    <div>Loading your scores…</div>
+            <section class="music-section">
+                <div class="music-section-head">
+                    <h2>Worship songs</h2>
+                    <p>Easily accessible melody sheets and video shortcuts for general Christian worship songs.</p>
                 </div>
-            </div>
+
+                <div id="library-content">
+                    <div style="text-align:center; padding:3rem; color:var(--color-text-muted);">
+                        <div class="spinner" style="margin-bottom: 1rem; width:24px; height:24px; border-width:3px;"></div>
+                        <div>Loading your scores…</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="music-section">
+                <div class="music-section-head">
+                    <h2>Paraverses</h2>
+                    <p>Original songs and verse settings — a separate project.</p>
+                </div>
+
+                <a class="project-card" href="https://paraverses.attieretief.com">
+                    <span class="project-card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                    </span>
+                    <span class="project-card-body">
+                        <span class="project-card-title">paraverses.attieretief.com</span>
+                        <span class="project-card-desc">Visit the Paraverses project</span>
+                    </span>
+                    <span class="project-card-arrow" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                    </span>
+                </a>
+            </section>
         </div>
     </div>
 
