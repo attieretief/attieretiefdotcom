@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research — Attie Retief</title>
+    <meta name="description" content="Academic papers by Attie Retief at the interface of Reformed theology and contemporary physics.">
+    <link rel="canonical" href="https://attieretief.com/research/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Research — Attie Retief">
+    <meta property="og:description" content="Academic papers at the interface of Reformed theology and contemporary physics.">
+    <meta property="og:url" content="https://attieretief.com/research/">
+    <meta property="og:image" content="https://attieretief.com/avatar.png">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Attie Retief",
+        "url": "https://attieretief.com",
+        "image": "https://attieretief.com/avatar.png",
+        "sameAs": [
+            "https://orcid.org/0009-0008-2426-9713",
+            "https://www.linkedin.com/in/attieretief/",
+            "https://www.youtube.com/@attieretief"
+        ]
+    }
+    </script>
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --color-bg: #0a0a0f;
+            --color-surface: #12121a;
+            --color-border: rgba(255, 255, 255, 0.06);
+            --color-text: #e8e8ed;
+            --color-text-muted: #8a8a9a;
+            --color-accent: #6366f1;
+            --color-accent-glow: rgba(99, 102, 241, 0.15);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            min-height: 100vh;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 1.1rem 1.5rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .topbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            text-decoration: none;
+            color: var(--color-text);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .topbar-brand .dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--color-accent);
+            box-shadow: 0 0 12px var(--color-accent-glow);
+        }
+
+        .topbar-section { color: var(--color-text-muted); font-size: 0.95rem; }
+
+        .page {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 4rem;
+        }
+
+        .page-header { margin-bottom: 2.5rem; }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.6rem;
+        }
+
+        .page-intro {
+            font-family: "Georgia", "Times New Roman", serif;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 1.08rem;
+            line-height: 1.8;
+            max-width: 60ch;
+        }
+
+        .orcid-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            margin-top: 1.1rem;
+            padding: 0.35rem 0.8rem;
+            border: 1px solid var(--color-border);
+            border-radius: 999px;
+            background: rgba(10, 10, 15, 0.55);
+            color: var(--color-text-muted);
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .orcid-chip:hover { border-color: rgba(99, 102, 241, 0.3); color: var(--color-text); }
+
+        .orcid-chip .orcid-mark {
+            width: 14px; height: 14px; border-radius: 50%;
+            background: #a6ce39;
+            color: #0a0a0f;
+            font-weight: 700;
+            font-size: 9px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-style: normal;
+        }
+
+        h2 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            margin: 2.6rem 0 1rem;
+        }
+
+        .paper {
+            padding: 1.5rem 1.6rem;
+            background: rgba(18, 18, 26, 0.7);
+            border: 1px solid var(--color-border);
+            border-radius: 14px;
+            margin-bottom: 1rem;
+        }
+
+        .paper-status {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.25rem 0.65rem;
+            border-radius: 999px;
+            margin-bottom: 0.8rem;
+        }
+
+        .status-review {
+            color: #e8b341;
+            background: rgba(232, 179, 65, 0.1);
+            border: 1px solid rgba(232, 179, 65, 0.25);
+        }
+
+        .status-prep {
+            color: var(--color-text-muted);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--color-border);
+        }
+
+        .paper-title {
+            font-size: 1.15rem;
+            font-weight: 650;
+            line-height: 1.45;
+            margin-bottom: 0.7rem;
+        }
+
+        .paper-abstract {
+            color: var(--color-text-muted);
+            font-size: 0.92rem;
+            line-height: 1.75;
+        }
+
+        .paper-meta {
+            margin-top: 0.9rem;
+            font-size: 0.8rem;
+            color: rgba(138, 138, 154, 0.75);
+        }
+
+        .prep-list .paper { padding: 1.1rem 1.6rem; }
+        .prep-list .paper-title { font-size: 1rem; margin-bottom: 0.35rem; }
+        .prep-list .paper-abstract { font-size: 0.88rem; }
+
+        .series-note {
+            margin-top: 2.2rem;
+            font-size: 0.88rem;
+            line-height: 1.75;
+            color: var(--color-text-muted);
+            border-left: 2px solid rgba(99, 102, 241, 0.35);
+            padding-left: 1rem;
+        }
+
+        footer {
+            margin-top: 3.5rem;
+            color: var(--color-text-muted);
+            font-size: 0.75rem;
+            opacity: 0.5;
+        }
+
+        @media (max-width: 480px) {
+            .page { padding: 2rem 1.1rem 3rem; }
+            h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <a href="/" class="topbar-brand">
+            <span class="dot"></span>
+            <span>Attie Retief</span>
+        </a>
+        <span class="topbar-section">/ Research</span>
+    </header>
+
+    <main class="page">
+        <div class="page-header">
+            <h1>Research</h1>
+            <p class="page-intro">Academic papers at the interface of Reformed theology and contemporary physics &mdash; on the methodological conditions for honest theological engagement with speculative science, and the doctrine of creation in conversation with emergent-spacetime research.</p>
+            <a class="orcid-chip" href="https://orcid.org/0009-0008-2426-9713" target="_blank" rel="noopener">
+                <span class="orcid-mark">iD</span>
+                ORCID 0009-0008-2426-9713
+            </a>
+        </div>
+
+        <h2>Journal articles</h2>
+
+        <article class="paper">
+            <span class="paper-status status-review">Under review</span>
+            <div class="paper-title">Conditional Consonance: An Operational Method for Theological Engagement with Speculative Physics</div>
+            <p class="paper-abstract">Theological engagement with physics increasingly concerns speculative research programs rather than established science, yet the methodological literature of the science-and-religion field offers postures rather than procedures, and guards against none of the failure modes that engagement invites. This article proposes an operational method, conditional consonance, comprising five components: explicit conditionalization of all consonance claims on named research programs; a three-register linguistic discipline; five demarcation firewalls adapted from recent philosophy of pseudoscience; a source discipline distinguishing common-grace insight from authoritative testimony; and a mandatory dissonance ledger. A worked case demonstrates the method discriminating between pedagogical value and evidential standing in a popular but unrefereed source. The method renders frontier engagement honest rather than forbidden.</p>
+            <div class="paper-meta">Under review at a peer-reviewed journal &middot; 2026</div>
+        </article>
+
+        <h2>In preparation</h2>
+
+        <div class="prep-list">
+            <article class="paper">
+                <span class="paper-status status-prep">In preparation</span>
+                <div class="paper-title">Quantized spacetime and the case against actual infinities</div>
+                <p class="paper-abstract">Finitism in the philosophy of religion in conversation with discrete-spacetime research programs in fundamental physics.</p>
+            </article>
+
+            <article class="paper">
+                <span class="paper-status status-prep">In preparation</span>
+                <div class="paper-title">Emergence and the argument from contingency</div>
+                <p class="paper-abstract">How emergent-gravity research programs sharpen, rather than dissolve, the Leibnizian question of why there is anything at all.</p>
+            </article>
+
+            <article class="paper">
+                <span class="paper-status status-prep">In preparation</span>
+                <div class="paper-title">Phase-transition cosmology and the doctrine of creation</div>
+                <p class="paper-abstract">Creatio ex nihilo and creatio continua in conversation with cosmological models that begin without a singularity.</p>
+            </article>
+
+            <article class="paper">
+                <span class="paper-status status-prep">In preparation</span>
+                <div class="paper-title">Topological persistence and created integrity</div>
+                <p class="paper-abstract">Matter as topologically protected pattern, the stability of created things, and the metaphysics of bodily resurrection.</p>
+            </article>
+
+            <article class="paper">
+                <span class="paper-status status-prep">In preparation</span>
+                <div class="paper-title">Incarnation as nucleation</div>
+                <p class="paper-abstract">A structural parallel between nucleation physics and the Incarnation &mdash; handled strictly as model, never as mechanism.</p>
+            </article>
+        </div>
+
+        <p class="series-note">These papers form a single research program: each defends one load-bearing claim of a larger project on science and faith, under an explicit methodological protocol that the first paper in the series supplies. A book-length synthesis, <em>Cosmic Wonder</em>, is in preparation.</p>
+
+        <footer>&copy; 2026 Attie Retief</footer>
+    </main>
+
+    <script data-goatcounter="https://attieretief.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
