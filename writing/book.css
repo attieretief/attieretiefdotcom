@@ -1,0 +1,213 @@
+/* writing/book.css — shared "paper book" styling for the writing collection.
+   Edit once; applies to the index (table of contents) and every piece page. */
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --paper:#f5f1e7;        /* warm cream page */
+  --paper-soft:#efe9dc;   /* faint panel / rule fills */
+  --ink:#2a2620;          /* primary ink */
+  --ink-soft:#4c463c;     /* body ink */
+  --muted:#938876;        /* captions, years, labels */
+  --rule:rgba(42,38,32,.16);
+  --accent:#7c2d2d;       /* deep wine — links & marks */
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,"Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--serif);
+  background:var(--paper);
+  color:var(--ink-soft);
+  min-height:100vh;
+  /* faint paper grain via layered radial tints */
+  background-image:
+    radial-gradient(120% 90% at 50% -10%,rgba(255,255,255,.5),transparent 60%),
+    radial-gradient(100% 120% at 50% 110%,rgba(124,45,45,.03),transparent 55%);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* ── breadcrumb / topbar ─────────────────────────────────── */
+.topbar{display:flex;align-items:center;gap:.6rem;padding:1.05rem 1.6rem;
+  border-bottom:1px solid var(--rule);font-family:var(--sans);
+  white-space:nowrap;flex-wrap:wrap}
+.topbar > a{display:inline-flex;align-items:center;gap:.55rem;text-decoration:none;
+  color:var(--ink);font-weight:600;font-size:.92rem;flex-shrink:0}
+.topbar .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);
+  box-shadow:0 0 10px rgba(124,45,45,.35);flex-shrink:0}
+.topbar .section{color:var(--muted);font-size:.92rem;font-weight:400}
+.topbar .section a{color:inherit;font-weight:400;text-decoration:none}
+.topbar .section a:hover{color:var(--ink)}
+
+.page{max-width:660px;margin:0 auto;padding:4rem 1.6rem 5rem}
+
+/* ── title page (index frontispiece) ─────────────────────── */
+.frontispiece{text-align:center;margin-bottom:3.5rem}
+.frontispiece h1{font-size:2.7rem;font-weight:600;letter-spacing:.01em;
+  color:var(--ink);line-height:1.1}
+.frontispiece .intro{font-style:italic;color:var(--muted);font-size:1.12rem;
+  line-height:1.75;max-width:42ch;margin:1.4rem auto 0}
+.frontis-author{font-family:var(--sans);font-size:.72rem;font-weight:600;
+  letter-spacing:.26em;text-transform:uppercase;color:var(--muted);margin-top:.9rem}
+.ornament{display:block;text-align:center;color:var(--accent);opacity:.7;
+  letter-spacing:.5em;margin:1.6rem 0 0;font-size:.9rem}
+
+/* ── drill-down: breadcrumb trail + level heading ────────── */
+.trail{font-family:var(--sans);font-size:.76rem;letter-spacing:.05em;color:var(--muted);
+  text-align:center;margin-bottom:2.2rem}
+.trail a{color:var(--muted);text-decoration:none}
+.trail a:hover{color:var(--accent)}
+.trail .sep{margin:0 .5rem;opacity:.45}
+.trail .here{color:var(--ink);font-weight:600}
+.level-head{text-align:center;margin-bottom:2.6rem}
+.level-head h2{font-size:2.1rem;font-weight:600;color:var(--ink);letter-spacing:.01em;
+  line-height:1.15}
+.level-head .sub{font-family:var(--sans);font-size:.7rem;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);margin-top:.55rem}
+
+/* ── language / genre pickers ────────────────────────────── */
+.picker{display:flex;flex-wrap:wrap;gap:1.3rem;justify-content:center;margin-top:.5rem}
+.pick{display:flex;flex-direction:column;justify-content:center;min-width:210px;
+  padding:1.8rem 2.1rem;border:1px solid var(--rule);border-radius:12px;
+  background:var(--paper-soft);text-decoration:none;text-align:center;
+  transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+.pick:hover{transform:translateY(-4px);border-color:rgba(124,45,45,.4);
+  box-shadow:0 14px 26px -16px rgba(0,0,0,.4)}
+.pick-name{font-family:var(--serif);font-size:1.6rem;font-weight:600;color:var(--ink)}
+.pick-sub{font-family:var(--sans);font-size:.66rem;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);margin-top:.5rem}
+
+/* ── shelf of collections (book covers) ──────────────────── */
+.shelf-lang{margin:0 auto 3.2rem}
+.shelf-lang-label{text-align:center;font-style:italic;color:var(--muted);
+  font-size:1.15rem;margin-bottom:1.7rem}
+.shelf-lang-label::before{content:"· ";color:var(--accent);opacity:.6}
+.shelf-lang-label::after{content:" ·";color:var(--accent);opacity:.6}
+.shelf{display:flex;flex-wrap:wrap;gap:1.7rem 1.5rem;justify-content:center}
+.book{--cloth:#5b6b5a;position:relative;display:block;width:160px;height:224px;
+  border-radius:2px 5px 5px 2px;background:var(--cloth);text-decoration:none;
+  box-shadow:0 1px 2px rgba(0,0,0,.25),0 12px 24px -12px rgba(0,0,0,.5);
+  transition:transform .28s ease,box-shadow .28s ease}
+.book:hover{transform:translateY(-7px) rotate(-.7deg);
+  box-shadow:0 1px 2px rgba(0,0,0,.25),0 20px 34px -14px rgba(0,0,0,.55)}
+.book .spine{position:absolute;left:0;top:0;bottom:0;width:13px;border-radius:2px 0 0 2px;
+  background:linear-gradient(90deg,rgba(0,0,0,.32),rgba(0,0,0,.04));
+  box-shadow:inset -1px 0 0 rgba(255,255,255,.10)}
+.book .sheen{position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(105deg,rgba(255,255,255,.16),rgba(255,255,255,0) 40%)}
+.book-inner{position:absolute;top:0;right:12px;bottom:34px;left:24px;display:flex;
+  flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.book-title{font-family:var(--serif);font-weight:600;font-size:1.14rem;line-height:1.25;
+  color:#f7f0e2;text-shadow:0 1px 1px rgba(0,0,0,.35)}
+.book-line{width:28px;height:1px;background:rgba(247,240,226,.45);margin:.75rem 0}
+.book-author{font-family:var(--sans);font-size:.6rem;letter-spacing:.2em;
+  text-transform:uppercase;color:rgba(247,240,226,.74)}
+.book-count{position:absolute;left:24px;right:12px;bottom:.95rem;text-align:center;
+  font-family:var(--sans);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(247,240,226,.52)}
+
+/* ── one collection, opened ──────────────────────────────── */
+.shelf-back{display:inline-block;margin-bottom:1.6rem;color:var(--muted);
+  text-decoration:none;font-family:var(--sans);font-size:.78rem;letter-spacing:.08em}
+.shelf-back:hover{color:var(--accent)}
+.coll-head{text-align:center;margin-bottom:2.6rem}
+.coll-head h1{font-size:2.3rem;font-weight:600;color:var(--ink);margin-top:.25rem;
+  line-height:1.15}
+.coll-toc .num{font-family:var(--sans);font-size:.7rem;color:var(--muted);
+  margin-right:.55rem;letter-spacing:.05em}
+
+/* ── genre "part" heading ────────────────────────────────── */
+.genre{margin-top:4rem}
+.genre:first-of-type{margin-top:0}
+.genre-title{text-align:center;font-size:1rem;font-weight:600;
+  letter-spacing:.32em;text-transform:uppercase;color:var(--ink);
+  margin-bottom:.4rem}
+.genre-rule{display:flex;align-items:center;justify-content:center;gap:.9rem;
+  color:var(--accent);opacity:.55;margin-bottom:2.4rem}
+.genre-rule::before,.genre-rule::after{content:"";height:1px;width:64px;
+  background:var(--rule)}
+
+/* ── language sub-section ────────────────────────────────── */
+.lang-group{margin:0 auto 2.6rem}
+.lang-label{text-align:center;font-style:italic;color:var(--muted);
+  font-size:1.05rem;letter-spacing:.02em;margin-bottom:1.4rem}
+.lang-label::before{content:"· "}
+.lang-label::after{content:" ·"}
+
+/* ── themed movement within a language ───────────────────── */
+.movement{margin-bottom:1.8rem;scroll-margin-top:1.5rem}
+.movement-theme{text-align:center;font-size:.74rem;font-family:var(--sans);
+  font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--muted);opacity:.85;margin-bottom:1rem}
+.movement-note{text-align:center;font-style:italic;color:var(--muted);
+  font-size:.95rem;line-height:1.7;max-width:38ch;margin:0 auto 1rem}
+
+/* ── a single work, table-of-contents row ────────────────── */
+.toc{list-style:none;text-align:center}
+.toc li{margin:.7rem 0}
+.toc a{display:inline-block;text-decoration:none;color:var(--ink);
+  font-size:1.28rem;line-height:1.4;transition:color .2s ease}
+.toc a:hover{color:var(--accent)}
+.toc a .yr{display:block;font-size:.78rem;font-family:var(--sans);
+  letter-spacing:.06em;color:var(--muted);margin-top:.15rem;font-weight:400}
+
+.empty{text-align:center;color:var(--muted);font-style:italic;
+  font-size:1rem;margin:1rem 0}
+
+/* ── piece (individual poem / prose) ─────────────────────── */
+.kicker{text-align:center;font-family:var(--sans);font-size:.7rem;font-weight:600;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--accent);opacity:.85;
+  margin-bottom:.9rem}
+.byline{text-align:center;font-family:var(--serif);font-style:italic;
+  color:var(--muted);font-size:1rem;margin-top:.6rem}
+.piece-header{text-align:center;margin-bottom:2.8rem}
+.piece-header h1{font-size:2.3rem;font-weight:600;color:var(--ink);
+  letter-spacing:.01em;line-height:1.15}
+.piece-meta{color:var(--muted);font-size:.78rem;font-family:var(--sans);
+  letter-spacing:.16em;text-transform:uppercase;margin-top:.9rem}
+
+.piece{font-size:1.2rem;line-height:1.95;color:var(--ink-soft);max-width:34em;
+  margin:0 auto}
+.piece.center{text-align:center}
+.piece p{margin-bottom:1.5rem}
+.piece .stanza{margin-bottom:1.9rem}
+.piece h3,.piece h4{font-family:inherit;color:var(--ink);margin:2.2rem 0 1rem}
+
+.backlink{display:block;text-align:center;margin-top:3.5rem;color:var(--muted);
+  text-decoration:none;font-size:.85rem;font-family:var(--sans);
+  letter-spacing:.05em}
+.backlink:hover{color:var(--accent)}
+
+/* ── pager — turning pages within a collection ───────────── */
+.pager{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;
+  margin-top:3.6rem;padding-top:1.5rem;border-top:1px solid var(--rule);
+  font-family:var(--sans)}
+.pager a{text-decoration:none;color:var(--muted);font-size:.72rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;transition:color .2s ease;
+  max-width:38%;display:flex;flex-direction:column;gap:.35rem}
+.pager a:hover{color:var(--accent)}
+.pager .prev{align-items:flex-start;text-align:left}
+.pager .next{align-items:flex-end;text-align:right;margin-left:auto}
+.pager .contents{align-items:center;text-align:center;flex-shrink:0;color:var(--muted);opacity:.8}
+.pager .label{font-family:var(--serif);font-style:italic;font-weight:400;
+  text-transform:none;letter-spacing:0;color:var(--ink);font-size:1rem;line-height:1.25}
+.pager .pos{font-family:var(--serif);font-style:italic;font-weight:400;
+  text-transform:none;letter-spacing:0;color:var(--muted);font-size:.95rem}
+.pager .ph{visibility:hidden}
+@media(max-width:480px){
+  .pager .label{font-size:.9rem}
+  .pager a{font-size:.66rem}
+}
+
+footer{margin-top:4rem;text-align:center;color:var(--muted);font-size:.72rem;
+  font-family:var(--sans);opacity:.7}
+
+@media(max-width:480px){
+  .page{padding:2.6rem 1.2rem 3.5rem}
+  .frontispiece h1{font-size:2.1rem}
+  .piece-header h1{font-size:1.8rem}
+  .toc a{font-size:1.16rem}
+  .piece{font-size:1.12rem}
+}
