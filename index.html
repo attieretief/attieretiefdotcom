@@ -136,7 +136,7 @@
         .container {
             text-align: center;
             padding: 3rem 2rem;
-            max-width: 560px;
+            max-width: 780px;
             width: 100%;
             position: relative;
             z-index: 1;
@@ -205,9 +205,15 @@
         }
 
         .links {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 0.75rem;
+        }
+
+        .bio {
+            max-width: 56ch;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .link-card {
@@ -332,6 +338,12 @@
             }
         }
 
+        @media (max-width: 640px) {
+            .links {
+                grid-template-columns: 1fr;
+            }
+        }
+
         @media (max-width: 480px) {
             .container {
                 padding: 2rem 1.25rem;
@@ -339,6 +351,25 @@
             h1 {
                 font-size: 1.65rem;
             }
+        }
+
+        /* Compress vertically on short viewports so everything fits without scrolling */
+        @media (min-width: 641px) and (max-height: 860px) {
+            .container { padding: 1.5rem 2rem; }
+            .avatar { width: 84px; height: 84px; margin-bottom: 1.2rem; }
+            h1 { font-size: 1.7rem; margin-bottom: 0.35rem; }
+            .bio { font-size: 1rem; line-height: 1.65; margin-bottom: 1.6rem; }
+            .link-card { padding: 0.75rem 1rem; }
+            .link-icon { width: 36px; height: 36px; }
+            footer { margin-top: 1.5rem; }
+        }
+
+        @media (min-width: 641px) and (max-height: 700px) {
+            .avatar { width: 64px; height: 64px; margin-bottom: 0.9rem; }
+            .bio { font-size: 0.9rem; line-height: 1.55; margin-bottom: 1.1rem; }
+            .link-card { padding: 0.6rem 0.9rem; }
+            .link-desc { display: none; }
+            footer { margin-top: 1rem; }
         }
     </style>
 </head>
