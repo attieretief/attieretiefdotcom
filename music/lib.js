@@ -11,8 +11,18 @@
         // GitHub username — used for listing your gists in the library
         githubUser: 'attieretief',
 
-        // Gist description prefix — used to filter your music gists from other gists
+        // Gist description prefix — used to filter your music gists from other gists.
+        // Default tag (worship songs) — kept for back-compat with anything that
+        // reads CONFIG.gistTag directly.
         gistTag: '[abc-music]',
+
+        // Collections — each maps to a distinct description tag so the library can
+        // split scores into separate sections. The editor lets you pick one when
+        // publishing; titleOf/tagOf treat any leading [bracket] tag generically.
+        collections: [
+            { key: 'worship',  tag: '[abc-music]',    label: 'Worship songs',          hostId: 'library-content'   },
+            { key: 'original', tag: '[abc-original]', label: 'Original compositions',  hostId: 'originals-content' }
+        ],
 
         // Cloudflare Worker that proxies gist READ requests with the owner's PAT
         // (so public visitors share the 5000/hour authenticated rate limit).
@@ -52,7 +62,7 @@
     // Public read works without token. Write needs PAT with `gist` scope.
     // ============================================================
     const GistAPI = {
-        async create(title, abc, token) {
+        async create(title, abc, token, tag) {
             const filename = AbcUtil.gistFilename(title);
             const files = {};
             files[filename] = { content: abc };
@@ -64,7 +74,7 @@
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    description: CONFIG.gistTag + ' ' + title,
+                    description: (tag || CONFIG.gistTag) + ' ' + title,
                     public: true,
                     files: files
                 })
@@ -73,7 +83,7 @@
             return res.json();
         },
 
-        async update(id, title, abc, token) {
+        async update(id, title, abc, token, tag) {
             // Find the existing .abc file's name so we update (and optionally rename) it
             // rather than adding a second file alongside it.
             const existing = await this.read(id);
@@ -85,6 +95,9 @@
             if (existingFilename !== newFilename) fileBody.filename = newFilename;
             const files = {};
             files[existingFilename] = fileBody;
+            // Preserve the score's existing collection tag unless the caller passes
+            // one explicitly (which reclassifies the score into another section).
+            const nextTag = tag || this.tagOf(existing);
             const res = await fetch('https://api.github.com/gists/' + id, {
                 method: 'PATCH',
                 headers: {
@@ -93,7 +106,7 @@
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    description: CONFIG.gistTag + ' ' + title,
+                    description: nextTag + ' ' + title,
                     files: files
                 })
             });
@@ -135,20 +148,33 @@
             return res.json();
         },
 
-        async listMine(user) {
+        // Every gist the user owns, raw — callers filter by collection tag.
+        async fetchAll(user) {
             const path = '/users/' + user + '/gists' + (CONFIG.gistApiBase ? '' : '?per_page=100');
             const res = await fetch(this._readUrl(path), {
                 headers: this._readHeaders()
             });
             if (!res.ok) throw new Error('Could not fetch gists (' + res.status + ')');
-            const all = await res.json();
-            return all.filter(g => g.description && g.description.startsWith(CONFIG.gistTag));
+            return res.json();
         },
 
-        // Pull the title back out of the gist description
+        async listMine(user, tag) {
+            const all = await this.fetchAll(user);
+            const t = tag || CONFIG.gistTag;
+            return all.filter(g => g.description && g.description.startsWith(t));
+        },
+
+        // The leading [bracket] collection tag, e.g. '[abc-original]'.
+        // Falls back to the default tag for untagged/legacy gists.
+        tagOf(gist) {
+            const m = /^\s*(\[[^\]]*\])/.exec(gist.description || '');
+            return m ? m[1] : CONFIG.gistTag;
+        },
+
+        // Pull the title back out of the gist description (strip any leading tag).
         titleOf(gist) {
             const desc = gist.description || '';
-            return desc.replace(CONFIG.gistTag, '').trim() || 'Untitled';
+            return desc.replace(/^\s*\[[^\]]*\]\s*/, '').trim() || 'Untitled';
         },
 
         // Extract the raw ABC content from a gist response

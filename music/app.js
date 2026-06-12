@@ -16,6 +16,7 @@
     const $btnStop     = document.getElementById('btn-stop');
     const $btnMp3      = document.getElementById('btn-mp3');
     const $mp3Label    = document.getElementById('mp3-label');
+    const $collection  = document.getElementById('collection');
     const $transpose   = document.getElementById('transpose');
     const $transValue  = document.getElementById('transpose-value');
     const $modalRoot   = document.getElementById('modal-root');
@@ -395,28 +396,29 @@
         const abc = $input.value;
         const title = AbcUtil.extractTitle(abc);
         const token = Auth.getToken();
+        const tag = $collection ? $collection.value : undefined;
         if (!token) {
             showTokenModal(() => publish());
             return;
         }
         if (currentGistId) {
-            showConfirmUpdateModal(title, () => doPublish(abc, title, token));
+            showConfirmUpdateModal(title, () => doPublish(abc, title, token, tag));
         } else {
-            doPublish(abc, title, token);
+            doPublish(abc, title, token, tag);
         }
     }
 
-    async function doPublish(abc, title, token) {
+    async function doPublish(abc, title, token, tag) {
         $btnPublish.disabled = true;
         const orig = $btnPublish.innerHTML;
         $btnPublish.innerHTML = '<span class="spinner"></span> ' + (currentGistId ? 'Updating…' : 'Publishing…');
         try {
             let gist;
             if (currentGistId) {
-                gist = await GistAPI.update(currentGistId, title, abc, token);
+                gist = await GistAPI.update(currentGistId, title, abc, token, tag);
                 Toast.success('Updated');
             } else {
-                gist = await GistAPI.create(title, abc, token);
+                gist = await GistAPI.create(title, abc, token, tag);
                 currentGistId = gist.id;
                 localStorage.setItem(CONFIG.storageKeys.lastId, gist.id);
                 // Update URL without reloading
@@ -492,6 +494,7 @@
             const gist = await GistAPI.read(id);
             const abc = GistAPI.abcOf(gist);
             $input.value = abc;
+            if ($collection) $collection.value = GistAPI.tagOf(gist);
             currentGistId = id;
             localStorage.setItem(CONFIG.storageKeys.draft, abc);
             updateLineCount();

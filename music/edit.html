@@ -7,7 +7,7 @@
     <meta name="description" content="ABC notation editor with live preview, MP3 export, and shareable score links.">
     <meta name="robots" content="noindex">
     <link rel="canonical" href="https://attieretief.com/music/">
-    <link rel="stylesheet" href="styles.css?v=10">
+    <link rel="stylesheet" href="styles.css?v=18">
 </head>
 <body>
     <div class="app">
@@ -27,6 +27,13 @@
                 <span class="editing-indicator-title" id="editing-title"></span>
             </span>
             <div class="topbar-spacer"></div>
+            <label class="collection-select" title="Which library section this score publishes to">
+                <span class="collection-select-label">Section</span>
+                <select id="collection">
+                    <option value="[abc-music]">Worship songs</option>
+                    <option value="[abc-original]">Original compositions</option>
+                </select>
+            </label>
             <button class="btn" id="btn-new" title="Start a new score">
                 <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                 New
@@ -108,8 +115,8 @@
     <!-- lamejs (MP3 encoder) -->
     <script src="https://cdn.jsdelivr.net/npm/@breezystack/lamejs@1.2.7/dist/lamejs.iife.js"></script>
 
-    <script src="lib.js?v=10"></script>
-    <script src="app.js?v=11"></script>
+    <script src="lib.js?v=17"></script>
+    <script src="app.js?v=12"></script>
 
     <!-- Goatcounter analytics (optional) -->
     <script data-goatcounter="https://attieretief.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

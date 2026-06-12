@@ -22,6 +22,7 @@
 }
 
 html, body { height: 100%; }
+html { scroll-behavior: smooth; }
 
 body {
     font-family: var(--font-sans);
@@ -476,6 +477,45 @@ body::before {
 .toast.success { border-color: var(--color-success); }
 .toast.error { border-color: var(--color-danger); }
 
+/* Collection picker in the editor topbar */
+.collection-select {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+}
+
+.collection-select-label {
+    letter-spacing: 0.01em;
+}
+
+.collection-select select {
+    padding: 0.4rem 0.6rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-text);
+    font-family: inherit;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+
+.collection-select select:hover {
+    border-color: var(--color-border-strong);
+}
+
+.collection-select select:focus {
+    outline: none;
+    border-color: var(--color-accent);
+}
+
+@media (max-width: 640px) {
+    .collection-select-label { display: none; }
+}
+
 /* === Library page === */
 .library-container {
     max-width: 880px;
@@ -499,8 +539,23 @@ body::before {
     font-size: 0.95rem;
 }
 
+/* Shortcut cards at the top of the library — Paraverses + on-page sections */
+.music-shortcuts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.7rem;
+    margin-bottom: 2.75rem;
+}
+
+/* In-page jump cards scroll downward, so nudge the arrow down (not diagonally). */
+.project-card--jump:hover .project-card-arrow {
+    transform: translateY(2px);
+}
+
 .music-section {
     margin-bottom: 2.5rem;
+    /* Clear the sticky topbar when jumped to via #anchor. */
+    scroll-margin-top: 90px;
 }
 
 .music-section-head {
@@ -587,7 +642,7 @@ body::before {
     margin-bottom: 1rem;
 }
 
-#score-search {
+.score-search {
     flex: 1;
     padding: 0.6rem 0.9rem;
     background: var(--color-surface);
@@ -599,13 +654,13 @@ body::before {
     transition: border-color 0.2s, background 0.2s;
 }
 
-#score-search:focus {
+.score-search:focus {
     outline: none;
     border-color: var(--color-accent);
     background: rgba(99, 102, 241, 0.04);
 }
 
-#score-search::placeholder { color: var(--color-text-faint); }
+.score-search::placeholder { color: var(--color-text-faint); }
 
 .score-count {
     font-size: 0.8rem;
