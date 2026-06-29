@@ -41,7 +41,7 @@ const COLLECTIONS = [
     'die-soen', 'jy', 'braille', 'jys-my-berg',
     'geseend', 'leplek-vir-n-kind', 'die-rede', 'liedjie', 'mooi-dag', 'ballade-vir-die-reenkind' ] },
   { lang: 'Afrikaans', theme: 'Troue & tuiste', slugs: [
-    'troudag', 'hierdie-huisie', 'die-wonderwerk', 'jy-is-reg' ] },
+    'troudag', 'hierdie-huisie', 'die-wonderwerk' ] },
   { lang: 'Afrikaans', theme: 'By die see', slugs: [
     'heroldsbaai', 'spoelgety', 'by-die-see', 'rotsgeloop' ] },
   { lang: 'Afrikaans', theme: 'Geloof', slugs: [

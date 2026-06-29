@@ -128,10 +128,6 @@ window.WRITING = {
                 {
                   "title": "Die wonderwerk",
                   "href": "/writing/poetry/die-wonderwerk/"
-                },
-                {
-                  "title": "Jy is reg",
-                  "href": "/writing/poetry/jy-is-reg/"
                 }
               ]
             },
