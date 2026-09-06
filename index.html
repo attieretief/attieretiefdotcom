@@ -92,6 +92,10 @@
             --color-text-muted: #8a8a9a;
             --color-accent: #6366f1;
             --color-accent-glow: rgba(99, 102, 241, 0.15);
+            /* The floating Recent panel's footprint. Read by the panel itself
+               and by the body padding that keeps the container clear of it. */
+            --panel-w: 360px;
+            --panel-gap: 1.5rem;
         }
 
         body {
@@ -294,19 +298,27 @@
             transform: translateX(0);
         }
 
-        /* Recent — the dated update timeline, built by feed/build.js. It lives
-           in a pill fixed to the bottom-right corner that expands into a panel,
-           so the hero and the cards keep the landing page to one screen. */
+        /* Recent — the dated update timeline, built by feed/build.js. On
+           desktop the panel is the default state: it floats at the right edge,
+           vertically centred, clear of the hero. The pill in the bottom-right
+           corner is only what it collapses to (and the default below 1024px).
+           The dock anchors the pill; the panel positions itself. */
         .recent-dock {
             position: fixed;
             right: 1.25rem;
             bottom: 1.25rem;
             z-index: 10;
             text-align: left;
-            /* Arrives after the cards have finished (~1.2s), so the eye is
-               drawn to it landing. The delay is restated in JS from
-               performance.now(), because the dock is [hidden] until feed.json
-               resolves and the animation clock only starts once it is shown. */
+            /* No transform on the dock, ever — one would make it the
+               containing block for the position:fixed panel inside it. */
+        }
+
+        /* Arrives after the cards have finished (~1.2s), so the eye is drawn
+           to it landing. The delay is restated in JS from performance.now(),
+           because the dock is [hidden] until feed.json resolves and the
+           animation clock only starts once it is shown. Suppressed entirely
+           when the panel opens on load — there the panel does the arriving. */
+        .recent-pill {
             animation: fadeUp 0.6s ease 1.2s both;
         }
 
@@ -400,7 +412,8 @@
             stroke-linejoin: round;
         }
 
-        /* Anchored to the same corner as the pill it replaces. */
+        /* Base (below 1024px): anchored to the same corner as the pill it
+           replaces. The desktop block below floats it centre-right instead. */
         .recent-panel {
             position: absolute;
             right: 0;
@@ -575,6 +588,83 @@
             }
         }
 
+        /* ---- Desktop: the panel floats, centred on the right edge ---------
+           Geometry, since it has to be reasoned about rather than eyeballed.
+           The panel occupies [W − gap − panel-w, W − gap]; the container is
+           780px wide and centred in whatever the body's right padding leaves.
+           Measured left/right edges and the gap between them:
+
+             1600px  panel 360, no padding   container  410–1190, gap 26px
+             1280px  panel 360, padding 360  container   70– 850, gap 46px
+             1024px  panel 300, padding 348  container    0– 676, gap 24px
+
+           Above 1600px natural centring already clears the panel, so nothing
+           shifts. Between 1280 and 1600 the padding equals the panel width,
+           which moves the centred container left by exactly half of it. Below
+           1280 the panel narrows to 300px and the reserve is panel + two gaps,
+           because half a 300px panel is no longer enough to clear it; from
+           1128px down the container gives up width rather than overlap. */
+        @media (min-width: 1024px) {
+            .recent-panel {
+                position: fixed;
+                top: 50%;
+                right: var(--panel-gap);
+                bottom: auto;
+                left: auto;
+                width: var(--panel-w);
+                max-height: 72vh;
+                /* Collapsed: down and in towards the pill in the corner. */
+                transform: translate(24px, calc(-50% + 56px)) scale(0.96);
+                transform-origin: 100% 100%;
+                transition: opacity 0.28s ease,
+                            transform 0.28s cubic-bezier(0.16, 0.84, 0.44, 1),
+                            visibility 0s linear 0.28s;
+            }
+
+            /* The one-shot arrival: a straight slide in from the right, with
+               none of the corner drift a collapse has. JS adds .entering,
+               flips .open on the next frame and drops .entering afterwards,
+               so the open transition itself is the entrance.
+               transition:none on the .entering-only frame is load-bearing —
+               with a transition the browser starts easing towards this
+               transform, .open retargets a frame later, and the slide begins
+               from the corner-collapse transform instead of from 40px right. */
+            .recent-dock.entering:not(.open) .recent-panel {
+                transform: translate(40px, -50%);
+                transition: none;
+            }
+
+            .recent-dock.open .recent-panel {
+                transform: translateY(-50%);
+                /* Restated so open and collapse run at the same speed — the
+                   base .open rule would otherwise hand opening its 0.2s. */
+                transition: opacity 0.28s ease,
+                            transform 0.28s cubic-bezier(0.16, 0.84, 0.44, 1),
+                            visibility 0s;
+            }
+
+            .recent-dock.entering.open .recent-panel {
+                transform: translateY(-50%);
+                transition: opacity 0.6s ease-out,
+                            transform 0.6s ease-out,
+                            visibility 0s;
+            }
+
+            /* Items stagger in behind the panel; delay set per item in JS. */
+            .recent-dock.entering .timeline li {
+                animation: fadeUp 0.4s ease both;
+            }
+        }
+
+        @media (min-width: 1024px) and (max-width: 1279px) {
+            :root { --panel-w: 300px; }
+            body { padding-right: 348px; }
+        }
+
+        @media (min-width: 1280px) and (max-width: 1599px) {
+            body { padding-right: 360px; }
+        }
+
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
@@ -583,12 +673,14 @@
                 transition-delay: 0s !important;
             }
 
-            /* No pulse, and the pill is simply there rather than arriving. */
+            /* No pulse, and the pill is simply there rather than arriving.
+               The panel simply appears too — JS skips the entrance and opens
+               it outright. */
             .pill-dot {
                 animation: none !important;
             }
 
-            .recent-dock {
+            .recent-pill {
                 animation-delay: 0s !important;
             }
         }
@@ -597,8 +689,10 @@
             .links {
                 grid-template-columns: 1fr;
             }
+        }
 
-            /* The pill spans the bottom edge; open, it is a bottom sheet. */
+        /* Phones and tablets: collapsed pill by default, bottom sheet open. */
+        @media (max-width: 1023px) {
             .recent-dock {
                 left: 1rem;
                 right: 1rem;
@@ -848,16 +942,17 @@
             const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
                             "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-            const STORE_KEY = "recent-open";
-            // A first-time desktop visitor gets the panel opened for them once,
-            // so the timeline is seen at least that once. This key records that
-            // it has happened; it is deliberately separate from STORE_KEY,
-            // because the auto-open is not the visitor's choice and must not be
-            // replayed as one on the next load.
-            const SHOWN_KEY = "recent-autoshown";
-            const AUTO_OPEN_MIN_WIDTH = 1024;
-            const AUTO_OPEN_DELAY = 2000;
+            // Desktop opens the panel on every visit. The only thing recorded
+            // is a *collapse*, and only for the session: a reload mid-visit
+            // respects the choice, a fresh visit opens again. sessionStorage,
+            // not localStorage, is what makes that distinction.
+            const STORE_KEY = "recent-collapsed";
+            const DESKTOP_MIN_WIDTH = 1024;
             const ENTRANCE_DELAY = 1200;
+            // Long enough to outlast the 0.6s slide and the last item's
+            // stagger (19 x 40ms + 0.4s), after which .entering comes off.
+            const ENTRANCE_LIFETIME = 1600;
+            const ITEM_STAGGER = 40;
 
             // Hiding the element the user just activated (the pill on open, the
             // panel on close) blurs it to <body> in a later style pass, which
@@ -872,17 +967,17 @@
                 });
             }
 
-            // localStorage throws in private mode; a browser that can't
+            // sessionStorage throws in private mode; a browser that can't
             // remember just gets the default behaviour every time.
             function store(key, value) {
                 try {
-                    localStorage.setItem(key, value);
+                    sessionStorage.setItem(key, value);
                 } catch (e) { /* not remembered */ }
             }
 
             function recall(key) {
                 try {
-                    return localStorage.getItem(key);
+                    return sessionStorage.getItem(key);
                 } catch (e) {
                     return null;
                 }
@@ -903,8 +998,10 @@
 
             function render(items) {
                 const list = document.getElementById("timeline");
-                items.forEach((item) => {
+                items.forEach((item, i) => {
                     const li = document.createElement("li");
+                    // Only bites while .entering is on the dock.
+                    li.style.animationDelay = (i * ITEM_STAGGER) + "ms";
 
                     const date = document.createElement("span");
                     date.className = "t-date";
@@ -945,23 +1042,35 @@
 
                 const dock = document.getElementById("recent-dock");
                 const pill = document.getElementById("recent-pill");
+
+                // Desktop shows the panel on arrival unless this session has
+                // already collapsed it. Below 1024px the pill is the default,
+                // whatever is stored.
+                const openOnLoad =
+                    window.matchMedia("(min-width: " + DESKTOP_MIN_WIDTH + "px)").matches &&
+                    recall(STORE_KEY) !== "1";
+
                 dock.hidden = false;
 
-                // The dock is revealed only once feed.json has resolved, and a
-                // CSS animation-delay starts counting from then — so restate it
-                // as whatever is left of the 1.2s the cards take.
-                if (!prefersReducedMotion) {
+                if (openOnLoad) {
+                    // The panel does the arriving; the pill must not flash in
+                    // at 1.2s only to be display:none'd by the same tick.
+                    pill.style.animation = "none";
+                } else if (!prefersReducedMotion) {
+                    // The dock is revealed only once feed.json has resolved,
+                    // and a CSS animation-delay starts counting from then — so
+                    // restate it as whatever is left of the 1.2s the cards take.
                     const left = Math.max(0, ENTRANCE_DELAY - performance.now());
-                    dock.style.animationDelay = (left / 1000) + "s";
+                    pill.style.animationDelay = (left / 1000) + "s";
                 }
 
-                // persist=false for the auto-open: it is the page's doing, not
-                // the visitor's, so it must not be remembered as an open state.
+                // persist=false for the open-on-load: it is the page's doing,
+                // not the visitor's. Only a collapse is ever recorded.
                 function setOpen(open, focus, persist) {
                     dock.classList.toggle("open", open);
                     pill.setAttribute("aria-expanded", String(open));
                     if (persist !== false) {
-                        store(STORE_KEY, open ? "1" : "0");
+                        store(STORE_KEY, open ? "0" : "1");
                     }
                     if (focus) {
                         focusWhenReady(open ? document.getElementById("recent-close") : pill, 5);
@@ -980,25 +1089,27 @@
                     if (dock.classList.contains("open") && !dock.contains(e.target)) setOpen(false, false);
                 });
 
-                const remembered = recall(STORE_KEY);
-                // Collapsed by default.
-                if (remembered === "1") {
-                    setOpen(true, false);
-                } else if (
-                    remembered === null &&
-                    recall(SHOWN_KEY) === null &&
-                    window.matchMedia("(min-width: " + AUTO_OPEN_MIN_WIDTH + "px)").matches
-                ) {
-                    // First desktop visit, no recorded choice: open the panel
-                    // once, a couple of seconds in. The visitor closes it with
-                    // the button, Esc or a click outside, and that closing is
-                    // what STORE_KEY then remembers. Never on a phone, and
-                    // never twice on the same browser.
-                    setTimeout(() => {
-                        store(SHOWN_KEY, "1");
-                        if (!dock.classList.contains("open")) setOpen(true, false, false);
-                    }, AUTO_OPEN_DELAY);
+                if (!openOnLoad) return;
+
+                if (prefersReducedMotion) {
+                    setOpen(true, false, false);
+                    return;
                 }
+
+                // .entering first, .open on the next frame: the browser needs
+                // one frame with the closed transform applied for the open one
+                // to transition rather than snap. Whatever is left of the 1.2s
+                // the cards take is the wait, for the same reason as the pill.
+                setTimeout(() => {
+                    if (dock.classList.contains("open")) return;
+                    dock.classList.add("entering");
+                    // Force the closed transform to be computed before .open
+                    // replaces it, or the browser collapses both into one
+                    // style change and the slide never happens.
+                    document.getElementById("recent-panel").getBoundingClientRect();
+                    requestAnimationFrame(() => setOpen(true, false, false));
+                    setTimeout(() => dock.classList.remove("entering"), ENTRANCE_LIFETIME);
+                }, Math.max(0, ENTRANCE_DELAY - performance.now()));
             }
 
             fetch("/feed.json", { cache: "no-cache" })

@@ -142,3 +142,45 @@
   in `index.html`), on top of the existing four-per-source cap. Why both: the source cap keeps
   every source visible across the whole list, the per-day cap stops one day's batch — the
   genealogy build's 22 pages — owning the top of it. `feed.json` stays uncapped and unfiltered.
+
+## Recent is open by default on desktop; the pill is only its collapsed state (2026-09-06)
+
+Reverses the previous decision above — the panel is no longer something the visitor has to
+open, on desktop it is the landing page's second column.
+
+- **At ≥1024px the panel is expanded on every visit.** No first-visit rule and no
+  `localStorage` gate; `recent-autoshown` and `recent-open` are gone. The only thing recorded
+  is a *collapse*, under **`recent-collapsed` in `sessionStorage`** — so a reload mid-visit
+  respects the choice and a fresh visit opens again. sessionStorage rather than localStorage
+  is the whole mechanism for that distinction. Below 1024px the pill is still the default
+  whatever is stored, and opening gives the bottom sheet (that breakpoint moved up from 640px).
+- **The panel floats `position: fixed`, `top: 50%` / `translateY(-50%)`, 1.5rem from the right,
+  max-height 72vh.** Its ancestor `.recent-dock` must therefore never carry a transform — one
+  would make the dock the containing block and the "fixed" panel would position against it.
+  That is why the 1.2s entrance animation moved from `.recent-dock` to `.recent-pill`.
+- **The container is kept clear by `body { padding-right }`, not by a transform**, so the
+  780px container simply centres in what is left. Measured left/right edges and the gap:
+  1600px → panel 360, no padding, container 410–1190, **gap 26px**; 1280px → panel 360,
+  padding 360 (a 180px shift, exactly half the panel), container 70–850, **gap 46px**;
+  1024px → panel 300, padding 348, container 0–676, **gap 24px**. Above 1600 natural centring
+  already clears it. Below 1280 the panel narrows to 300px and the reserve is panel + two gaps,
+  because half of 300 no longer clears it; from 1128px down the container gives up width
+  rather than overlap (676 instead of 780 at 1024). No horizontal overflow at any width.
+- **The entrance is the open transition, not a separate keyframe animation.** JS adds
+  `.entering`, forces a reflow, flips `.open` on the next frame, and removes `.entering` 1.6s
+  later. `.recent-dock.entering:not(.open) .recent-panel` carries **`transition: none`** and
+  that is load-bearing: with a transition the browser starts easing toward the entering
+  transform, `.open` retargets a frame later, and the slide begins from the corner-collapse
+  transform instead of from 40px right. Verified in the trace — before the fix the entrance
+  started at `matrix(0.96,…,24,-232)`, after it at `matrix(1,0,0,1,40,-288)`.
+- **Collapse and expand are the same transition run backwards**, from `translateY(-50%)` to
+  `translate(24px, calc(-50% + 56px)) scale(0.96)` with `transform-origin: 100% 100%` — down
+  and in towards the pill in the corner. 0.28s each way; the entrance is the slower 0.6s.
+  Items stagger 40ms apart, the delay set per `<li>` in JS and only biting while `.entering`.
+- **Verified over CDP against the rendered DOM** (Playwright's headless-shell chromium, local
+  server, per-tab sessions): open on load at 1600/1280/1024 with no session record and 20
+  items; pill instead at 375×812 with the panel `absolute` and hidden; close button, Esc and
+  an outside click each collapse it and store `recent-collapsed=1`, which survives a reload
+  and is cleared by a fresh tab; under emulated `prefers-reduced-motion` the panel is simply
+  open at 896,112–1256,688 with no `.entering` and no dot animation; and the entrance opacity
+  samples 0 → 0.29 → 0.64 → 0.84 → 1 over ~600ms, so it eases rather than snaps.

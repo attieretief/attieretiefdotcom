@@ -98,3 +98,8 @@ from the git log and migrated conversations; treat undated items as approximate.
 - **2026-09-06 — the Recent pill made conspicuous.** Accent label + pulsing dot, larger type,
   accent border with a resting glow, an entrance timed after the cards, and a one-time
   first-visit auto-open on desktop. Verified against the rendered DOM in headless Chrome.
+
+- **2026-09-06 — Recent panel flipped to open-by-default.** `index.html` only. Desktop
+  (≥1024px) arrives with the panel expanded and floating centre-right; the pill is now just
+  what it collapses to, and the collapse is remembered for the session only. Container and
+  panel measured clear at 1600 (gap 26px), 1280 (46px) and 1024 (24px), pill-only at 375.
