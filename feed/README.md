@@ -29,9 +29,14 @@ first:
 { "date": "2026-09-06", "source": "news", "title": "…", "url": "https://…", "blurb": "…" }
 ```
 
-`date` is `YYYY-MM-DD`. `blurb` may be empty. `feed.json` holds **all** items;
-the page shows the 20 most recent, capped at four per source (five for
-`research`, which emits one item per dated event rather than one per page).
+`date` is `YYYY-MM-DD`. `blurb` may be empty. Sorting is date descending, then
+the fixed `SOURCE_PRIORITY` in `build.js` — news, research, book, genealogy,
+video, music, writing, aletheia, paraverses — then title, so on a shared date the
+real news heads the list and the pill rather than whichever adapter ran first.
+`feed.json` holds **all** items; the page shows the 20 most recent, capped at
+four per source (five for `research`, which emits one item per dated event rather
+than one per page) and at three per source per day, so a batch published together
+cannot crowd out the rest of that day.
 
 ## Sources
 

@@ -1,13 +1,6 @@
 [
   {
     "date": "2026-09-06",
-    "source": "genealogy",
-    "title": "François Retif",
-    "url": "https://attieretief.com/genealogy/people/francois-retief-1663/",
-    "blurb": "1663–1721 · Mer, Loir-et-Cher, France · The Retief Spine — François to today"
-  },
-  {
-    "date": "2026-09-06",
     "source": "news",
     "title": "Retief genealogy published",
     "url": "https://attieretief.com/genealogy/",
@@ -19,6 +12,13 @@
     "title": "Creation Without a Singularity",
     "url": "https://attieretief.com/research/#creation-without-a-singularity",
     "blurb": "Submitted to Religious Studies (Cambridge University Press)"
+  },
+  {
+    "date": "2026-09-06",
+    "source": "genealogy",
+    "title": "François Retif",
+    "url": "https://attieretief.com/genealogy/people/francois-retief-1663/",
+    "blurb": "1663–1721 · Mer, Loir-et-Cher, France · The Retief Spine — François to today"
   },
   {
     "date": "2026-09-02",
@@ -988,6 +988,13 @@
   },
   {
     "date": "2026-05-07",
+    "source": "news",
+    "title": "The ABC music editor goes live",
+    "url": "https://attieretief.com/music/",
+    "blurb": "Write, hear and publish scores in the browser — library, editor and public viewer."
+  },
+  {
+    "date": "2026-05-07",
     "source": "music",
     "title": "Before the throne of God above",
     "url": "https://attieretief.com/music/view.html?id=b953ca61e90ece8d8029bb5f2909f300",
@@ -1027,13 +1034,6 @@
     "title": "To God Be the Glory",
     "url": "https://attieretief.com/music/view.html?id=fe57f36898b10f4e9ea255784277dd51",
     "blurb": "Worship song"
-  },
-  {
-    "date": "2026-05-07",
-    "source": "news",
-    "title": "The ABC music editor goes live",
-    "url": "https://attieretief.com/music/",
-    "blurb": "Write, hear and publish scores in the browser — library, editor and public viewer."
   },
   {
     "date": "2026-05-06",

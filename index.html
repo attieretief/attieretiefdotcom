@@ -800,6 +800,10 @@
             // the run of 2026 submissions off mid-list.
             const PER_SOURCE_DEFAULT = 4;
             const PER_SOURCE = { research: 5 };
+            // And no more than three from one source on any single day, so a
+            // batch published together cannot take the top of the list — and
+            // with it the pill headline — from the rest of that day's news.
+            const PER_SOURCE_PER_DAY = 3;
             const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
                             "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -912,12 +916,17 @@
                 .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
                 .then((feed) => {
                     const counts = {};
+                    const daily = {};
                     const picked = [];
                     for (const item of feed) {
                         if (picked.length >= SHOWN) break;
-                        counts[item.source] = (counts[item.source] || 0) + 1;
+                        const day = item.source + "|" + item.date;
                         const cap = PER_SOURCE[item.source] || PER_SOURCE_DEFAULT;
-                        if (counts[item.source] <= cap) picked.push(item);
+                        if ((counts[item.source] || 0) >= cap) continue;
+                        if ((daily[day] || 0) >= PER_SOURCE_PER_DAY) continue;
+                        counts[item.source] = (counts[item.source] || 0) + 1;
+                        daily[day] = (daily[day] || 0) + 1;
+                        picked.push(item);
                     }
                     if (picked.length) render(picked);
                 })

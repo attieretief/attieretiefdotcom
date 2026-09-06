@@ -402,6 +402,21 @@ function newsAdapter() {
 // LinkedIn — no adapter, and there will not be one. LinkedIn has no public API
 // for a member's posts and forbids scraping; the profile stays a link-card only.
 
+// Tie-break for items sharing a date: most newsworthy first. The pill on the
+// landing page shows the single newest item, and several sources routinely land
+// on the same day — 2026-09-06 carried a paper submission, the genealogy launch
+// and 22 generated person pages — so without a fixed order the headline went to
+// whichever adapter happened to run first. Anything not listed sorts last.
+const SOURCE_PRIORITY = [
+    'news', 'research', 'book', 'genealogy', 'video', 'music', 'writing',
+    'aletheia', 'paraverses',
+];
+
+const priority = (source) => {
+    const i = SOURCE_PRIORITY.indexOf(source);
+    return i === -1 ? SOURCE_PRIORITY.length : i;
+};
+
 // news runs first so a hand-written entry wins the URL de-duplication below
 // against a generated one for the same page.
 const ADAPTERS = [
@@ -476,7 +491,7 @@ async function main() {
 
     const feed = unique.sort((a, b) =>
         b.date.localeCompare(a.date)
-        || a.source.localeCompare(b.source)
+        || priority(a.source) - priority(b.source)
         || a.title.localeCompare(b.title));
 
     fs.writeFileSync(OUT, JSON.stringify(feed, null, 2) + '\n');

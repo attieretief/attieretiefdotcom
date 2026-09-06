@@ -99,3 +99,16 @@
   took focus straight back off the close button; a single or double rAF was flaky, the retry is not.
 - **The open/closed choice persists in `localStorage["recent-open"]`, default collapsed**, and the
   whole dock stays `hidden` if `feed.json` fails or is empty - the page is complete without it.
+
+## Feed order on a shared date is a fixed source priority (2026-09-06)
+
+- **`feed/build.js` sorts date desc → `SOURCE_PRIORITY` → title**, the priority being news,
+  research, book, genealogy, video, music, writing, aletheia, paraverses; anything unlisted
+  sorts last. It replaced an alphabetical source tie-break, which is why 6 Sep put the
+  genealogy person page "François Retif" ahead of "Retief genealogy published" and the paper
+  submission — and the pill shows only the newest item, so the least newsworthy thing that day
+  was the headline.
+- **The page also caps a source at three items per day inside its twenty** (`PER_SOURCE_PER_DAY`
+  in `index.html`), on top of the existing four-per-source cap. Why both: the source cap keeps
+  every source visible across the whole list, the per-day cap stops one day's batch — the
+  genealogy build's 22 pages — owning the top of it. `feed.json` stays uncapped and unfiltered.
