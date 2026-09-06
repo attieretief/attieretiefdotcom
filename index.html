@@ -303,30 +303,39 @@
             bottom: 1.25rem;
             z-index: 10;
             text-align: left;
+            /* Arrives after the cards have finished (~1.2s), so the eye is
+               drawn to it landing. The delay is restated in JS from
+               performance.now(), because the dock is [hidden] until feed.json
+               resolves and the animation clock only starts once it is shown. */
+            animation: fadeUp 0.6s ease 1.2s both;
         }
 
+        /* The pill is meant to be the one lit element on the page: accent
+           border, a resting glow (the same one the cards get on hover) and a
+           pulsing dot. Still glass — never a solid button. */
         .recent-pill {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            max-width: 340px;
-            padding: 0.55rem 0.95rem;
+            max-width: 420px;
+            padding: 0.85rem 1.15rem;
             font-family: inherit;
-            font-size: 0.8rem;
+            font-size: 0.95rem;
             color: var(--color-text);
             background: rgba(10, 10, 15, 0.55);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(99, 102, 241, 0.45);
             border-radius: 999px;
             cursor: pointer;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 20px var(--color-accent-glow);
             transition: all 0.25s ease;
         }
 
         .recent-pill:hover {
-            border-color: rgba(99, 102, 241, 0.3);
-            background: rgba(99, 102, 241, 0.08);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 20px var(--color-accent-glow);
+            border-color: rgba(99, 102, 241, 0.75);
+            background: rgba(99, 102, 241, 0.12);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35), 0 0 28px rgba(99, 102, 241, 0.3);
         }
 
         .recent-pill:focus-visible,
@@ -342,6 +351,28 @@
             flex-shrink: 0;
             background: var(--color-accent);
             box-shadow: 0 0 8px var(--color-accent);
+            animation: pillPulse 2s ease infinite;
+        }
+
+        @keyframes pillPulse {
+            0%, 100% {
+                opacity: 1;
+                box-shadow: 0 0 8px var(--color-accent);
+            }
+            50% {
+                opacity: 0.45;
+                box-shadow: 0 0 14px var(--color-accent);
+            }
+        }
+
+        .pill-label {
+            color: var(--color-accent);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .pill-date {
@@ -382,9 +413,9 @@
             background: rgba(10, 10, 15, 0.8);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(99, 102, 241, 0.45);
             border-radius: 16px;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45), 0 0 20px var(--color-accent-glow);
             opacity: 0;
             visibility: hidden;
             transform: translateY(8px);
@@ -550,6 +581,15 @@
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
                 transition-delay: 0s !important;
+            }
+
+            /* No pulse, and the pill is simply there rather than arriving. */
+            .pill-dot {
+                animation: none !important;
+            }
+
+            .recent-dock {
+                animation-delay: 0s !important;
             }
         }
 
@@ -742,6 +782,7 @@
         <button type="button" class="recent-pill" id="recent-pill"
                 aria-expanded="false" aria-controls="recent-panel">
             <span class="pill-dot" aria-hidden="true"></span>
+            <span class="pill-label">Recent</span>
             <span class="pill-date" id="pill-date"></span>
             <span class="pill-title" id="pill-title"></span>
             <svg class="pill-chevron" viewBox="0 0 24 24" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
@@ -808,6 +849,15 @@
                             "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
             const STORE_KEY = "recent-open";
+            // A first-time desktop visitor gets the panel opened for them once,
+            // so the timeline is seen at least that once. This key records that
+            // it has happened; it is deliberately separate from STORE_KEY,
+            // because the auto-open is not the visitor's choice and must not be
+            // replayed as one on the next load.
+            const SHOWN_KEY = "recent-autoshown";
+            const AUTO_OPEN_MIN_WIDTH = 1024;
+            const AUTO_OPEN_DELAY = 2000;
+            const ENTRANCE_DELAY = 1200;
 
             // Hiding the element the user just activated (the pill on open, the
             // panel on close) blurs it to <body> in a later style pass, which
@@ -820,6 +870,22 @@
                         focusWhenReady(el, tries - 1);
                     }
                 });
+            }
+
+            // localStorage throws in private mode; a browser that can't
+            // remember just gets the default behaviour every time.
+            function store(key, value) {
+                try {
+                    localStorage.setItem(key, value);
+                } catch (e) { /* not remembered */ }
+            }
+
+            function recall(key) {
+                try {
+                    return localStorage.getItem(key);
+                } catch (e) {
+                    return null;
+                }
             }
 
             function formatDate(iso) {
@@ -881,12 +947,22 @@
                 const pill = document.getElementById("recent-pill");
                 dock.hidden = false;
 
-                function setOpen(open, focus) {
+                // The dock is revealed only once feed.json has resolved, and a
+                // CSS animation-delay starts counting from then — so restate it
+                // as whatever is left of the 1.2s the cards take.
+                if (!prefersReducedMotion) {
+                    const left = Math.max(0, ENTRANCE_DELAY - performance.now());
+                    dock.style.animationDelay = (left / 1000) + "s";
+                }
+
+                // persist=false for the auto-open: it is the page's doing, not
+                // the visitor's, so it must not be remembered as an open state.
+                function setOpen(open, focus, persist) {
                     dock.classList.toggle("open", open);
                     pill.setAttribute("aria-expanded", String(open));
-                    try {
-                        localStorage.setItem(STORE_KEY, open ? "1" : "0");
-                    } catch (e) { /* private mode — the choice just isn't remembered */ }
+                    if (persist !== false) {
+                        store(STORE_KEY, open ? "1" : "0");
+                    }
                     if (focus) {
                         focusWhenReady(open ? document.getElementById("recent-close") : pill, 5);
                     }
@@ -904,12 +980,25 @@
                     if (dock.classList.contains("open") && !dock.contains(e.target)) setOpen(false, false);
                 });
 
-                let remembered = null;
-                try {
-                    remembered = localStorage.getItem(STORE_KEY);
-                } catch (e) { /* ignore */ }
+                const remembered = recall(STORE_KEY);
                 // Collapsed by default.
-                if (remembered === "1") setOpen(true, false);
+                if (remembered === "1") {
+                    setOpen(true, false);
+                } else if (
+                    remembered === null &&
+                    recall(SHOWN_KEY) === null &&
+                    window.matchMedia("(min-width: " + AUTO_OPEN_MIN_WIDTH + "px)").matches
+                ) {
+                    // First desktop visit, no recorded choice: open the panel
+                    // once, a couple of seconds in. The visitor closes it with
+                    // the button, Esc or a click outside, and that closing is
+                    // what STORE_KEY then remembers. Never on a phone, and
+                    // never twice on the same browser.
+                    setTimeout(() => {
+                        store(SHOWN_KEY, "1");
+                        if (!dock.classList.contains("open")) setOpen(true, false, false);
+                    }, AUTO_OPEN_DELAY);
+                }
             }
 
             fetch("/feed.json", { cache: "no-cache" })

@@ -100,6 +100,36 @@
 - **The open/closed choice persists in `localStorage["recent-open"]`, default collapsed**, and the
   whole dock stays `hidden` if `feed.json` fails or is empty - the page is complete without it.
 
+## The Recent pill is the page's one lit element, and it opens itself once (2026-09-06)
+
+- **Attie's call: the pill as first built was too inconspicuous.** It now leads with a "Recent"
+  label in `--color-accent` beside a dot pulsing on a 2s ease loop, carries the date and title
+  at 0.95rem on ~0.85rem vertical padding, and sits inside an accent border (0.45 alpha) with a
+  **resting** `--color-accent-glow` — the same glow the link cards only get on hover. Hover
+  brightens border, tint and glow. It stays glass; a solid button was explicitly rejected. The
+  panel takes the same border and glow so open and closed read as one object.
+- **The pill arrives last, ~1.2s after load**, once the staggered card fade-ins have finished,
+  so the movement is what catches the eye. The delay is in CSS *and* restated from
+  `performance.now()` in JS, because the dock is `[hidden]` until `feed.json` resolves and an
+  animation clock only starts when the element is displayed — without the restatement a slow
+  feed would push the entrance to 1.2s *after* the fetch instead of after the cards.
+- **First desktop visit auto-opens the panel after 2s**, at ≥1024px only, never on a phone.
+  Under reduced motion it still auto-opens, without the animation (the dot's pulse is
+  `animation: none` and the dock's delay is forced to 0s there).
+- **The auto-open is recorded under its own key, `recent-autoshown`, and does not write
+  `recent-open`.** Why: `recent-open` is the *visitor's* choice and is replayed on every load,
+  so letting the auto-open write "1" would reopen the panel on every subsequent visit — the
+  opposite of "once". The key is written when the timer fires, not at page load, so a visitor
+  who leaves inside the first two seconds still gets their one showing. `localStorage` access
+  is wrapped (`store`/`recall`) because it throws in private mode; a browser that cannot
+  remember simply gets the default every time.
+- **Verified in headless Chrome over CDP** (local server, real DOM read): at 1280×800 a fresh
+  profile auto-opens and stores `recent-autoshown=1`; a reload and a full browser relaunch on
+  the same profile do not; at 375×812 it never opens and the key is never written; under
+  emulated `prefers-reduced-motion` it opens once with no dot animation and no entrance delay;
+  and the close button, Esc and an outside click each collapse it, return focus to the pill and
+  store `recent-open=0`, which survives the next load.
+
 ## Feed order on a shared date is a fixed source priority (2026-09-06)
 
 - **`feed/build.js` sorts date desc → `SOURCE_PRIORITY` → title**, the priority being news,

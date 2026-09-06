@@ -94,3 +94,7 @@ from the git log and migrated conversations; treat undated items as approximate.
   bottom 787px inside an 800px viewport with no scrollbar, 20 items, panel 360x560 anchored
   20px from both edges, phone sheet 375px wide at 70vh, and click / Esc / outside-click /
   localStorage / failed-feed / empty-feed / reduced-motion all behaving.
+
+- **2026-09-06 — the Recent pill made conspicuous.** Accent label + pulsing dot, larger type,
+  accent border with a resting glow, an entrance timed after the cards, and a one-time
+  first-visit auto-open on desktop. Verified against the rendered DOM in headless Chrome.
