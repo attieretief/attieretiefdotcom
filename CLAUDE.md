@@ -10,13 +10,16 @@ poet, and author of the forthcoming book *Reasonable Wonder*.
 
 ## Layout
 
-- `index.html` — landing page (link-card grid; rotating Unsplash landscape backgrounds).
+- `index.html` — landing page (ten-card link grid + a "Recent" timeline read from
+  `feed.json`; rotating Unsplash landscape backgrounds).
+- `feed/` — the update-feed aggregator (`build.js`, `news.json`) that writes `feed.json`.
 - `cosmic-wonder/` — *Reasonable Wonder* book page (physics-meets-faith), with an audio
   prologue (`Cosmic_Wonder_Prologue.mp3` + `.vtt` captions).
 - `music/` — self-contained **ABC-notation editor** sub-site (see below).
 - `research/` — academic paper listing (Reformed theology × contemporary physics).
 - `video/` — piano-cover / performance video listing (YouTube `@attieretief`).
-- `writing/` — bilingual (Afrikaans + English) poetry collection, curated by `build.js`.
+- `writing/` — bilingual (Afrikaans + English) poetry collection.
+- `genealogy/` — the redacted public Retief genealogy build; also emits `genealogy/feed.json`.
 - `avatar.png`, `sitemap.xml`, `robots.txt`, `CNAME` — site chrome / SEO.
 - `.github/workflows/claude.yml` — the Claude Code GitHub Action (see CI below).
 
@@ -40,10 +43,33 @@ poet, and author of the forthcoming book *Reasonable Wonder*.
 is no CI build/test gate for the site itself; commit working HTML. Do not `git add`/commit
 unless asked.
 
-## The `writing/` collection (has a build step)
+## The home-page update feed (has a build step)
 
-`writing/build.js` is a Node script and the **one exception** to "no build step". It's the
-curation + binder for the poetry collection:
+`feed/build.js` is a Node script with no dependencies. It aggregates every source the site
+contains or points to into `feed.json` at the repo root; `index.html` fetches that file and
+renders the "Recent" timeline under the link cards.
+
+```sh
+node feed/build.js
+```
+
+- Each source is a small adapter that **fails soft** — a dead source logs `– skipped` and is
+  omitted, never failing the run. The one guard is a floor: fewer than four producing sources
+  exits non-zero.
+- Items normalise to `{date, source, title, url, blurb}`, sorted newest first. `feed.json`
+  holds everything; the page shows 20, capped at 4 per source so no burst crowds the rest.
+- One-off news (a talk, a book milestone) goes in `feed/news.json`, not a new adapter.
+- `.github/workflows/feed.yml` reruns it on push to `main` and daily, committing `feed.json`
+  only when it changed. See `feed/README.md` for the source table and how to add one.
+
+## The `writing/` collection (build script currently missing)
+
+**Note:** `writing/build.js` and `writing/works.js` described below were dropped by the
+2026-08-12 republish and are not in the repo. `writing/index.html` is now the only list of
+poems. The rest of this section is kept as the record of how the collection was curated.
+
+`writing/build.js` was a Node script and the original **one exception** to "no build step".
+It was the curation + binder for the poetry collection:
 
 ```sh
 node writing/build.js

@@ -57,3 +57,16 @@ from the git log and migrated conversations; treat undated items as approximate.
 - Earlier the writing site was briefly pointed at a `writing.attieretief.com` subdomain /
   separate writing-repo Action, then brought back to be served directly at `/writing/` from
   this repo.
+- **The 2026-08-12 republish dropped `writing/build.js` and `writing/works.js`** — neither is
+  in the repo any more, despite `CLAUDE.md` still documenting them. `writing/index.html` is
+  now the only list of poems. The poem pages themselves are intact.
+
+## Genealogy and the home-page update feed (2026-09-06)
+- Published the redacted genealogy build at `/genealogy/`, which also emits its own
+  `genealogy/feed.json` in the shared item shape.
+- Landing page grew to **ten** link cards — added Genealogy and GitHub, so the two-column
+  grid stays even at five rows.
+- Added `feed/build.js`, the second build step in the repo, aggregating writing, research,
+  video (YouTube Atom), music (gists), the book, genealogy and hand-written news into
+  `feed.json` at the root. `index.html` renders it as a "Recent" timeline under the cards.
+  First run: 155 items across 7 sources.

@@ -100,7 +100,6 @@
             color: var(--color-text);
             min-height: 100vh;
             display: flex;
-            align-items: center;
             justify-content: center;
         }
 
@@ -140,6 +139,10 @@
             width: 100%;
             position: relative;
             z-index: 1;
+            /* Auto margins centre the block when it fits and collapse to 0 when
+               it doesn't — so the timeline can push the page taller than the
+               viewport without ever clipping the hero off the top. */
+            margin-block: auto;
         }
 
         .avatar {
@@ -292,6 +295,85 @@
             transform: translateX(0);
         }
 
+        /* Recent — the dated update timeline, built by feed/build.js */
+        .updates {
+            margin-top: 3rem;
+            text-align: left;
+        }
+
+        .updates h2 {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            margin-bottom: 0.9rem;
+        }
+
+        .timeline {
+            list-style: none;
+        }
+
+        .timeline li {
+            display: grid;
+            grid-template-columns: 6rem 1fr;
+            gap: 0.9rem;
+            align-items: baseline;
+            padding: 0.6rem 0;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .timeline li:first-child {
+            border-top: 0;
+        }
+
+        .t-date {
+            color: var(--color-text-muted);
+            font-size: 0.72rem;
+            font-variant-numeric: tabular-nums;
+            white-space: nowrap;
+        }
+
+        .t-main {
+            min-width: 0;
+        }
+
+        .t-badge {
+            display: inline-block;
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.1rem 0.45rem;
+            margin-right: 0.5rem;
+            border: 1px solid var(--color-border);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--color-text-muted);
+            vertical-align: 1px;
+        }
+
+        .t-link {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--color-text);
+            text-decoration: none;
+        }
+
+        .t-link:hover {
+            color: var(--color-accent);
+        }
+
+        .t-blurb {
+            display: block;
+            margin-top: 0.15rem;
+            font-size: 0.76rem;
+            color: var(--color-text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
         footer {
             margin-top: 3rem;
             color: var(--color-text-muted);
@@ -319,6 +401,8 @@
         .links .link-card:nth-child(6) { animation: fadeUp 0.5s ease 0.65s both; }
         .links .link-card:nth-child(7) { animation: fadeUp 0.5s ease 0.73s both; }
         .links .link-card:nth-child(8) { animation: fadeUp 0.5s ease 0.81s both; }
+        .links .link-card:nth-child(9) { animation: fadeUp 0.5s ease 0.89s both; }
+        .links .link-card:nth-child(10) { animation: fadeUp 0.5s ease 0.97s both; }
 
         @keyframes fadeUp {
             from {
@@ -343,6 +427,11 @@
             .links {
                 grid-template-columns: 1fr;
             }
+            /* Date above the entry rather than beside it */
+            .timeline li {
+                grid-template-columns: 1fr;
+                gap: 0.15rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -362,6 +451,7 @@
             .bio { font-size: 1rem; line-height: 1.65; margin-bottom: 1.6rem; }
             .link-card { padding: 0.75rem 1rem; }
             .link-icon { width: 36px; height: 36px; }
+            .updates { margin-top: 2rem; }
             footer { margin-top: 1.5rem; }
         }
 
@@ -370,6 +460,7 @@
             .bio { font-size: 0.9rem; line-height: 1.55; margin-bottom: 1.1rem; }
             .link-card { padding: 0.6rem 0.9rem; }
             .link-desc { display: none; }
+            .updates { margin-top: 1.4rem; }
             footer { margin-top: 1rem; }
         }
     </style>
@@ -469,7 +560,34 @@
                 </div>
                 <span class="link-arrow">&rarr;</span>
             </a>
+
+            <a href="/genealogy/" class="link-card">
+                <div class="link-icon">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="6" height="4" rx="1.2"/><rect x="15" y="3" width="6" height="4" rx="1.2"/><rect x="9" y="17" width="6" height="4" rx="1.2"/><path d="M6 7v3h12V7"/><path d="M12 10v7"/></svg>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">Genealogy</div>
+                    <div class="link-desc">The Retiefs, from Huguenot refugee to now</div>
+                </div>
+                <span class="link-arrow">&rarr;</span>
+            </a>
+
+            <a href="https://github.com/attieretief" target="_blank" rel="noopener" class="link-card">
+                <div class="link-icon">
+                    <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">GitHub</div>
+                    <div class="link-desc">Code, mostly for people who grow things</div>
+                </div>
+                <span class="link-arrow">&rarr;</span>
+            </a>
         </div>
+
+        <section class="updates" id="updates" aria-labelledby="updates-heading" hidden>
+            <h2 id="updates-heading">Recent</h2>
+            <ol class="timeline" id="timeline"></ol>
+        </section>
 
         <footer>&copy; 2026 Attie Retief</footer>
     </div>
@@ -505,6 +623,80 @@
                 });
             });
         }
+    </script>
+    <script>
+        // "Recent" timeline. feed.json is built by feed/build.js and refreshed
+        // by .github/workflows/feed.yml; it holds every item, newest first.
+        (function () {
+            const SHOWN = 20;
+            // A single source can publish dozens of pages on one day (the
+            // genealogy build did), which would otherwise fill the whole list.
+            // Cap each source so all of them stay visible.
+            const PER_SOURCE = 4;
+            const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+            function formatDate(iso) {
+                const parts = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
+                if (!parts) return iso;
+                return Number(parts[3]) + " " + MONTHS[Number(parts[2]) - 1] + " " + parts[1];
+            }
+
+            function render(items) {
+                const list = document.getElementById("timeline");
+                items.forEach((item) => {
+                    const li = document.createElement("li");
+
+                    const date = document.createElement("span");
+                    date.className = "t-date";
+                    date.textContent = formatDate(item.date);
+
+                    const main = document.createElement("div");
+                    main.className = "t-main";
+
+                    const badge = document.createElement("span");
+                    badge.className = "t-badge";
+                    badge.textContent = item.source;
+
+                    const link = document.createElement("a");
+                    link.className = "t-link";
+                    link.href = item.url;
+                    link.textContent = item.title;
+                    if (/^https?:\/\//i.test(item.url) && !item.url.startsWith("https://attieretief.com")) {
+                        link.target = "_blank";
+                        link.rel = "noopener";
+                    }
+
+                    main.append(badge, link);
+
+                    if (item.blurb) {
+                        const blurb = document.createElement("span");
+                        blurb.className = "t-blurb";
+                        blurb.textContent = item.blurb;
+                        main.appendChild(blurb);
+                    }
+
+                    li.append(date, main);
+                    list.appendChild(li);
+                });
+                document.getElementById("updates").hidden = false;
+            }
+
+            fetch("/feed.json", { cache: "no-cache" })
+                .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
+                .then((feed) => {
+                    const counts = {};
+                    const picked = [];
+                    for (const item of feed) {
+                        if (picked.length >= SHOWN) break;
+                        counts[item.source] = (counts[item.source] || 0) + 1;
+                        if (counts[item.source] <= PER_SOURCE) picked.push(item);
+                    }
+                    if (picked.length) render(picked);
+                })
+                // No feed, no timeline — the page is complete without it.
+                .catch(() => {});
+        })();
     </script>
     <script data-goatcounter="https://attieretief.goatcounter.com/count"
             async src="//gc.zgo.at/count.js"></script>

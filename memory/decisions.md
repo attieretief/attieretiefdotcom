@@ -32,3 +32,23 @@
   "entrepreneur" was the one correction accepted.)
 - **Writing is served from this repo at `/writing/`**, after an earlier experiment with a
   `writing.attieretief.com` subdomain was reversed.
+- **The home-page update feed is built by Node, not fetched by the browser** — `feed/build.js`
+  writes `feed.json` at the root and `index.html` just reads it. Why: most sources are
+  unreachable from a page — GitHub, YouTube and the subdomains are cross-origin, the gists API
+  is rate-limited anonymously, and several dates only exist in this repo's git history. This
+  is the second deliberate build-step exception, after `writing/build.js`.
+- **Every feed adapter fails soft; the run has a floor.** A source that 404s or changes its
+  markup logs `– skipped` and contributes nothing. But if fewer than four sources produce
+  items the script exits non-zero — that means something structural broke, not one source
+  being down.
+- **The timeline caps at four items per source inside its twenty.** Why: sources publish in
+  bursts (the genealogy build added 22 pages on one date), and a straight "20 most recent"
+  showed nothing but genealogy. The cap keeps every source visible. `feed.json` itself is
+  uncapped and unfiltered.
+- **`news` runs first among the adapters**, because the first adapter to claim a URL keeps it.
+  That is how a hand-written `feed/news.json` entry replaces a generated one for the same page.
+- **No adapter for linc.co.za or LinkedIn.** linc.co.za exposes no feed and no sitemap
+  (probed 2026-09-06); LinkedIn has no public API for a member's posts. Both stay link-cards.
+- **Ten link cards, not nine.** GitHub was added alongside Genealogy so the two-column grid
+  stays even. `body` lost `align-items: center` in favour of `margin-block: auto` on
+  `.container`, so the page can now scroll past the fold without clipping the hero.

@@ -1,0 +1,52 @@
+name: Build update feed
+
+# Regenerates feed.json (the home-page "Recent" timeline) and commits it when it
+# changed. See feed/README.md.
+
+on:
+  push:
+    branches: [main]
+    # The bot's own commit only touches feed.json, so ignoring it here is what
+    # stops this workflow from re-triggering itself.
+    paths-ignore:
+      - 'feed.json'
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: feed
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Several adapters date items by the commit that added the file.
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Aggregate sources
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node feed/build.js
+
+      - name: Commit feed.json if it changed
+        run: |
+          if git diff --quiet -- feed.json; then
+            echo "feed.json unchanged — nothing to commit"
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add feed.json
+          git commit -m "feed: refresh feed.json"
+          git push

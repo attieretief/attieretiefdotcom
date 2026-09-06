@@ -11,6 +11,15 @@ No hard blockers or known bugs captured. A few optional/deferred items noted alo
   preparation" — the `research/` listing will need updating as their status changes.
 - **Book *Reasonable Wonder* is "forthcoming."** Manuscript complete; the `cosmic-wonder/`
   page presumably needs updating once it's published/available.
+- **`CLAUDE.md` still documents `writing/build.js` and `writing/works.js`, which no longer
+  exist** — the 2026-08-12 republish dropped them. Either restore the binder or correct the
+  docs; `feed/build.js` currently parses `writing/index.html` and prefers `works.js` if it
+  ever returns.
+- **`paraverses.attieretief.com` has no feed** (no `/feed.xml`, `/rss.xml`, `/atom.xml`, no
+  `rel="alternate"`), so it contributes nothing to the update timeline. `aletheia` has a valid
+  Jekyll Atom feed with zero entries — it will start showing up on its own once a post lands.
+- **The old landing-page card points at `video.attieretief.com`, but `/video/` also exists in
+  this repo.** Not resolved; left alone.
 - **Adding poems is a manual loop.** New poem = create `writing/poetry/<slug>/index.html` +
   add slug to `COLLECTIONS` in `writing/build.js` + rerun. Anything not listed lands in an
   "Uncollected" section — worth checking that section stays empty after edits.
