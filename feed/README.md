@@ -30,7 +30,8 @@ first:
 ```
 
 `date` is `YYYY-MM-DD`. `blurb` may be empty. `feed.json` holds **all** items;
-the page shows the 20 most recent.
+the page shows the 20 most recent, capped at four per source (five for
+`research`, which emits one item per dated event rather than one per page).
 
 ## Sources
 
@@ -38,7 +39,7 @@ the page shows the 20 most recent.
 |---|---|---|
 | `news` | `feed/news.json` — hand-maintained | as written |
 | `writing` | poems listed in `writing/index.html` | first commit that added `writing/poetry/<slug>/index.html` |
-| `research` | `<article class="paper">` blocks in `research/index.html` | an ISO date in the markup, else the git-added date of the page |
+| `research` | each `<li>` of an `<ol class="paper-history">` in `research/index.html` — **one item per dated event**, not per paper | the `<time datetime>` on that event |
 | `video` | the YouTube channel Atom feed for `@attieretief` | feed `<published>` |
 | `music` | public gists tagged `[abc-music]` / `[abc-original]` — read anonymously | gist `created_at` |
 | `book` | `cosmic-wonder/index.html` | git-added date of the page |
@@ -80,10 +81,12 @@ scores. **Do not authenticate the gists call with the Actions token.** Set
 
 ## De-duplication
 
-Within a source an item is identified by URL **and** title, so `research/` can
-list six papers that all link to `/research/`. Across sources the first adapter
-to claim a URL keeps it — which is why `news` runs first: a hand-written entry
-replaces the generated one for the same page.
+Within a source an item is identified by URL, title **and** date. `research/`
+emits several events for one paper — submitted, then accepted — which share a
+URL and a title and differ only by the date. Across sources the first adapter to
+claim a URL keeps it, which is why `news` runs first: a hand-written entry
+replaces the generated one for the same page. (So don't point a `news` entry at
+a URL an adapter also produces unless you mean to replace it.)
 
 ## Adding a source
 
@@ -92,8 +95,17 @@ replaces the generated one for the same page.
 2. Add it to the `ADAPTERS` array. Order only matters for the URL rule above.
 3. Run `node feed/build.js` and check the count.
 
-For a one-off — a talk, a book milestone, a piece of news — don't write an
-adapter. Add an entry to `feed/news.json` and rerun.
+For a one-off — a talk, a book milestone, a composition, a launch — don't write
+an adapter. Add an entry to `feed/news.json` and rerun.
+
+### Dates in `news.json` must be traceable
+
+Every entry carries a `trace` field naming the line of record the date came from
+— a commit, a `memory/` line, a row in the submissions tracker. It exists so the
+next editor can check a date rather than trust it, and it is **never published**:
+`newsAdapter` rebuilds each item from the five feed fields, so `trace` cannot
+reach `feed.json` or the page. Nothing personal, family, health or
+business-internal goes in this file; it is a public timeline.
 
 ## Automation
 

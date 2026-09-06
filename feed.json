@@ -14,6 +14,20 @@
     "blurb": "Eleven generations of the Huguenot Retief line, and the families married into it."
   },
   {
+    "date": "2026-09-06",
+    "source": "research",
+    "title": "Creation Without a Singularity",
+    "url": "https://attieretief.com/research/#creation-without-a-singularity",
+    "blurb": "Submitted to Religious Studies (Cambridge University Press)"
+  },
+  {
+    "date": "2026-09-02",
+    "source": "research",
+    "title": "Quantised Spacetime and the Case Against Actual Infinities",
+    "url": "https://attieretief.com/research/#quantised-spacetime",
+    "blurb": "Accepted for publication in Sophia (Springer)"
+  },
+  {
     "date": "2026-08-29",
     "source": "video",
     "title": "Requiem - Introit",
@@ -180,6 +194,20 @@
     "title": "The van Niekerk Line",
     "url": "https://attieretief.com/genealogy/lines/van-niekerk/",
     "blurb": "Attie's maternal grandmother's line — Sophia Wilhelmina Jacoba van Niekerk (1890–deceased) documented back four generations to Johannes Wilhelmus Alb…"
+  },
+  {
+    "date": "2026-07-12",
+    "source": "research",
+    "title": "Emergent spacetime as a single medium",
+    "url": "https://attieretief.com/research/#emergent-spacetime-single-medium",
+    "blurb": "Submitted to Studies in History and Philosophy of Science (Elsevier)"
+  },
+  {
+    "date": "2026-07-05",
+    "source": "research",
+    "title": "Conditional Consonance: An Operational Method for Theological Engagement with Speculative Physics",
+    "url": "https://attieretief.com/research/#conditional-consonance",
+    "blurb": "Submitted to Theology and Science (Taylor & Francis)"
   },
   {
     "date": "2026-07-01",
@@ -364,6 +392,13 @@
     "blurb": "b. 1765 · The Tait Line"
   },
   {
+    "date": "2026-06-20",
+    "source": "research",
+    "title": "Quantised Spacetime and the Case Against Actual Infinities",
+    "url": "https://attieretief.com/research/#quantised-spacetime",
+    "blurb": "Submitted to Sophia (Springer)"
+  },
+  {
     "date": "2026-06-13",
     "source": "video",
     "title": "Paraverse 1 · None like You · Original",
@@ -456,45 +491,10 @@
   },
   {
     "date": "2026-06-12",
-    "source": "research",
-    "title": "Conditional Consonance: An Operational Method for Theological Engagement with Speculative Physics",
-    "url": "https://attieretief.com/research/",
-    "blurb": "Under review · Theological engagement with physics increasingly concerns speculative research programs rather than established science, yet the metho…"
-  },
-  {
-    "date": "2026-06-12",
-    "source": "research",
-    "title": "Emergence and the argument from contingency",
-    "url": "https://attieretief.com/research/",
-    "blurb": "In preparation · How emergent-gravity research programs sharpen, rather than dissolve, the Leibnizian question of why there is anything at all."
-  },
-  {
-    "date": "2026-06-12",
-    "source": "research",
-    "title": "Incarnation as nucleation",
-    "url": "https://attieretief.com/research/",
-    "blurb": "In preparation · A structural parallel between nucleation physics and the Incarnation — handled strictly as model, never as mechanism."
-  },
-  {
-    "date": "2026-06-12",
-    "source": "research",
-    "title": "Phase-transition cosmology and the doctrine of creation",
-    "url": "https://attieretief.com/research/",
-    "blurb": "In preparation · Creatio ex nihilo and creatio continua in conversation with cosmological models that begin without a singularity."
-  },
-  {
-    "date": "2026-06-12",
-    "source": "research",
-    "title": "Quantized spacetime and the case against actual infinities",
-    "url": "https://attieretief.com/research/",
-    "blurb": "In preparation · Finitism in the philosophy of religion in conversation with discrete-spacetime research programs in fundamental physics."
-  },
-  {
-    "date": "2026-06-12",
-    "source": "research",
-    "title": "Topological persistence and created integrity",
-    "url": "https://attieretief.com/research/",
-    "blurb": "In preparation · Matter as topologically protected pattern, the stability of created things, and the metaphysics of bodily resurrection."
+    "source": "news",
+    "title": "The writing collection goes up at /writing/",
+    "url": "https://attieretief.com/writing/",
+    "blurb": "Seventy poems in Afrikaans and English, laid out as a paper book with curated navigation."
   },
   {
     "date": "2026-06-12",
@@ -1027,6 +1027,13 @@
     "title": "To God Be the Glory",
     "url": "https://attieretief.com/music/view.html?id=fe57f36898b10f4e9ea255784277dd51",
     "blurb": "Worship song"
+  },
+  {
+    "date": "2026-05-07",
+    "source": "news",
+    "title": "The ABC music editor goes live",
+    "url": "https://attieretief.com/music/",
+    "blurb": "Write, hear and publish scores in the browser — library, editor and public viewer."
   },
   {
     "date": "2026-05-06",

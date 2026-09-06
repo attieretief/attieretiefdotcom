@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Research — Attie Retief</title>
-    <meta name="description" content="Academic papers by Attie Retief at the interface of Reformed theology and contemporary physics.">
+    <meta name="description" content="Academic papers by Attie Retief at the interface of Reformed theology and contemporary physics — one accepted by Sophia (Springer), three under review.">
     <link rel="canonical" href="https://attieretief.com/research/">
 
     <!-- Open Graph -->
@@ -159,6 +159,12 @@
             margin-bottom: 0.8rem;
         }
 
+        .status-accepted {
+            color: #5bd68a;
+            background: rgba(91, 214, 138, 0.1);
+            border: 1px solid rgba(91, 214, 138, 0.28);
+        }
+
         .status-review {
             color: #e8b341;
             background: rgba(232, 179, 65, 0.1);
@@ -190,6 +196,37 @@
             color: rgba(138, 138, 154, 0.75);
         }
 
+        /* The dated record for one paper. Each <li> is one event and carries a
+           machine-readable <time datetime>; feed/build.js reads exactly this
+           list to emit one timeline item per submission or acceptance. */
+        .paper-history {
+            list-style: none;
+            margin-top: 1.1rem;
+            padding-top: 0.9rem;
+            border-top: 1px solid var(--color-border);
+            font-size: 0.8rem;
+            line-height: 1.6;
+        }
+
+        .paper-history li {
+            display: grid;
+            grid-template-columns: 6.5rem 1fr;
+            gap: 0.8rem;
+            padding: 0.22rem 0;
+            color: rgba(232, 232, 237, 0.72);
+        }
+
+        .paper-history time {
+            color: var(--color-text-muted);
+            font-variant-numeric: tabular-nums;
+            white-space: nowrap;
+        }
+
+        .paper-history em {
+            font-style: italic;
+            color: var(--color-text);
+        }
+
         .prep-list .paper { padding: 1.1rem 1.6rem; }
         .prep-list .paper-title { font-size: 1rem; margin-bottom: 0.35rem; }
         .prep-list .paper-abstract { font-size: 0.88rem; }
@@ -203,6 +240,14 @@
             padding-left: 1rem;
         }
 
+        .series-note a {
+            color: var(--color-text);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.45);
+        }
+
+        .series-note a:hover { color: var(--color-accent); }
+
         footer {
             margin-top: 3.5rem;
             color: var(--color-text-muted);
@@ -210,9 +255,22 @@
             opacity: 0.5;
         }
 
+        /* Stack the date above its event well before the phone breakpoint —
+           two columns inside a 1.6rem-padded card get cramped long before the
+           page itself does. */
+        @media (max-width: 560px) {
+            .paper-history li {
+                grid-template-columns: 1fr;
+                gap: 0.1rem;
+                padding: 0.35rem 0;
+            }
+        }
+
         @media (max-width: 480px) {
             .page { padding: 2rem 1.1rem 3rem; }
             h1 { font-size: 1.6rem; }
+            .paper { padding: 1.2rem 1.2rem; }
+            .prep-list .paper { padding: 1rem 1.2rem; }
         }
     </style>
 </head>
@@ -235,13 +293,47 @@
             </a>
         </div>
 
-        <h2>Journal articles</h2>
+        <h2>Accepted</h2>
 
-        <article class="paper">
+        <article class="paper" id="quantised-spacetime">
+            <span class="paper-status status-accepted">Accepted</span>
+            <div class="paper-title">Quantised Spacetime and the Case Against Actual Infinities</div>
+            <p class="paper-abstract">Finitism in the philosophy of religion in conversation with discrete-spacetime research programs in fundamental physics.</p>
+            <ol class="paper-history">
+                <li><time datetime="2026-06-20">20 Jun 2026</time> <span>Submitted to <em>Sophia</em> (Springer)</span></li>
+                <li><time datetime="2026-09-02">2 Sep 2026</time> <span>Accepted for publication in <em>Sophia</em> (Springer)</span></li>
+            </ol>
+        </article>
+
+        <h2>Under review</h2>
+
+        <article class="paper" id="creation-without-a-singularity">
+            <span class="paper-status status-review">Under review</span>
+            <div class="paper-title">Creation Without a Singularity</div>
+            <p class="paper-abstract">Creatio ex nihilo and creatio continua in conversation with cosmological models that begin without a singularity.</p>
+            <ol class="paper-history">
+                <li><time datetime="2026-09-06">6 Sep 2026</time> <span>Submitted to <em>Religious Studies</em> (Cambridge University Press)</span></li>
+            </ol>
+        </article>
+
+        <article class="paper" id="emergent-spacetime-single-medium">
+            <span class="paper-status status-review">Under review</span>
+            <div class="paper-title">Emergent spacetime as a single medium</div>
+            <p class="paper-abstract">A paper in the philosophy of physics on what emergent-spacetime research programs are committed to describing.</p>
+            <div class="paper-meta">With the editor</div>
+            <ol class="paper-history">
+                <li><time datetime="2026-07-12">12 Jul 2026</time> <span>Submitted to <em>Studies in History and Philosophy of Science</em> (Elsevier)</span></li>
+            </ol>
+        </article>
+
+        <article class="paper" id="conditional-consonance">
             <span class="paper-status status-review">Under review</span>
             <div class="paper-title">Conditional Consonance: An Operational Method for Theological Engagement with Speculative Physics</div>
             <p class="paper-abstract">Theological engagement with physics increasingly concerns speculative research programs rather than established science, yet the methodological literature of the science-and-religion field offers postures rather than procedures, and guards against none of the failure modes that engagement invites. This article proposes an operational method, conditional consonance, comprising five components: explicit conditionalization of all consonance claims on named research programs; a three-register linguistic discipline; five demarcation firewalls adapted from recent philosophy of pseudoscience; a source discipline distinguishing common-grace insight from authoritative testimony; and a mandatory dissonance ledger. A worked case demonstrates the method discriminating between pedagogical value and evidential standing in a popular but unrefereed source. The method renders frontier engagement honest rather than forbidden.</p>
-            <div class="paper-meta">Under review at a peer-reviewed journal &middot; 2026</div>
+            <div class="paper-meta">With the editor</div>
+            <ol class="paper-history">
+                <li><time datetime="2026-07-05">5 Jul 2026</time> <span>Submitted to <em>Theology and Science</em> (Taylor &amp; Francis)</span></li>
+            </ol>
         </article>
 
         <h2>In preparation</h2>
@@ -249,20 +341,8 @@
         <div class="prep-list">
             <article class="paper">
                 <span class="paper-status status-prep">In preparation</span>
-                <div class="paper-title">Quantized spacetime and the case against actual infinities</div>
-                <p class="paper-abstract">Finitism in the philosophy of religion in conversation with discrete-spacetime research programs in fundamental physics.</p>
-            </article>
-
-            <article class="paper">
-                <span class="paper-status status-prep">In preparation</span>
                 <div class="paper-title">Emergence and the argument from contingency</div>
                 <p class="paper-abstract">How emergent-gravity research programs sharpen, rather than dissolve, the Leibnizian question of why there is anything at all.</p>
-            </article>
-
-            <article class="paper">
-                <span class="paper-status status-prep">In preparation</span>
-                <div class="paper-title">Phase-transition cosmology and the doctrine of creation</div>
-                <p class="paper-abstract">Creatio ex nihilo and creatio continua in conversation with cosmological models that begin without a singularity.</p>
             </article>
 
             <article class="paper">
@@ -278,7 +358,7 @@
             </article>
         </div>
 
-        <p class="series-note">These papers form a single research program: each defends one load-bearing claim of a larger project on science and faith, under an explicit methodological protocol that the first paper in the series supplies. A book-length synthesis, <em>Cosmic Wonder</em>, is in preparation.</p>
+        <p class="series-note">These papers form a single research program: each defends one load-bearing claim of a larger project on science and faith, under an explicit methodological protocol that the method paper in the series supplies. A book-length synthesis, <a href="/cosmic-wonder/"><em>Reasonable Wonder</em></a>, is written and seeking a publisher.</p>
 
         <footer>&copy; 2026 Attie Retief</footer>
     </main>

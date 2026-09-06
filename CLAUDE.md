@@ -16,7 +16,8 @@ poet, and author of the forthcoming book *Reasonable Wonder*.
 - `cosmic-wonder/` — *Reasonable Wonder* book page (physics-meets-faith), with an audio
   prologue (`Cosmic_Wonder_Prologue.mp3` + `.vtt` captions).
 - `music/` — self-contained **ABC-notation editor** sub-site (see below).
-- `research/` — academic paper listing (Reformed theology × contemporary physics).
+- `research/` — academic paper listing (Reformed theology × contemporary physics), grouped
+  Accepted / Under review / In preparation, each paper carrying a dated history.
 - `video/` — piano-cover / performance video listing (YouTube `@attieretief`).
 - `writing/` — bilingual (Afrikaans + English) poetry collection.
 - `genealogy/` — the redacted public Retief genealogy build; also emits `genealogy/feed.json`.
@@ -57,8 +58,15 @@ node feed/build.js
   omitted, never failing the run. The one guard is a floor: fewer than four producing sources
   exits non-zero.
 - Items normalise to `{date, source, title, url, blurb}`, sorted newest first. `feed.json`
-  holds everything; the page shows 20, capped at 4 per source so no burst crowds the rest.
-- One-off news (a talk, a book milestone) goes in `feed/news.json`, not a new adapter.
+  holds everything; the page shows 20, capped at 4 per source (5 for `research`) so no burst
+  crowds the rest.
+- `research/` is **event-shaped**: each paper on `research/index.html` carries an
+  `<ol class="paper-history">` whose `<li>`s hold a `<time datetime>` and the event in words,
+  and the adapter emits one feed item per event — submitted, then accepted. A paper still in
+  preparation has no history and so contributes nothing.
+- One-off news (a talk, a book milestone, a composition, a launch) goes in `feed/news.json`,
+  not a new adapter. Every entry there carries a `trace` field naming the record its date came
+  from; it is provenance only and is stripped before the item reaches `feed.json`.
 - `.github/workflows/feed.yml` reruns it on push to `main` and daily, committing `feed.json`
   only when it changed. See `feed/README.md` for the source table and how to add one.
 

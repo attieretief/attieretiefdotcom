@@ -70,3 +70,20 @@ from the git log and migrated conversations; treat undated items as approximate.
   video (YouTube Atom), music (gists), the book, genealogy and hand-written news into
   `feed.json` at the root. `index.html` renders it as a "Recent" timeline under the cards.
   First run: 155 items across 7 sources.
+
+## Research page refresh and an event-shaped feed (2026-09-06)
+- The research listing was still the June wording: one paper "under review at a peer-reviewed
+  journal", five in preparation, no journal names, no dates, and a closing note calling the
+  book *Cosmic Wonder*. None of the year's actual news was on the site.
+- Restructured into **Accepted / Under review / In preparation**. Accepted: *Quantised
+  Spacetime and the Case Against Actual Infinities*, submitted to *Sophia* (Springer)
+  2026-06-20, accepted 2026-09-02 — Attie's first peer-reviewed publication. Under review:
+  *Creation Without a Singularity* (Religious Studies, CUP, 2026-09-06), *Emergent spacetime
+  as a single medium* (SHPS, Elsevier, 2026-07-12), *Conditional Consonance* (Theology and
+  Science, Taylor & Francis, 2026-07-05). Three papers stay in preparation.
+- `feed/build.js`'s research adapter now emits one item per dated event; the timeline shows
+  the 2 Sep acceptance and all four submissions.
+- Also fixed as stale: the writing index and landing card claimed "short stories, essays and
+  plays" that were never published (70 poems is the whole collection); the video page said
+  "piano covers & performances" while the channel now carries the Requiem.
+

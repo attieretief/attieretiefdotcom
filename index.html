@@ -534,7 +534,7 @@
                 </div>
                 <div class="link-content">
                     <div class="link-title">Writing</div>
-                    <div class="link-desc">Poetry, stories, essays, plays — Afrikaans and English</div>
+                    <div class="link-desc">Seventy poems, in Afrikaans and English</div>
                 </div>
                 <span class="link-arrow">&rarr;</span>
             </a>
@@ -631,8 +631,12 @@
             const SHOWN = 20;
             // A single source can publish dozens of pages on one day (the
             // genealogy build did), which would otherwise fill the whole list.
-            // Cap each source so all of them stay visible.
-            const PER_SOURCE = 4;
+            // Cap each source so all of them stay visible. research/ gets one
+            // more than the rest because it emits one item per dated event —
+            // a paper submitted and later accepted is two — and four slots cut
+            // the run of 2026 submissions off mid-list.
+            const PER_SOURCE_DEFAULT = 4;
+            const PER_SOURCE = { research: 5 };
             const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
                             "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -690,7 +694,8 @@
                     for (const item of feed) {
                         if (picked.length >= SHOWN) break;
                         counts[item.source] = (counts[item.source] || 0) + 1;
-                        if (counts[item.source] <= PER_SOURCE) picked.push(item);
+                        const cap = PER_SOURCE[item.source] || PER_SOURCE_DEFAULT;
+                        if (counts[item.source] <= cap) picked.push(item);
                     }
                     if (picked.length) render(picked);
                 })

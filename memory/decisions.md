@@ -52,3 +52,26 @@
 - **Ten link cards, not nine.** GitHub was added alongside Genealogy so the two-column grid
   stays even. `body` lost `align-items: center` in favour of `margin-block: auto` on
   `.container`, so the page can now scroll past the fold without clipping the hero.
+- **The research page is the dated record of the papers, and the feed reads it.** Each paper
+  carries an `<ol class="paper-history">` of `<li><time datetime="YYYY-MM-DD">…` events, and
+  `feed/build.js` emits one timeline item per event rather than one per paper. Why: a
+  submission and an acceptance are two pieces of news months apart, and the old adapter dated
+  every paper by the git-added date of the listing — so the whole page moved on the timeline
+  whenever the file was touched, and the acceptance itself never appeared.
+- **Journal names are published; manuscript ids are not.** Attie's call, 2026-09-06. The page
+  names *Sophia* (Springer), *Theology and Science* (Taylor & Francis), *Studies in History
+  and Philosophy of Science* (Elsevier) and *Religious Studies* (Cambridge University Press);
+  the tracker's manuscript ids stay private.
+- **Within a source, a feed item is keyed by URL + title + date.** It used to be URL + title,
+  which silently dropped a paper's second event (accepted) because it shares a URL and title
+  with its first (submitted).
+- **`feed/news.json` entries carry a `trace` field, not a `source` one.** The brief asked for
+  a provenance field named `source`; `source` is already the feed's rendered badge, so the
+  provenance field is `trace`. `newsAdapter` rebuilds each item from the five feed fields, so
+  `trace` never reaches `feed.json`.
+- **Dropped "Phase-transition cosmology and the doctrine of creation" from In preparation.**
+  It is the same work as *Creation Without a Singularity*, submitted to Religious Studies on
+  2026-09-06, and listing both would have shown one paper twice in two states. "Emergence and
+  the argument from contingency" was kept in preparation — *Emergent spacetime as a single
+  medium* went to a philosophy-of-science venue, so they read as different papers. **Unverified
+  against the Cosmic Wonder tracker** (see open-threads.md).

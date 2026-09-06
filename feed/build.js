@@ -225,34 +225,46 @@ function writingAdapter() {
 }
 
 /**
- * research/ — one item per <article class="paper">. The listing carries a year
- * but no full date, so we take an ISO date from the markup when one appears and
- * otherwise fall back to the git-added date of the page itself. There are no
- * per-paper anchors or PDFs yet, so every item links to /research/.
+ * research/ — one item per *dated event*, not one per paper. A paper's real news
+ * is "submitted to X" and "accepted by Y", each with its own date, so the page
+ * carries that record as data: an <ol class="paper-history"> whose every <li>
+ * holds a <time datetime="YYYY-MM-DD"> and the event in words. This adapter is
+ * that list's only consumer.
+ *
+ * A paper with no history — one still in preparation — has no dated event and
+ * so contributes nothing. That is deliberate: "in preparation" is a state, not
+ * something that happened on a day, and dating it by the git-added date of the
+ * page (what this adapter used to do) put the whole listing on the timeline
+ * every time the file moved.
  */
 function researchAdapter() {
     const html = readFile('research/index.html');
     if (!html) throw new Error('research/index.html not found');
-    const fallback = gitAddedDate('research/index.html');
 
-    return xmlBlocks(html, 'article').map((block) => {
-        if (!/class="paper"/.test(block) && !/paper-title/.test(block)) return null;
+    const items = [];
+    // Matched with the opening tag kept, unlike xmlBlocks(), because the id
+    // attribute on <article> is what each paper's permalink is built from.
+    const articles = /<article\b([^>]*)>([\s\S]*?)<\/article>/g;
+    let article;
+    while ((article = articles.exec(html)) !== null) {
+        const [, attrs, block] = article;
         const title = clean((block.match(/<div class="paper-title">([\s\S]*?)<\/div>/) || [])[1] || '');
-        if (!title) return null;
-        const status = clean((block.match(/<span class="paper-status[^"]*">([\s\S]*?)<\/span>/) || [])[1] || '');
-        const abstract = clean((block.match(/<p class="paper-abstract">([\s\S]*?)<\/p>/) || [])[1] || '');
-        const meta = clean((block.match(/<div class="paper-meta">([\s\S]*?)<\/div>/) || [])[1] || '');
-        const date = toDate(meta.match(/\d{4}-\d{2}-\d{2}/) && meta) || fallback;
-        if (!date) return null;
-        const firstSentence = abstract.split(/(?<=\.)\s/)[0] || abstract;
-        return {
-            date,
-            source: 'research',
-            title,
-            url: `${SITE}/research/`,
-            blurb: truncate(status ? `${status} · ${firstSentence}` : firstSentence, 150),
-        };
-    }).filter(Boolean);
+        if (!title) continue;
+
+        // Per-paper anchor, so each paper's events link to the paper itself.
+        const id = (attrs.match(/\bid="([^"]+)"/) || [])[1] || '';
+        const url = `${SITE}/research/${id ? `#${id}` : ''}`;
+
+        const history = (block.match(/<ol class="paper-history">([\s\S]*?)<\/ol>/) || [])[1] || '';
+        const li = /<li>([\s\S]*?)<\/li>/g;
+        let m;
+        while ((m = li.exec(history)) !== null) {
+            const date = toDate((m[1].match(/\bdatetime="([^"]+)"/) || [])[1]);
+            const event = clean(m[1].replace(/<time\b[\s\S]*?<\/time>/i, ''));
+            if (date && event) items.push({ date, source: 'research', title, url, blurb: truncate(event, 150) });
+        }
+    }
+    return items;
 }
 
 /**
@@ -358,7 +370,14 @@ function subdomainAdapter(origin, source) {
     };
 }
 
-/** feed/news.json — hand-maintained one-offs: milestones, talks, news. */
+/**
+ * feed/news.json — hand-maintained one-offs: milestones, talks, launches.
+ *
+ * Entries also carry a "trace" field naming the line of record the date came
+ * from (a commit, a memory file, a tracker row). It is provenance for whoever
+ * edits the file next, never published: the object rebuilt below drops it, so
+ * it cannot reach feed.json or the page.
+ */
 function newsAdapter() {
     const raw = readFile('feed/news.json');
     if (!raw) return [];
@@ -439,14 +458,15 @@ async function main() {
     }
 
     // Two-tier de-duplication. Within a source, an item is identified by URL +
-    // title, so research/ can list six papers that all link to /research/.
+    // title + date: research/ emits several events for one paper — submitted,
+    // then accepted — which share a URL and a title and differ only by date.
     // Across sources, the first adapter to claim a URL keeps it — that is how
     // a hand-written news entry replaces the generated one for the same page.
     const seen = new Set();
     const urlOwner = new Map();
     const unique = [];
     for (const item of items) {
-        const key = `${item.source}|${item.url}|${item.title}`;
+        const key = `${item.source}|${item.url}|${item.title}|${item.date}`;
         const owner = urlOwner.get(item.url);
         if (seen.has(key) || (owner && owner !== item.source)) continue;
         seen.add(key);

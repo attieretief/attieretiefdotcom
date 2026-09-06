@@ -4,6 +4,23 @@
     "source": "news",
     "title": "Retief genealogy published",
     "url": "https://attieretief.com/genealogy/",
-    "blurb": "Eleven generations of the Huguenot Retief line, and the families married into it."
+    "blurb": "Eleven generations of the Huguenot Retief line, and the families married into it.",
+    "trace": "attieretiefdotcom commit bc622cb 'Publish the Retief genealogy at /genealogy/' (2026-09-06); memory/history.md"
+  },
+  {
+    "date": "2026-06-12",
+    "source": "news",
+    "title": "The writing collection goes up at /writing/",
+    "url": "https://attieretief.com/writing/",
+    "blurb": "Seventy poems in Afrikaans and English, laid out as a paper book with curated navigation.",
+    "trace": "attieretiefdotcom commits 'Publish writing site (2026-06-12)' and 'Writing: paper-book redesign with hierarchical, curated navigation' (2026-06-12); memory/history.md"
+  },
+  {
+    "date": "2026-05-07",
+    "source": "news",
+    "title": "The ABC music editor goes live",
+    "url": "https://attieretief.com/music/",
+    "blurb": "Write, hear and publish scores in the browser — library, editor and public viewer.",
+    "trace": "attieretiefdotcom commit 'Add music sub-site: ABC notation editor, library, and public viewer' (2026-05-07); memory/history.md"
   }
 ]
