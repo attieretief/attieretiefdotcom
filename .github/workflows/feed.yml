@@ -34,9 +34,10 @@ jobs:
         with:
           node-version: '20'
 
+      # No GITHUB_TOKEN here on purpose: the Actions token is scoped to this
+      # repository and 403s on another user's gists. The gists call is
+      # anonymous, which is well inside the 60/hr limit for one run a day.
       - name: Aggregate sources
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node feed/build.js
 
       - name: Commit feed.json if it changed

@@ -274,12 +274,17 @@ async function videoAdapter() {
 /**
  * music/ — published scores are public gists (the music sub-site has no other
  * backend). Both collection tags from music/lib.js are included, matching what
- * the library page shows. Unauthenticated is fine at this volume; Actions
- * passes GITHUB_TOKEN to use the higher rate limit.
+ * the library page shows.
+ *
+ * Deliberately anonymous. Do NOT pass the Actions GITHUB_TOKEN here: it is
+ * scoped to this repository and 403s on another user's gists, which silently
+ * cost the feed all 13 scores on the first scheduled run. One unauthenticated
+ * call a day is nowhere near the 60/hr anonymous limit. GIST_READ_TOKEN is
+ * honoured if a real PAT is ever needed.
  */
 async function musicAdapter() {
-    const headers = process.env.GITHUB_TOKEN
-        ? { authorization: `Bearer ${process.env.GITHUB_TOKEN}` }
+    const headers = process.env.GIST_READ_TOKEN
+        ? { authorization: `Bearer ${process.env.GIST_READ_TOKEN}` }
         : {};
     const gists = await getJson('https://api.github.com/users/attieretief/gists?per_page=100', headers);
     const collections = {
@@ -396,19 +401,41 @@ const ADAPTERS = [
 // Run
 // ============================================================
 
+/**
+ * Sources that produced items last time must produce items this time. A single
+ * source going quiet is not "one source being down" — it is a break, and left
+ * unguarded it silently shrinks the published feed. (It already did once: the
+ * Actions token 403'd on the gists API and the feed lost all 13 scores.)
+ */
+function checkForRegression(counts) {
+    const previous = readFile('feed.json');
+    if (!previous) return [];
+    const before = new Set();
+    for (const item of JSON.parse(previous)) before.add(item.source);
+    return [...before].filter((source) => !counts[source]);
+}
+
 async function main() {
     const items = [];
-    let produced = 0;
+    const counts = {};
 
     for (const [name, adapter] of ADAPTERS) {
         try {
             const got = await adapter();
             items.push(...got);
-            if (got.length) produced += 1;
+            for (const item of got) counts[item.source] = (counts[item.source] || 0) + 1;
             console.log(`${name.padEnd(11)} ${String(got.length).padStart(3)} items`);
         } catch (err) {
             console.log(`${name.padEnd(11)}   – skipped: ${err.message}`);
         }
+    }
+
+    const produced = Object.keys(counts).length;
+
+    const lost = checkForRegression(counts);
+    if (lost.length) {
+        console.error(`\nRefusing to write: ${lost.join(', ')} produced items last run and none now.`);
+        process.exit(1);
     }
 
     // Two-tier de-duplication. Within a source, an item is identified by URL +

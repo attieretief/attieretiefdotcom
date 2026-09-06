@@ -40,7 +40,7 @@ the page shows the 20 most recent.
 | `writing` | poems listed in `writing/index.html` | first commit that added `writing/poetry/<slug>/index.html` |
 | `research` | `<article class="paper">` blocks in `research/index.html` | an ISO date in the markup, else the git-added date of the page |
 | `video` | the YouTube channel Atom feed for `@attieretief` | feed `<published>` |
-| `music` | public gists tagged `[abc-music]` / `[abc-original]` | gist `created_at` |
+| `music` | public gists tagged `[abc-music]` / `[abc-original]` — read anonymously | gist `created_at` |
 | `book` | `cosmic-wonder/index.html` | git-added date of the page |
 | `genealogy` | `genealogy/feed.json` (local, falling back to the published copy) | as published there |
 | `aletheia` | feed autodiscovery on `aletheia.attieretief.com` | feed `<published>` |
@@ -60,13 +60,23 @@ so it holds no static entries to parse — the channel Atom feed is the source.
 2026-08-12 republish dropped it; `build.js` prefers it if it returns and parses
 `writing/index.html` otherwise.
 
-## Failure is expected
+## Failure is expected — silent shrinkage is not
 
 Every adapter is wrapped. A source that 404s, times out or changes its markup
-logs `– skipped: <reason>` and contributes nothing; the run still succeeds. The
-one guard is a floor: if fewer than four sources produce items, the script exits
-non-zero, because that means something structural broke rather than one source
-being down.
+logs `– skipped: <reason>` and contributes nothing; the run still succeeds.
+
+Two guards stop that tolerance from quietly gutting the feed:
+
+- **Floor.** Fewer than four sources producing items exits non-zero.
+- **Regression.** A source that produced items in the existing `feed.json` and
+  produces none now exits non-zero *before* writing, so the published file is
+  left alone rather than replaced by a smaller one.
+
+Both exist because it already happened: the first scheduled run passed the
+Actions `GITHUB_TOKEN` to the gists API, which 403s on another user's gists
+because it is scoped to this repository, and the feed silently lost all 13
+scores. **Do not authenticate the gists call with the Actions token.** Set
+`GIST_READ_TOKEN` to a real PAT if authentication is ever needed.
 
 ## De-duplication
 
