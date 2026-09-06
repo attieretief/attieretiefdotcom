@@ -184,3 +184,38 @@ open, on desktop it is the landing page's second column.
   and is cleared by a fresh tab; under emulated `prefers-reduced-motion` the panel is simply
   open at 896,112–1256,688 with no `.entering` and no dot animation; and the entrance opacity
   samples 0 → 0.29 → 0.64 → 0.84 → 1 over ~600ms, so it eases rather than snaps.
+
+## 2026-09-06 — the /projects/ page
+
+- **The site now carries projects that have no URL of their own, not just destinations.**
+  `projects/index.html` holds three entries: Kalah, the Crossroads Prison Ministries SA
+  website + admin system, and Attie's prison-ministry mentoring. The last two link to nothing
+  of their own — the point of the page is that a thing can be real work without being a
+  website.
+- **The page is `research/index.html`'s chrome with the class names renamed `paper-` →
+  `project-`.** Same head block, same card, same status pill (live / in review / ongoing in
+  place of accepted / under review / in preparation), same 560px stack of the history grid.
+  Deliberate: they are the same kind of page and the feed reads them the same way, so they
+  should not be allowed to drift apart.
+- **`feed/build.js` gained `datedHistory(dir, source, kind)`**, and `researchAdapter` /
+  `projectsAdapter` are now one-line wrappers over it. A near-identical second copy of the
+  article-and-history parser was the alternative, and would have been the thing that drifted.
+- **`projects` sits second in `SOURCE_PRIORITY`, right after `research`** — "first
+  congregation live" is real news and should win a date tie against a poem or a gist, but not
+  against a hand-written `news.json` entry or a paper acceptance.
+- **The CPM preview URL is not on this site and must not be added until Attie says it is
+  approved.** The entry links the *current* site, `cpministries-sa.org.za`, only, and its
+  status line says built and in review. This is the hard constraint on the page.
+- **The prison-ministry entry stays at ministry level.** No student, no facility, no letter
+  content, no counts — only that he marks lessons weekly, writes each student a letter, and is
+  translating the *Great Truths of the Bible* and *Survey of the Bible* curricula into
+  Afrikaans.
+- **GitHub was the card that had to go** to keep the grid at ten; the link moved into the
+  footer as plain text (`© 2026 Attie Retief · GitHub`). The landing page's schema.org
+  `sameAs` already carried the profile, so nothing was lost for search.
+- **Verified in the headless shell** (Playwright's chromium-1234 shell over `file://`, no
+  network): the page at 1280×1050 and 390×1500 — cards, status pills, the links row and the
+  history grid all read correctly, and the date stacks above its event on the phone; the
+  landing page at 1280×1000 shows ten cards with Projects last and GitHub in the footer.
+  `node feed/build.js` runs clean — 8 sources, 158 items, both Kalah milestones present at
+  `/projects/#kalah`.

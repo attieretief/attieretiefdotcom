@@ -18,6 +18,9 @@ poet, and author of the forthcoming book *Reasonable Wonder*.
 - `music/` — self-contained **ABC-notation editor** sub-site (see below).
 - `research/` — academic paper listing (Reformed theology × contemporary physics), grouped
   Accepted / Under review / In preparation, each paper carrying a dated history.
+- `projects/` — what Attie builds outside the day job and that has no card of its own:
+  Kalah (kalah.app), the Crossroads Prison Ministries SA website + admin system, and his
+  prison-ministry mentoring. Same event-shaped markup as `research/` (see below).
 - `video/` — piano-cover / performance video listing (YouTube `@attieretief`).
 - `writing/` — bilingual (Afrikaans + English) poetry collection.
 - `genealogy/` — the redacted public Retief genealogy build; also emits `genealogy/feed.json`.
@@ -60,10 +63,12 @@ node feed/build.js
 - Items normalise to `{date, source, title, url, blurb}`, sorted newest first. `feed.json`
   holds everything; the page shows 20, capped at 4 per source (5 for `research`) so no burst
   crowds the rest.
-- `research/` is **event-shaped**: each paper on `research/index.html` carries an
-  `<ol class="paper-history">` whose `<li>`s hold a `<time datetime>` and the event in words,
-  and the adapter emits one feed item per event — submitted, then accepted. A paper still in
-  preparation has no history and so contributes nothing.
+- `research/` and `projects/` are **event-shaped** and share one reader, `datedHistory()`:
+  each `<article id="…">` carries an `<ol class="paper-history">` / `<ol class="project-history">`
+  whose `<li>`s hold a `<time datetime>` and the event in words, and the adapter emits one feed
+  item per event — submitted then accepted; first congregation live then public launch. An
+  entry with no history (a paper in preparation, a project still in review) contributes
+  nothing, and the item's url is the entry's own `#id` anchor.
 - One-off news (a talk, a book milestone, a composition, a launch) goes in `feed/news.json`,
   not a new adapter. Every entry there carries a `trace` field naming the record its date came
   from; it is provenance only and is stripped before the item reaches `feed.json`.

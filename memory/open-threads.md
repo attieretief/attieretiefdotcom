@@ -19,6 +19,14 @@ No hard blockers or known bugs captured. A few optional/deferred items noted alo
   consequences to close out: (a) re-check the four papers' dates, titles and journals against
   `Submissions.md`; (b) no book milestone, composition or choral score could be added to
   `feed/news.json`, because no date for one was traceable from inside this repo.
+- **The CPM website + admin system has a preview URL that is deliberately not on this site.**
+  `projects/index.html` links the current `cpministries-sa.org.za` only, and its status says
+  built and in review. When Attie says the new site is approved, the entry gets the new link
+  and its first `<li><time datetime="…">` milestone — which is also what puts it on the feed.
+  Until then, do not add the preview URL anywhere.
+- **Kalah is the only project entry with dated milestones.** The prison-ministry entry has
+  none by design (it is ongoing, not event-shaped), so it will never appear in the timeline —
+  that is correct, not a bug in the adapter.
 - **Book *Reasonable Wonder* is "forthcoming."** Manuscript complete; the `cosmic-wonder/`
   page presumably needs updating once it's published/available.
 - **`CLAUDE.md` still documents `writing/build.js` and `writing/works.js`, which no longer

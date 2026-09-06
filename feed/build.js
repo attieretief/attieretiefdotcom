@@ -225,47 +225,55 @@ function writingAdapter() {
 }
 
 /**
- * research/ — one item per *dated event*, not one per paper. A paper's real news
- * is "submitted to X" and "accepted by Y", each with its own date, so the page
- * carries that record as data: an <ol class="paper-history"> whose every <li>
- * holds a <time datetime="YYYY-MM-DD"> and the event in words. This adapter is
- * that list's only consumer.
+ * The shared reader for the two pages that carry their own news as data:
+ * research/ and projects/. Each entry is an <article id="…"> holding a
+ * <div class="<kind>-title"> and an <ol class="<kind>-history"> whose every
+ * <li> holds a <time datetime="YYYY-MM-DD"> and the event in words. One feed
+ * item per *dated event*, not one per entry — a paper's real news is
+ * "submitted to X" then "accepted by Y", a project's is "first congregation
+ * live" then "public launch", and each of those happened on its own day.
  *
- * A paper with no history — one still in preparation — has no dated event and
- * so contributes nothing. That is deliberate: "in preparation" is a state, not
+ * An entry with no history contributes nothing. That is deliberate: a paper
+ * "in preparation", or a project still in review, is a state rather than
  * something that happened on a day, and dating it by the git-added date of the
- * page (what this adapter used to do) put the whole listing on the timeline
- * every time the file moved.
+ * page (what the research adapter used to do) put the whole listing on the
+ * timeline every time the file moved.
  */
-function researchAdapter() {
-    const html = readFile('research/index.html');
-    if (!html) throw new Error('research/index.html not found');
+function datedHistory(dir, source, kind) {
+    const html = readFile(`${dir}/index.html`);
+    if (!html) throw new Error(`${dir}/index.html not found`);
+
+    const title = new RegExp(`<div class="${kind}-title">([\\s\\S]*?)</div>`);
+    const history = new RegExp(`<ol class="${kind}-history">([\\s\\S]*?)</ol>`);
 
     const items = [];
     // Matched with the opening tag kept, unlike xmlBlocks(), because the id
-    // attribute on <article> is what each paper's permalink is built from.
+    // attribute on <article> is what each entry's permalink is built from.
     const articles = /<article\b([^>]*)>([\s\S]*?)<\/article>/g;
     let article;
     while ((article = articles.exec(html)) !== null) {
         const [, attrs, block] = article;
-        const title = clean((block.match(/<div class="paper-title">([\s\S]*?)<\/div>/) || [])[1] || '');
-        if (!title) continue;
+        const name = clean((block.match(title) || [])[1] || '');
+        if (!name) continue;
 
-        // Per-paper anchor, so each paper's events link to the paper itself.
+        // Per-entry anchor, so every event links to the entry itself.
         const id = (attrs.match(/\bid="([^"]+)"/) || [])[1] || '';
-        const url = `${SITE}/research/${id ? `#${id}` : ''}`;
+        const url = `${SITE}/${dir}/${id ? `#${id}` : ''}`;
 
-        const history = (block.match(/<ol class="paper-history">([\s\S]*?)<\/ol>/) || [])[1] || '';
+        const events = (block.match(history) || [])[1] || '';
         const li = /<li>([\s\S]*?)<\/li>/g;
         let m;
-        while ((m = li.exec(history)) !== null) {
+        while ((m = li.exec(events)) !== null) {
             const date = toDate((m[1].match(/\bdatetime="([^"]+)"/) || [])[1]);
             const event = clean(m[1].replace(/<time\b[\s\S]*?<\/time>/i, ''));
-            if (date && event) items.push({ date, source: 'research', title, url, blurb: truncate(event, 150) });
+            if (date && event) items.push({ date, source, title: name, url, blurb: truncate(event, 150) });
         }
     }
     return items;
 }
+
+const researchAdapter = () => datedHistory('research', 'research', 'paper');
+const projectsAdapter = () => datedHistory('projects', 'projects', 'project');
 
 /**
  * video/ — video/index.html holds no static entries (it renders playlists from
@@ -408,8 +416,8 @@ function newsAdapter() {
 // and 22 generated person pages — so without a fixed order the headline went to
 // whichever adapter happened to run first. Anything not listed sorts last.
 const SOURCE_PRIORITY = [
-    'news', 'research', 'book', 'genealogy', 'video', 'music', 'writing',
-    'aletheia', 'paraverses',
+    'news', 'research', 'projects', 'book', 'genealogy', 'video', 'music',
+    'writing', 'aletheia', 'paraverses',
 ];
 
 const priority = (source) => {
@@ -423,6 +431,7 @@ const ADAPTERS = [
     ['news', newsAdapter],
     ['writing', writingAdapter],
     ['research', researchAdapter],
+    ['projects', projectsAdapter],
     ['video', videoAdapter],
     ['music', musicAdapter],
     ['book', cosmicWonderAdapter],

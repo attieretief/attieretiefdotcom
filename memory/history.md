@@ -103,3 +103,11 @@ from the git log and migrated conversations; treat undated items as approximate.
   (≥1024px) arrives with the panel expanded and floating centre-right; the pill is now just
   what it collapses to, and the collapse is remembered for the session only. Container and
   panel measured clear at 1600 (gap 26px), 1280 (46px) and 1024 (24px), pill-only at 375.
+
+- **2026-09-06 — `/projects/` shipped.** New `projects/index.html` carrying Kalah, the
+  Crossroads Prison Ministries SA website + admin system, and prison-ministry mentoring; the
+  landing grid's GitHub card swapped for a Projects card with GitHub moved to the footer line;
+  a `projects` adapter in `feed/build.js` sharing `datedHistory()` with research;
+  `feed/README.md`, `CLAUDE.md` and `sitemap.xml` updated; `feed.json` rebuilt to 158 items
+  from 8 sources, including the 20 Jul first-congregation-live and 12 Aug kalah.app launch
+  milestones.

@@ -30,9 +30,10 @@ first:
 ```
 
 `date` is `YYYY-MM-DD`. `blurb` may be empty. Sorting is date descending, then
-the fixed `SOURCE_PRIORITY` in `build.js` — news, research, book, genealogy,
-video, music, writing, aletheia, paraverses — then title, so on a shared date the
-real news heads the list and the pill rather than whichever adapter ran first.
+the fixed `SOURCE_PRIORITY` in `build.js` — news, research, projects, book,
+genealogy, video, music, writing, aletheia, paraverses — then title, so on a
+shared date the real news heads the list and the pill rather than whichever
+adapter ran first.
 `feed.json` holds **all** items; the page shows the 20 most recent, capped at
 four per source (five for `research`, which emits one item per dated event rather
 than one per page) and at three per source per day, so a batch published together
@@ -45,6 +46,7 @@ cannot crowd out the rest of that day.
 | `news` | `feed/news.json` — hand-maintained | as written |
 | `writing` | poems listed in `writing/index.html` | first commit that added `writing/poetry/<slug>/index.html` |
 | `research` | each `<li>` of an `<ol class="paper-history">` in `research/index.html` — **one item per dated event**, not per paper | the `<time datetime>` on that event |
+| `projects` | each `<li>` of an `<ol class="project-history">` in `projects/index.html` — **one item per milestone**, not per project | the `<time datetime>` on that milestone |
 | `video` | the YouTube channel Atom feed for `@attieretief` | feed `<published>` |
 | `music` | public gists tagged `[abc-music]` / `[abc-original]` — read anonymously | gist `created_at` |
 | `book` | `cosmic-wonder/index.html` | git-added date of the page |
@@ -87,8 +89,9 @@ scores. **Do not authenticate the gists call with the Actions token.** Set
 ## De-duplication
 
 Within a source an item is identified by URL, title **and** date. `research/`
-emits several events for one paper — submitted, then accepted — which share a
-URL and a title and differ only by the date. Across sources the first adapter to
+and `projects/` — which share one reader, `datedHistory()` — emit several events
+for a single entry (submitted then accepted; first congregation live then public
+launch), and those share a URL and a title, differing only by the date. Across sources the first adapter to
 claim a URL keeps it, which is why `news` runs first: a hand-written entry
 replaces the generated one for the same page. (So don't point a `news` entry at
 a URL an adapter also produces unless you mean to replace it.)
