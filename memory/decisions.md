@@ -149,11 +149,10 @@ Reverses the previous decision above — the panel is no longer something the vi
 open, on desktop it is the landing page's second column.
 
 - **At ≥1024px the panel is expanded on every visit.** No first-visit rule and no
-  `localStorage` gate; `recent-autoshown` and `recent-open` are gone. The only thing recorded
-  is a *collapse*, under **`recent-collapsed` in `sessionStorage`** — so a reload mid-visit
-  respects the choice and a fresh visit opens again. sessionStorage rather than localStorage
-  is the whole mechanism for that distinction. Below 1024px the pill is still the default
-  whatever is stored, and opening gives the bottom sheet (that breakpoint moved up from 640px).
+  `localStorage` gate; `recent-autoshown` and `recent-open` are gone. ~~The only thing recorded
+  is a *collapse*, under `recent-collapsed` in `sessionStorage`.~~ **Superseded the same day —
+  see "No memory of a collapse" below; nothing is stored at all.** Below 1024px the pill is
+  still the default, and opening gives the bottom sheet (that breakpoint moved up from 640px).
 - **The panel floats `position: fixed`, `top: 50%` / `translateY(-50%)`, 1.5rem from the right,
   max-height 72vh.** Its ancestor `.recent-dock` must therefore never carry a transform — one
   would make the dock the containing block and the "fixed" panel would position against it.
@@ -184,6 +183,26 @@ open, on desktop it is the landing page's second column.
   and is cleared by a fresh tab; under emulated `prefers-reduced-motion` the panel is simply
   open at 896,112–1256,688 with no `.entering` and no dot animation; and the entrance opacity
   samples 0 → 0.29 → 0.64 → 0.84 → 1 over ~600ms, so it eases rather than snaps.
+
+## No memory of a collapse — Recent opens on every desktop load (2026-09-06)
+
+Attie collapsed the panel once, reloaded, and landed on a closed page. The session memory did
+exactly what it was told; what it was told was wrong.
+
+- **The panel opens on every load at ≥1024px, full stop.** A collapse lasts until the next
+  load and is written nowhere — `STORE_KEY = "recent-collapsed"` and the `store()` / `recall()`
+  `sessionStorage` wrappers are gone, and `setOpen` lost its third `persist` argument with
+  them. `openOnLoad` is now just the media query. Nothing else moved: same 1024px breakpoint,
+  same entrance, same close button / Esc / outside-click, same phone pill and bottom sheet.
+- **The reasoning that produced the session store was sound and still lost.** "A reload
+  mid-visit respects the choice" reads well in a comment and is a worse page: the one thing
+  this panel exists to do is be seen, and any stored state at all means some reload doesn't
+  show it. A visitor closing it has already read it; the next load is a new look.
+- **Verified over CDP at 1280×800 against the rendered DOM** (Playwright headless-shell
+  chromium, local server): `aria-expanded="true"` and `.open` on load with 20 items and the
+  panel at 896,112 360×576; close it, reload, and it is open again with **`sessionStorage` and
+  `localStorage` both empty** at every point; Esc closes, the pill reopens, an outside click
+  closes; at 390×844 it still arrives collapsed and taps open to a 390×591 sheet.
 
 ## 2026-09-06 — the /projects/ page
 

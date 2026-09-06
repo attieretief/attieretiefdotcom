@@ -101,7 +101,8 @@ from the git log and migrated conversations; treat undated items as approximate.
 
 - **2026-09-06 — Recent panel flipped to open-by-default.** `index.html` only. Desktop
   (≥1024px) arrives with the panel expanded and floating centre-right; the pill is now just
-  what it collapses to, and the collapse is remembered for the session only. Container and
+  what it collapses to, and the collapse was remembered for the session (dropped later the
+  same day — see below). Container and
   panel measured clear at 1600 (gap 26px), 1280 (46px) and 1024 (24px), pill-only at 375.
 
 - **2026-09-06 — `/projects/` shipped.** New `projects/index.html` carrying Kalah, the
@@ -111,3 +112,10 @@ from the git log and migrated conversations; treat undated items as approximate.
   `feed/README.md`, `CLAUDE.md` and `sitemap.xml` updated; `feed.json` rebuilt to 158 items
   from 8 sources, including the 20 Jul first-congregation-live and 12 Aug kalah.app launch
   milestones.
+
+- **2026-09-06 — the Recent panel's session memory dropped.** Attie collapsed it once,
+  reloaded and got a closed page. `index.html` only: `STORE_KEY`, `store()`, `recall()` and
+  `setOpen`'s `persist` argument removed, so the panel opens on every load at ≥1024px and a
+  collapse is stored nowhere. Verified at 1280×800 over CDP — open on load, collapse, reload,
+  open again, both storages empty throughout; Esc / pill / outside-click and the 390px bottom
+  sheet all unchanged.

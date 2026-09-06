@@ -950,11 +950,10 @@
             const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
                             "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-            // Desktop opens the panel on every visit. The only thing recorded
-            // is a *collapse*, and only for the session: a reload mid-visit
-            // respects the choice, a fresh visit opens again. sessionStorage,
-            // not localStorage, is what makes that distinction.
-            const STORE_KEY = "recent-collapsed";
+            // Desktop opens the panel on every load, full stop. A collapse is
+            // never stored anywhere — it lasts until the next load, and then
+            // the panel is back. Remembering it meant a reload could land on a
+            // closed page, which is exactly what this page must never do.
             const DESKTOP_MIN_WIDTH = 1024;
             const ENTRANCE_DELAY = 1200;
             // Long enough to outlast the 0.6s slide and the last item's
@@ -973,22 +972,6 @@
                         focusWhenReady(el, tries - 1);
                     }
                 });
-            }
-
-            // sessionStorage throws in private mode; a browser that can't
-            // remember just gets the default behaviour every time.
-            function store(key, value) {
-                try {
-                    sessionStorage.setItem(key, value);
-                } catch (e) { /* not remembered */ }
-            }
-
-            function recall(key) {
-                try {
-                    return sessionStorage.getItem(key);
-                } catch (e) {
-                    return null;
-                }
             }
 
             function formatDate(iso) {
@@ -1051,12 +1034,10 @@
                 const dock = document.getElementById("recent-dock");
                 const pill = document.getElementById("recent-pill");
 
-                // Desktop shows the panel on arrival unless this session has
-                // already collapsed it. Below 1024px the pill is the default,
-                // whatever is stored.
+                // Desktop shows the panel on arrival. Below 1024px the pill is
+                // the whole of it, and the bottom sheet is what opens.
                 const openOnLoad =
-                    window.matchMedia("(min-width: " + DESKTOP_MIN_WIDTH + "px)").matches &&
-                    recall(STORE_KEY) !== "1";
+                    window.matchMedia("(min-width: " + DESKTOP_MIN_WIDTH + "px)").matches;
 
                 dock.hidden = false;
 
@@ -1072,14 +1053,9 @@
                     pill.style.animationDelay = (left / 1000) + "s";
                 }
 
-                // persist=false for the open-on-load: it is the page's doing,
-                // not the visitor's. Only a collapse is ever recorded.
-                function setOpen(open, focus, persist) {
+                function setOpen(open, focus) {
                     dock.classList.toggle("open", open);
                     pill.setAttribute("aria-expanded", String(open));
-                    if (persist !== false) {
-                        store(STORE_KEY, open ? "0" : "1");
-                    }
                     if (focus) {
                         focusWhenReady(open ? document.getElementById("recent-close") : pill, 5);
                     }
@@ -1100,7 +1076,7 @@
                 if (!openOnLoad) return;
 
                 if (prefersReducedMotion) {
-                    setOpen(true, false, false);
+                    setOpen(true, false);
                     return;
                 }
 
@@ -1115,7 +1091,7 @@
                     // replaces it, or the browser collapses both into one
                     // style change and the slide never happens.
                     document.getElementById("recent-panel").getBoundingClientRect();
-                    requestAnimationFrame(() => setOpen(true, false, false));
+                    requestAnimationFrame(() => setOpen(true, false));
                     setTimeout(() => dock.classList.remove("entering"), ENTRANCE_LIFETIME);
                 }, Math.max(0, ENTRANCE_DELAY - performance.now()));
             }
