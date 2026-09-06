@@ -238,3 +238,32 @@ exactly what it was told; what it was told was wrong.
   landing page at 1280×1000 shows ten cards with Projects last and GitHub in the footer.
   `node feed/build.js` runs clean — 8 sources, 158 items, both Kalah milestones present at
   `/projects/#kalah`.
+
+## 2026-09-06 — /projects/ gains Choral works and the Crossworks Missions site
+
+- **Five entries now, ordered Kalah, Choral works, Crossroads site and admin, Prison ministry,
+  Crossworks.** Attie's order, not a status or date sort — the two new entries were chosen by
+  him the same day the page shipped.
+- **The Choral works entry carries NO `<ol class="project-history">`, deliberately.** Its one
+  milestone — the Requiem Introit and Lacrimosa mock-ups, 2026-08-29 — already reaches the
+  timeline through the `video` adapter, and a history item on the same date would show the same
+  news twice. The entry links the two YouTube videos instead, and a comment above the article
+  says why so nobody "fixes" the missing list. This is the first entry on either event-shaped
+  page (research/, projects/) that is content-only.
+- **The choir that will sing *None like you* is not named**, and no competitions, rehearsal
+  dates, scores or files are mentioned. Attie's constraint. The entry names the three works
+  only: the *Requiem* (begun 1992, SATB — Introit, Lacrimosa, Pie Iesu and the Dies irae
+  sequence so far), *Winternag* (Eugene Marais, SSA + piano, arranged Aug 2026), and
+  *None like you* (original hymn, engraved SATB).
+- **Crossworks Missions is named as an organisation only, no individuals.** One-page static
+  site Attie built and hosts unpaid, GitHub Pages under its own domain; status Live, one
+  history item, 2026-08-26 `crossworksmissions.org` live — which is the only new feed item
+  from this change (`projects` went 2 → 3, 159 items from 8 sources).
+- **The landing card description now hints at the music**: "Kalah, choral music, prison
+  ministry — and what else keeps me up". The page's own meta/OG/Twitter descriptions were
+  extended to match the five entries.
+- **Verified in the headless shell** (chrome-headless-shell-1234 over `file://`): the page at
+  1280×2000 shows all five cards in the intended order with the status pills, links row and
+  history grid correct and no history block under Choral works; at 390×2100 the date stacks
+  above its event and nothing overflows; the landing page at 1280×1250 shows the reworded
+  Projects card wrapping to two lines like Genealogy beside it.
