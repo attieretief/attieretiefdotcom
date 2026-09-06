@@ -87,3 +87,10 @@ from the git log and migrated conversations; treat undated items as approximate.
   plays" that were never published (70 poems is the whole collection); the video page said
   "piano covers & performances" while the channel now carries the Requiem.
 
+
+- **2026-09-06 - landing page back to one screen.** `index.html` only: the in-flow updates
+  section was replaced by the floating Recent pill/panel. Verified headless (Playwright, via
+  Linc-Engage's install) at 1280x800 and 375x812: pill present, `.updates` gone, container
+  bottom 787px inside an 800px viewport with no scrollbar, 20 items, panel 360x560 anchored
+  20px from both edges, phone sheet 375px wide at 70vh, and click / Esc / outside-click /
+  localStorage / failed-feed / empty-feed / reduced-motion all behaving.

@@ -75,3 +75,27 @@
   the argument from contingency" was kept in preparation — *Emergent spacetime as a single
   medium* went to a philosophy-of-science venue, so they read as different papers. **Unverified
   against the Cosmic Wonder tracker** (see open-threads.md).
+
+## The home-page "Recent" timeline is a floating pill, not an in-flow section (2026-09-06)
+
+- **The timeline moved out of the page flow into a pill fixed bottom-right that expands into a
+  panel.** Attie's call: the landing page was designed to fit one screen, and the in-flow
+  `<section class="updates">` pushed everything past the fold. Collapsed, the pill shows an
+  accent dot, the newest item's day+month, its title truncated, and a chevron; expanded, it is
+  a 360px panel (max-height 70vh, scrolling inside) with a "Recent" header and a close button,
+  holding the same 20 items rendered exactly as before. On <=640px the pill spans the bottom
+  edge and opens as a full-width bottom sheet.
+- **No "All updates" footer link.** There is no full updates page to link to; the brief said to
+  omit it in that case.
+- **The panel's timeline rows stack the date above the entry at every width.** The old two-column
+  `6rem 1fr` grid was the desktop layout of a 780px column; at 360px it leaves the title 232px.
+  The stacked form is what the page already used on phones.
+- **`visibility` is transitioned as `0s linear 0.2s` (closed) / `0s` (open), not `0.2s`.** With a
+  timed transition Chrome only flips visibility at the *end* in both directions, so the panel was
+  unfocusable and invisible for the whole fade-in. The reduced-motion block now also forces
+  `transition-delay: 0s`, so closing is instant there.
+- **Focus is moved with a retry-until-it-sticks rAF loop (`focusWhenReady`).** Hiding the element
+  the user just activated - the pill on open - blurs it to `<body>` in a later style pass, which
+  took focus straight back off the close button; a single or double rAF was flaky, the retry is not.
+- **The open/closed choice persists in `localStorage["recent-open"]`, default collapsed**, and the
+  whole dock stays `hidden` if `feed.json` fails or is empty - the page is complete without it.
