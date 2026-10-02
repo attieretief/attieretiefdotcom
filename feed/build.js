@@ -299,14 +299,23 @@ async function videoAdapter() {
  * Deliberately anonymous. Do NOT pass the Actions GITHUB_TOKEN here: it is
  * scoped to this repository and 403s on another user's gists, which silently
  * cost the feed all 13 scores on the first scheduled run. One unauthenticated
- * call a day is nowhere near the 60/hr anonymous limit. GIST_READ_TOKEN is
- * honoured if a real PAT is ever needed.
+ * calls share a runner IP's 60/hr limit, so the worker proxy is tried first.
+ * GIST_READ_TOKEN is honoured on the direct fallback if a PAT is ever needed.
  */
 async function musicAdapter() {
     const headers = process.env.GIST_READ_TOKEN
         ? { authorization: `Bearer ${process.env.GIST_READ_TOKEN}` }
         : {};
-    const gists = await getJson('https://api.github.com/users/attieretief/gists?per_page=100', headers);
+    // Read through the music site's own read-only worker proxy first: anonymous
+    // calls from shared Actions runners hit the per-IP limit and 403'd every
+    // scheduled run from 21 Sep. Direct api.github.com stays as the fallback.
+    const path = '/users/attieretief/gists?per_page=100';
+    let gists;
+    try {
+        gists = await getJson(`https://music-gists.marketing-0c0.workers.dev${path}`, {});
+    } catch {
+        gists = await getJson(`https://api.github.com${path}`, headers);
+    }
     const collections = {
         '[abc-music]': 'Worship song',
         '[abc-original]': 'Original composition',
