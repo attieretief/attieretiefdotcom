@@ -281,7 +281,20 @@ const projectsAdapter = () => datedHistory('projects', 'projects', 'project');
  * Deduped on video id in case a video is ever also listed by hand.
  */
 async function videoAdapter() {
-    const xml = await get(`https://www.youtube.com/feeds/videos.xml?channel_id=${YOUTUBE_CHANNEL_ID}`);
+    let xml;
+    try {
+        xml = await get(`https://www.youtube.com/feeds/videos.xml?channel_id=${YOUTUBE_CHANNEL_ID}`);
+    } catch (err) {
+        // YouTube's Atom endpoint 404s for every channel at times (3–5 Oct 2026:
+        // channel, playlist and user feeds alike), which tripped the lost-source
+        // guard and froze the whole feed. A video feed that is down has not lost
+        // its videos, so carry last run's items forward; a channel that really
+        // has none still trips the guard on the next successful fetch.
+        const previous = JSON.parse(readFile('feed.json') || '[]').filter((item) => item.source === 'video');
+        if (!previous.length) throw err;
+        console.log(`video         (feed down: ${err.message} — carrying ${previous.length} items forward)`);
+        return previous;
+    }
     const seen = new Set();
     return parseFeedXml(xml, 'video').filter((item) => {
         const id = (item.url.match(/[?&]v=([A-Za-z0-9_-]+)/) || [])[1] || item.url;
