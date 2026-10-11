@@ -8,10 +8,8 @@ No hard blockers or known bugs captured. A few optional/deferred items noted alo
 - **MP3 export runs on the main thread** and takes 30+ seconds for a ~1-minute hymn. Noted as
   normal; could be moved to a Web Worker if it becomes annoying. Not done.
 - **Research statuses need re-checking as they move.** Verified 2026-10-11 against
-  `cosmic-wonder/Submission/Submissions.md`: one published (*Sophia*), three under review (P1 at
-  *PTSc*, P3 at SHPS, P6 at *Sophia* from 11 Oct), one in preparation (P7 for *JAT*, package
-  built, not submitted). When P7 goes out, move them to Under review with a
-  dated `<li><time>` event.
+  `cosmic-wonder/Submission/Submissions.md`: one published (*Sophia*), four under review (P1 *PTSc*, P3 SHPS, P6 *Sophia*, P7 *JAT*, the last two from 11 Oct);
+  nothing in preparation, so the section was removed — re-add it when a new paper starts.
 - **The CPM website + admin system has a preview URL that is deliberately not on this site.**
   `projects/index.html` links the current `cpministries-sa.org.za` only, and its status says
   built and in review. When Attie says the new site is approved, the entry gets the new link
