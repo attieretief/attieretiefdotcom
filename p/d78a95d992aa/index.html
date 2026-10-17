@@ -63,7 +63,6 @@
         .hero-photo { flex: 1; min-height: 0; display: flex; justify-content: center; align-items: flex-end; padding-top: calc(3rem + env(safe-area-inset-top, 0px)); }
         .hero-frame { position: relative; height: 100%; max-width: 100%; }
         .hero-frame img { height: 100%; width: auto; max-width: 100%; object-fit: contain; }
-        .hero-frame::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, var(--graphite) 0, rgba(22,21,15,0) 9%, rgba(22,21,15,0) 91%, var(--graphite) 100%), linear-gradient(180deg, var(--graphite) 0, rgba(22,21,15,0) 8%, rgba(22,21,15,0) 82%, var(--graphite) 100%); }
         .hero-inner { flex: none; padding-top: .4rem; padding-bottom: clamp(1.2rem, 3.5vh, 2.4rem); }
         @media (min-width: 821px) {
             .hero-inner { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 3rem; align-items: end; }
