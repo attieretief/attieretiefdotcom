@@ -119,3 +119,5 @@ from the git log and migrated conversations; treat undated items as approximate.
   collapse is stored nowhere. Verified at 1280×800 over CDP — open on load, collapse, reload,
   open again, both storages empty throughout; Esc / pill / outside-click and the 390px bottom
   sheet all unchanged.
+
+- 2026-10-17: Added unlisted LC 500 provenance page at /p/d78a95d992aa/ (noindex, not in sitemap/feed/home). Showcase only — transaction documents and correspondence deliberately kept off the site; originals live in Attie's mail archive.
