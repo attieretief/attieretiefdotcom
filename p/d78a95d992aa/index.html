@@ -60,9 +60,9 @@
 
         /* ── Hero ── */
         .hero { position: relative; --h1: min(11.5vw, 11.5vh); height: 100vh; height: 100svh; min-height: 520px; display: flex; flex-direction: column; }
-        .hero-photo { flex: 1; min-height: 0; display: flex; justify-content: center; align-items: flex-end; padding-top: calc(3rem + env(safe-area-inset-top, 0px)); }
-        .hero-frame { position: relative; height: 100%; max-width: 100%; }
-        .hero-frame img { height: 100%; width: auto; max-width: 100%; object-fit: contain; }
+        .hero-photo { flex: 1 1 auto; min-height: 0; max-height: calc(100vw / 1.93); position: relative; overflow: hidden; }
+        .hero-frame { position: absolute; inset: 0; }
+        .hero-frame img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
         .hero-inner { flex: none; padding-top: .4rem; padding-bottom: clamp(1.2rem, 3.5vh, 2.4rem); }
         @media (min-width: 821px) {
             .hero-inner { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 3rem; align-items: end; }
@@ -207,9 +207,7 @@
 
         @media (max-width: 820px) {
             .hero { --h1: 15vw; height: auto; min-height: 0; }
-            .hero-photo { flex: none; padding-top: calc(3.2rem + env(safe-area-inset-top, 0px)); }
-            .hero-frame { height: auto; width: 100%; }
-            .hero-frame img { width: 100%; height: auto; }
+            .hero-photo { flex: none; aspect-ratio: 1600 / 830; max-height: none; }
             .lede, .chapter, .sheet-wrap, .logbook, .sources, .band .prose { grid-template-columns: minmax(0, 1fr); gap: 1.2rem; }
             .chapter { gap: .6rem; }
             .sheet dl { grid-template-columns: minmax(0, 1fr); }
