@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Updates — Attie Retief</title>
+    <meta name="description" content="Updates from Attie Retief: papers, short films and the book Reasonable Wonder.">
+    <link rel="canonical" href="https://attieretief.com/join/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Updates — Attie Retief">
+    <meta property="og:description" content="Papers, short films and the book Reasonable Wonder.">
+    <meta property="og:url" content="https://attieretief.com/join/">
+    <meta property="og:image" content="https://attieretief.com/avatar.png">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Attie Retief",
+        "url": "https://attieretief.com",
+        "image": "https://attieretief.com/avatar.png",
+        "sameAs": [
+            "https://orcid.org/0009-0008-2426-9713",
+            "https://www.linkedin.com/in/attieretief/",
+            "https://www.youtube.com/@attieretief"
+        ]
+    }
+    </script>
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --color-bg: #0a0a0f;
+            --color-surface: #12121a;
+            --color-border: rgba(255, 255, 255, 0.06);
+            --color-text: #e8e8ed;
+            --color-text-muted: #8a8a9a;
+            --color-accent: #6366f1;
+            --color-accent-glow: rgba(99, 102, 241, 0.15);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            min-height: 100vh;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 1.1rem 1.5rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .topbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            text-decoration: none;
+            color: var(--color-text);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .topbar-brand .dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--color-accent);
+            box-shadow: 0 0 12px var(--color-accent-glow);
+        }
+
+        .topbar-section { color: var(--color-text-muted); font-size: 0.95rem; }
+
+        .page {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 4rem;
+        }
+
+        .page-header { margin-bottom: 2.5rem; }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.6rem;
+        }
+
+        .page-intro {
+            font-family: "Georgia", "Times New Roman", serif;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 1.08rem;
+            line-height: 1.8;
+            max-width: 60ch;
+        }
+
+        .orcid-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            margin-top: 1.1rem;
+            padding: 0.35rem 0.8rem;
+            border: 1px solid var(--color-border);
+            border-radius: 999px;
+            background: rgba(10, 10, 15, 0.55);
+            color: var(--color-text-muted);
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .orcid-chip:hover { border-color: rgba(99, 102, 241, 0.3); color: var(--color-text); }
+
+        .orcid-chip .orcid-mark {
+            width: 14px; height: 14px; border-radius: 50%;
+            background: #a6ce39;
+            color: #0a0a0f;
+            font-weight: 700;
+            font-size: 9px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-style: normal;
+        }
+
+        h2 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            margin: 2.6rem 0 1rem;
+        }
+
+        .paper {
+            padding: 1.5rem 1.6rem;
+            background: rgba(18, 18, 26, 0.7);
+            border: 1px solid var(--color-border);
+            border-radius: 14px;
+            margin-bottom: 1rem;
+        }
+
+        .paper-status {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.25rem 0.65rem;
+            border-radius: 999px;
+            margin-bottom: 0.8rem;
+        }
+
+        .status-accepted {
+            color: #5bd68a;
+            background: rgba(91, 214, 138, 0.1);
+            border: 1px solid rgba(91, 214, 138, 0.28);
+        }
+
+        .status-review {
+            color: #e8b341;
+            background: rgba(232, 179, 65, 0.1);
+            border: 1px solid rgba(232, 179, 65, 0.25);
+        }
+
+        .status-prep {
+            color: var(--color-text-muted);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--color-border);
+        }
+
+        .paper-title {
+            font-size: 1.15rem;
+            font-weight: 650;
+            line-height: 1.45;
+            margin-bottom: 0.7rem;
+        }
+
+        .paper-link { color: inherit; text-decoration: none; }
+        .history-link { color: var(--color-accent); text-decoration: none; white-space: nowrap; }
+        .history-link:hover { text-decoration: underline; }
+        .paper-link:hover { color: var(--color-accent); }
+
+        .paper-abstract {
+            color: var(--color-text-muted);
+            font-size: 0.92rem;
+            line-height: 1.75;
+        }
+
+        .paper-meta {
+            margin-top: 0.9rem;
+            font-size: 0.8rem;
+            color: rgba(138, 138, 154, 0.75);
+        }
+
+        /* The dated record for one paper. Each <li> is one event and carries a
+           machine-readable <time datetime>; feed/build.js reads exactly this
+           list to emit one timeline item per submission or acceptance. */
+        .paper-history {
+            list-style: none;
+            margin-top: 1.1rem;
+            padding-top: 0.9rem;
+            border-top: 1px solid var(--color-border);
+            font-size: 0.8rem;
+            line-height: 1.6;
+        }
+
+        .paper-history li {
+            display: grid;
+            grid-template-columns: 6.5rem 1fr;
+            gap: 0.8rem;
+            padding: 0.22rem 0;
+            color: rgba(232, 232, 237, 0.72);
+        }
+
+        .paper-history time {
+            color: var(--color-text-muted);
+            font-variant-numeric: tabular-nums;
+            white-space: nowrap;
+        }
+
+        .paper-history em {
+            font-style: italic;
+            color: var(--color-text);
+        }
+
+        .prep-list .paper { padding: 1.1rem 1.6rem; }
+        .prep-list .paper-title { font-size: 1rem; margin-bottom: 0.35rem; }
+        .prep-list .paper-abstract { font-size: 0.88rem; }
+
+        .series-note {
+            margin-top: 2.2rem;
+            font-size: 0.88rem;
+            line-height: 1.75;
+            color: var(--color-text-muted);
+            border-left: 2px solid rgba(99, 102, 241, 0.35);
+            padding-left: 1rem;
+        }
+
+        .series-note a {
+            color: var(--color-text);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.45);
+        }
+
+        .series-note a:hover { color: var(--color-accent); }
+
+        footer {
+            margin-top: 3.5rem;
+            color: var(--color-text-muted);
+            font-size: 0.75rem;
+            opacity: 0.5;
+        }
+
+        /* Stack the date above its event well before the phone breakpoint —
+           two columns inside a 1.6rem-padded card get cramped long before the
+           page itself does. */
+        @media (max-width: 560px) {
+            .paper-history li {
+                grid-template-columns: 1fr;
+                gap: 0.1rem;
+                padding: 0.35rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page { padding: 2rem 1.1rem 3rem; }
+            h1 { font-size: 1.6rem; }
+            .paper { padding: 1.2rem 1.2rem; }
+            .prep-list .paper { padding: 1rem 1.2rem; }
+        }
+
+        .signup { margin: 2.5rem 0 1.5rem; padding: 1.5rem; border: 1px solid var(--color-border); border-radius: 14px; background: var(--color-surface); }
+        .signup h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.4rem; }
+        .signup p { color: var(--color-text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 1rem; }
+        .signup form { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+        .signup input[type=email], .signup input[type=text] { flex: 1 1 200px; min-width: 0; padding: 0.7rem 0.9rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.12); background: var(--color-bg); color: var(--color-text); font: inherit; font-size: 0.95rem; }
+        .signup input:focus { outline: none; border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-glow); }
+        .signup button { padding: 0.7rem 1.2rem; border: 0; border-radius: 10px; background: var(--color-accent); color: #fff; font: inherit; font-weight: 600; font-size: 0.95rem; cursor: pointer; }
+        .signup button:hover { filter: brightness(1.1); }
+        .signup .hp { position: absolute; left: -9999px; }
+        .signup small { display: block; margin-top: 0.7rem; color: var(--color-text-muted); font-size: 0.78rem; }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <a href="/" class="topbar-brand">
+            <span class="dot"></span>
+            <span>Attie Retief</span>
+        </a>
+        <span class="topbar-section">/ Updates</span>
+    </header>
+
+    <main class="page">
+        <div class="page-header">
+            <h1>Updates</h1>
+            <p class="page-intro">I'm arguing one thing across a book, a run of academic papers and a set of short films: that creation is finite, emergent and received. The list is where each new piece goes first.</p>
+        </div>
+
+        <section class="signup" id="join">
+            <h2>Join the list</h2>
+            <p>New papers, short films and chapters of <em>Reasonable Wonder</em>, when there is something worth sending. A few times a month at most.</p>
+            <form method="post" action="https://list.attieretief.com/subscription/form">
+                <input type="hidden" name="l" value="6f83ed13-26dc-474d-849c-986742cb40dd">
+                <input type="text" name="nonce" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+                <input type="text" name="name" placeholder="Name" autocomplete="name" aria-label="Name">
+                <input type="email" name="email" placeholder="you@example.com" required autocomplete="email" aria-label="Email">
+                <button type="submit">Subscribe</button>
+            </form>
+            <small>You'll get one email to confirm. Unsubscribe from any email.</small>
+        </section>
+
+        <footer>&copy; 2026 Attie Retief &middot; <a href="/research/" style="color:inherit">Research</a></footer>
+    </main>
+
+    <script data-goatcounter="https://attieretief.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

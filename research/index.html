@@ -277,6 +277,17 @@
             .paper { padding: 1.2rem 1.2rem; }
             .prep-list .paper { padding: 1rem 1.2rem; }
         }
+
+        .signup { margin: 2.5rem 0 1.5rem; padding: 1.5rem; border: 1px solid var(--color-border); border-radius: 14px; background: var(--color-surface); }
+        .signup h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.4rem; }
+        .signup p { color: var(--color-text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 1rem; }
+        .signup form { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+        .signup input[type=email], .signup input[type=text] { flex: 1 1 200px; min-width: 0; padding: 0.7rem 0.9rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.12); background: var(--color-bg); color: var(--color-text); font: inherit; font-size: 0.95rem; }
+        .signup input:focus { outline: none; border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-glow); }
+        .signup button { padding: 0.7rem 1.2rem; border: 0; border-radius: 10px; background: var(--color-accent); color: #fff; font: inherit; font-weight: 600; font-size: 0.95rem; cursor: pointer; }
+        .signup button:hover { filter: brightness(1.1); }
+        .signup .hp { position: absolute; left: -9999px; }
+        .signup small { display: block; margin-top: 0.7rem; color: var(--color-text-muted); font-size: 0.78rem; }
     </style>
 </head>
 <body>
@@ -364,6 +375,19 @@
         </article>
 
         <p class="series-note">These papers form a single research program: each defends one load-bearing claim of a larger project on science and faith, under an explicit methodological protocol that the method paper in the series supplies. A book-length synthesis, <a href="/cosmic-wonder/"><em>Reasonable Wonder</em></a>, is written and seeking a publisher.</p>
+
+        <section class="signup" id="join">
+            <h2>Get the updates</h2>
+            <p>New papers, short films and chapters of <em>Reasonable Wonder</em>, when there is something worth sending. A few times a month at most.</p>
+            <form method="post" action="https://list.attieretief.com/subscription/form">
+                <input type="hidden" name="l" value="6f83ed13-26dc-474d-849c-986742cb40dd">
+                <input type="text" name="nonce" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+                <input type="text" name="name" placeholder="Name" autocomplete="name" aria-label="Name">
+                <input type="email" name="email" placeholder="you@example.com" required autocomplete="email" aria-label="Email">
+                <button type="submit">Subscribe</button>
+            </form>
+            <small>You'll get one email to confirm. Unsubscribe from any email.</small>
+        </section>
 
         <footer>&copy; 2026 Attie Retief</footer>
     </main>
