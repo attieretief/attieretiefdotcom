@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naples Yellow — a 2017 Lexus LC 500</title>
+    <!-- Unlisted: not in sitemap.xml, not linked from the home page, not in the feed. -->
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="description" content="Provenance file for a 2017 Lexus LC 500 in Naples Yellow: build record, ownership arc, service history, correspondence and the things still to find.">
+    <link rel="canonical" href="https://attieretief.com/lc500/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Naples Yellow — a 2017 Lexus LC 500">
+    <meta property="og:description" content="Provenance file: one of roughly forty LCs allocated to South Africa in 2017.">
+    <meta property="og:url" content="https://attieretief.com/lc500/">
+    <meta property="og:image" content="https://attieretief.com/lc500/img/04-front-three-quarter.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Naples Yellow — a 2017 Lexus LC 500">
+    <meta name="twitter:description" content="Provenance file: one of roughly forty LCs allocated to South Africa in 2017.">
+    <meta name="twitter:image" content="https://attieretief.com/lc500/img/04-front-three-quarter.jpg">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0a0a0f;
+            --surface: rgba(18, 18, 26, 0.75);
+            --border: rgba(255, 255, 255, 0.07);
+            --text: #e8e8ed;
+            --muted: #8a8a9a;
+            --accent: #6366f1;
+            --yellow: #f2b705;
+            --yellow-soft: rgba(242, 183, 5, 0.12);
+            --ok: #34d399;
+            --ok-soft: rgba(52, 211, 153, 0.12);
+            --maybe: #fbbf24;
+            --maybe-soft: rgba(251, 191, 36, 0.12);
+            --open: #a5b4fc;
+            --open-soft: rgba(99, 102, 241, 0.14);
+            --serif: "Georgia", "Times New Roman", serif;
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        a { color: var(--yellow); text-underline-offset: 3px; }
+        a:hover { color: #ffd54a; }
+
+        .topbar { display: flex; align-items: center; gap: .6rem; padding: 1.1rem 1.5rem; border-bottom: 1px solid var(--border); }
+        .topbar-brand { display: flex; align-items: center; gap: .55rem; text-decoration: none; color: var(--text); font-weight: 600; font-size: .95rem; }
+        .topbar-brand .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--yellow); box-shadow: 0 0 12px var(--yellow-soft); }
+        .topbar-section { color: var(--muted); font-size: .95rem; }
+        .topbar-flag { margin-left: auto; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--border); padding: .2rem .55rem; border-radius: 999px; }
+
+        .hero { position: relative; max-height: 78vh; overflow: hidden; border-bottom: 1px solid var(--border); }
+        .hero img { width: 100%; height: 78vh; object-fit: cover; object-position: center 60%; display: block; filter: saturate(1.05); }
+        .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,10,15,0) 45%, rgba(10,10,15,.92) 100%); }
+        .hero-text { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; padding: 2rem 1.5rem 2.2rem; max-width: 900px; margin: 0 auto; }
+        .kicker { font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--yellow); font-weight: 600; }
+        h1 { font-size: clamp(2rem, 6vw, 3.4rem); font-weight: 700; letter-spacing: -.035em; line-height: 1.05; margin: .4rem 0 .6rem; }
+        .hero-sub { font-family: var(--serif); font-style: italic; color: rgba(255,255,255,.72); font-size: 1.08rem; max-width: 60ch; }
+
+        nav.toc { position: sticky; top: 0; z-index: 5; background: rgba(10,10,15,.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+        nav.toc ul { list-style: none; display: flex; gap: 1.2rem; overflow-x: auto; padding: .7rem 1.5rem; max-width: 900px; margin: 0 auto; scrollbar-width: none; }
+        nav.toc a { color: var(--muted); text-decoration: none; font-size: .88rem; white-space: nowrap; }
+        nav.toc a:hover { color: var(--text); }
+
+        main { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+        section { margin-bottom: 4rem; scroll-margin-top: 3.5rem; }
+        h2 { font-size: 1.45rem; letter-spacing: -.02em; margin-bottom: .35rem; }
+        .section-intro { color: var(--muted); margin-bottom: 1.6rem; max-width: 65ch; }
+        h3 { font-size: 1.05rem; margin-bottom: .4rem; }
+        p + p { margin-top: .8rem; }
+
+        .status-note { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--yellow); border-radius: 10px; padding: 1rem 1.2rem; font-size: .92rem; color: rgba(255,255,255,.78); margin-bottom: 3rem; }
+        .legend { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .6rem; }
+
+        .tag { display: inline-block; font-size: .68rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; padding: .15rem .5rem; border-radius: 999px; vertical-align: .12em; white-space: nowrap; }
+        .tag.ok { color: var(--ok); background: var(--ok-soft); }
+        .tag.maybe { color: var(--maybe); background: var(--maybe-soft); }
+        .tag.open { color: var(--open); background: var(--open-soft); }
+
+        /* Facts grid */
+        .facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+        .fact { background: #101017; padding: .85rem 1rem; }
+        .fact dt { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+        .fact dd { font-size: .98rem; margin-top: .15rem; font-variant-numeric: tabular-nums; word-break: break-word; }
+
+        /* Story */
+        .chapter { position: relative; padding: 0 0 2.2rem 2rem; border-left: 1px solid var(--border); margin-left: .4rem; }
+        .chapter:last-child { padding-bottom: 0; }
+        .chapter::before { content: ""; position: absolute; left: -6px; top: .45rem; width: 11px; height: 11px; border-radius: 50%; background: var(--bg); border: 2px solid var(--yellow); }
+        .chapter.pending::before { border-color: var(--muted); border-style: dashed; }
+        .chapter .when { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--yellow); font-weight: 600; }
+        .chapter h3 { font-size: 1.2rem; margin: .15rem 0 .5rem; }
+        .chapter p { color: rgba(255,255,255,.82); max-width: 68ch; }
+        .chapter .src { font-size: .82rem; color: var(--muted); margin-top: .55rem; }
+
+        /* Gallery */
+        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: .5rem; }
+        .gallery a { display: block; border-radius: 8px; overflow: hidden; aspect-ratio: 4/3; background: #111; }
+        .gallery img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s; }
+        .gallery a:hover img { transform: scale(1.03); }
+        .videos { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: .5rem; margin-top: .5rem; }
+        .videos video { width: 100%; border-radius: 8px; background: #000; aspect-ratio: 9/16; object-fit: cover; }
+        .caption { font-size: .82rem; color: var(--muted); margin-top: .6rem; }
+
+        /* Tables */
+        .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; }
+        table { width: 100%; border-collapse: collapse; font-size: .88rem; font-variant-numeric: tabular-nums; }
+        th, td { text-align: left; padding: .55rem .8rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+        th { font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; background: #101017; }
+        tr:last-child td { border-bottom: none; }
+        td.num { text-align: right; white-space: nowrap; }
+        td.date { white-space: nowrap; }
+        tr.flag td { background: rgba(242,183,5,.04); }
+
+        .chart { background: #101017; border: 1px solid var(--border); border-radius: 12px; padding: 1rem; margin: 1.2rem 0; }
+        .chart svg { width: 100%; height: auto; display: block; }
+        .chart text { font-size: 11px; fill: var(--muted); font-family: inherit; }
+
+        /* Correspondence */
+        .msg { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1.25rem; margin-bottom: .8rem; }
+        .msg-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .3rem 1rem; font-size: .85rem; color: var(--muted); margin-bottom: .6rem; }
+        .msg-head strong { color: var(--text); font-weight: 600; }
+        .msg-body { font-size: .93rem; color: rgba(255,255,255,.85); }
+        .msg-body ol { padding-left: 1.3rem; margin: .5rem 0; }
+        .msg-body li + li { margin-top: .25rem; }
+        .msg.from-me { border-left: 3px solid var(--accent); }
+        .msg.from-dealer { border-left: 3px solid var(--yellow); }
+        .msg.missing { border-style: dashed; }
+        .attach { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .8rem; }
+        .attach a, .attach span { font-size: .8rem; padding: .25rem .6rem; border-radius: 6px; border: 1px solid var(--border); text-decoration: none; color: var(--text); background: rgba(255,255,255,.03); }
+        .attach span { color: var(--muted); }
+        .attach a::before { content: "📎 "; }
+
+        /* Docs */
+        .docs { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: .8rem; }
+        .doc { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+        .doc img { width: 100%; aspect-ratio: 4/3; object-fit: cover; object-position: top; background: #fff; display: block; }
+        .doc .doc-body { padding: .8rem 1rem 1rem; font-size: .86rem; flex: 1; }
+        .doc .doc-body strong { display: block; font-size: .95rem; margin-bottom: .2rem; }
+        .doc .doc-body p { color: var(--muted); }
+        .doc.private { border-style: dashed; }
+        .doc.private .doc-body { display: flex; flex-direction: column; justify-content: center; }
+
+        /* Wanted */
+        .wanted { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: .8rem; }
+        .want { border: 1px dashed rgba(255,255,255,.16); border-radius: 12px; padding: 1rem 1.1rem; }
+        .want.got { border-style: solid; border-color: rgba(52,211,153,.35); }
+        .want h3 { font-size: .98rem; display: flex; justify-content: space-between; gap: .6rem; align-items: baseline; }
+        .want p { font-size: .86rem; color: var(--muted); margin-top: .35rem; }
+        .want .how { color: rgba(255,255,255,.7); }
+
+        .questions li { margin: 0 0 .7rem 1.2rem; max-width: 70ch; }
+        .questions li span { color: var(--muted); font-size: .88rem; }
+
+        .sources li { margin: 0 0 .45rem 1.2rem; font-size: .9rem; }
+        footer { border-top: 1px solid var(--border); padding: 2rem 1.5rem; text-align: center; color: var(--muted); font-size: .82rem; }
+
+        /* Lightbox */
+        .lb { position: fixed; inset: 0; background: rgba(0,0,0,.92); display: none; align-items: center; justify-content: center; z-index: 50; padding: 1rem; cursor: zoom-out; }
+        .lb.on { display: flex; }
+        .lb img { max-width: 100%; max-height: 100%; border-radius: 6px; }
+
+        @media (max-width: 560px) {
+            .hero img { height: 62vh; }
+            main { padding: 2rem 1rem 4rem; }
+            .chapter { padding-left: 1.4rem; }
+            th, td { padding: .5rem .6rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <a href="/" class="topbar-brand"><span class="dot"></span>Attie Retief</a>
+        <span class="topbar-section">/ LC 500</span>
+        <span class="topbar-flag">Working file · unlisted</span>
+    </header>
+
+    <div class="hero">
+        <img src="img/04-front-three-quarter.jpg" alt="Naples Yellow Lexus LC 500, front three-quarter view, in the Halfway Lexus Pretoria showroom">
+        <div class="hero-text">
+            <div class="kicker">Provenance file · VIN JTHHP5AY70A000554</div>
+            <h1>Naples Yellow</h1>
+            <p class="hero-sub">A 2017 Lexus LC 500, one of roughly forty that came to South Africa in its launch year. It now belongs to a man who set out to buy a sports car under a million rand.</p>
+        </div>
+    </div>
+
+    <nav class="toc" aria-label="Sections">
+        <ul>
+            <li><a href="#car">The car</a></li>
+            <li><a href="#story">Story</a></li>
+            <li><a href="#gallery">Photos</a></li>
+            <li><a href="#record">Service record</a></li>
+            <li><a href="#correspondence">Correspondence</a></li>
+            <li><a href="#documents">Documents</a></li>
+            <li><a href="#wanted">Wanted</a></li>
+            <li><a href="#questions">Open questions</a></li>
+            <li><a href="#sources">Sources</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="status-note">
+            This is a working file, last updated <strong>17 October 2026</strong>, the day the offer to purchase was signed. Every claim carries a confidence tag. They change as records come in.
+            <div class="legend">
+                <span class="tag ok">Verified</span> <span style="font-size:.85rem;color:var(--muted)">in a Lexus or dealer record</span>
+                <span class="tag maybe">Probable</span> <span style="font-size:.85rem;color:var(--muted)">well supported, not yet documented</span>
+                <span class="tag open">Unverified</span> <span style="font-size:.85rem;color:var(--muted)">a lead or hypothesis</span>
+            </div>
+        </div>
+
+        <!-- ───────────────────────── THE CAR ───────────────────────── -->
+        <section id="car">
+            <h2>The car</h2>
+            <p class="section-intro">From the Lexus South Africa vehicle record (dealer system screens, photographed by Halfway Lexus, 17 October 2026).</p>
+            <dl class="facts">
+                <div class="fact"><dt>Model</dt><dd>Lexus LC 500 coupé</dd></div>
+                <div class="fact"><dt>Model code</dt><dd>URZ100R-ACUBHQ</dd></div>
+                <div class="fact"><dt>VIN</dt><dd>JTHHP5AY70A000554</dd></div>
+                <div class="fact"><dt>Build date</dt><dd>3 May 2017</dd></div>
+                <div class="fact"><dt>Plant</dt><dd>Motomachi, Toyota City <span class="tag maybe">Probable</span></dd></div>
+                <div class="fact"><dt>Engine</dt><dd>2UR-GSE 5.0 V8, naturally aspirated, 351 kW / 540 Nm</dd></div>
+                <div class="fact"><dt>Gearbox</dt><dd>10-speed automatic</dd></div>
+                <div class="fact"><dt>Paint</dt><dd>5C1 Naples Yellow</dd></div>
+                <div class="fact"><dt>Trim</dt><dd>FA20 Black</dd></div>
+                <div class="fact"><dt>Factory options</dt><dd>X4803 · X7391 floor mats · X7392 homologation</dd></div>
+                <div class="fact"><dt>NAAMSA month</dt><dd>August 2017</dd></div>
+                <div class="fact"><dt>Selling dealer</dt><dd>Lexus Kingsmead, Durban (45060)</dd></div>
+                <div class="fact"><dt>First sold</dt><dd>24 August 2017</dd></div>
+                <div class="fact"><dt>Odometer</dt><dd>≈ 19 900 km (October 2026)</dd></div>
+                <div class="fact"><dt>Extended warranty</dt><dd>Lexus Unlimited, to 19 Feb 2029, no km limit</dd></div>
+            </dl>
+        </section>
+
+        <!-- ───────────────────────── STORY ───────────────────────── -->
+        <section id="story">
+            <h2>Story</h2>
+            <p class="section-intro">The arc as it stands. Chapters with a dashed marker are hypotheses waiting on a record.</p>
+
+            <div class="chapter">
+                <div class="when">3 May 2017 · Japan</div>
+                <h3>Built</h3>
+                <p>The car was built on 3 May 2017, in the LC's first year of production, as a right-hand-drive South African car. Lexus built the LC at its Motomachi plant in Toyota City, so this one was very probably built there. It left the factory in Naples Yellow over black, with a "hold delivery" flag on its order.</p>
+                <p class="src"><span class="tag ok">Verified</span> build date and spec: Lexus SA vehicle record. <span class="tag maybe">Probable</span> plant: <a href="https://en.wikipedia.org/wiki/Lexus_LC">Wikipedia, Lexus LC</a>.</p>
+            </div>
+
+            <div class="chapter pending">
+                <div class="when">June 2017 · Franschhoek</div>
+                <h3>The launch car?</h3>
+                <p>Lexus launched the LC 500 to the South African motoring press in June 2017 at the Franschhoek Motor Museum, priced from R1 729 600, with about forty cars allocated for the year. The yellow car in the launch photographs carries Gauteng press-fleet plates. TimesLive's first drive, published 21 June 2017, was also in a Naples Yellow car.</p>
+                <p>This car was built six weeks before the launch, and its order carried a delivery hold. It was then sold through a dealer in late August, with only 3 617 km on it a year later. That fits a car that did a launch and a short press loan before going to a customer. It does not prove it. There may have been more than one yellow LC in the country that winter.</p>
+                <p class="src"><span class="tag open">Unverified</span> Launch evidence: <a href="https://www.cars.co.za/motoring-news/lexus-lc-500-2017-launch-review/47666/">Cars.co.za launch review</a>, <a href="https://www.timeslive.co.za/motoring/reviews/2017-06-21-first-drive-2017-lexus-lc-500-coup/">TimesLive first drive (21 June 2017)</a>. To settle it: the eNaTIS registration history, or Toyota SA's press fleet records for that plate. See <a href="#wanted">Wanted</a>.</p>
+            </div>
+
+            <div class="chapter">
+                <div class="when">24 August 2017 – 2020 · KwaZulu-Natal</div>
+                <h3>First owner, Durban</h3>
+                <p>Lexus Kingsmead in Durban sold the car on 24 August 2017. It came with a six-year, 100 000 km service plan. The first owner put it on a personalised KwaZulu-Natal plate and drove it gently: 3 617 km by its first service in September 2018.</p>
+                <p>The early years have one theme, the air-conditioning. It was reported dead in November 2018, not cooling in February 2019, and repaired under warranty for a leak in January 2020. The front discs were replaced in September 2019 at about 5 000 km, which is early and still unexplained.</p>
+                <p class="src"><span class="tag ok">Verified</span> Lexus SA service history and service-plan record.</p>
+            </div>
+
+            <div class="chapter">
+                <div class="when">2021 – 2026 · Gauteng</div>
+                <h3>Gauteng years</h3>
+                <p>By November 2021 the car was on Gauteng plates, first a personalised one and then, from 2022, the number it carries today. Whether that was the same owner moving north or a second owner is not yet known. Someone valued it either way. A four-year extended warranty was bought upfront in October 2021, and every service stayed inside the Lexus network.</p>
+                <p>It still did not travel far: about 1 300 km a year. The record shows a repair after a complaint in August 2022, sound-system work in 2023, Lexus Value Services in November 2024 and November 2025, and all four rims resprayed in June 2025.</p>
+                <p class="src"><span class="tag ok">Verified</span> plates, dates and work: Lexus SA records. <span class="tag open">Unverified</span> number of owners.</p>
+            </div>
+
+            <div class="chapter">
+                <div class="when">February – October 2026 · Pretoria</div>
+                <h3>Halfway Lexus</h3>
+                <p>A fresh three-year Lexus Unlimited extended warranty began on 20 February 2026. In March, Halfway Lexus Pretoria (dealer 45250) fitted Apple CarPlay, which has since been removed. In August, Halfway repaired an armrest under warranty. In October the car stood in Halfway's showroom under the "Congratulations, you've arrived" sign, advertised at R1 999 900 with 19 900 km.</p>
+                <p>According to the salesman's voice note, the chrome trim has been blacked out and the rims refinished to match. He says the rims are unmarked, the air-con has been regassed and everything works.</p>
+                <p class="src"><span class="tag ok">Verified</span> warranty, CarPlay and armrest jobs: Lexus SA records. <span class="tag maybe">Probable</span> cosmetic work: dealer voice note, machine-transcribed from Afrikaans.</p>
+            </div>
+
+            <div class="chapter">
+                <div class="when">16 – 17 October 2026 · Pretoria to Cape Town</div>
+                <h3>The weekend it was sold</h3>
+                <p>The buyer was in Cape Town. His brief had started as a sports car under R1 million, stretched to R1.5 million, and wandered through a 911, an R8, an Aston Martin DB9 and a Vantage. On Friday evening Halfway sent showroom photos and a walk-up video. On Saturday morning they sent detail shots and the Lexus service screens.</p>
+                <p>That same morning, a salesman at a Cape Town Lexus dealer messaged Halfway. He asked them to pull the advert until Monday and offered R2 million so he could show the car to his own client. The buyer asked for an offer to purchase. Version 1 arrived at 10:54. His terms went back at 11:25, version 2 arrived at 11:46, and he had signed by 12:24, subject to finance.</p>
+                <p class="src"><span class="tag ok">Verified</span> the correspondence below.</p>
+            </div>
+
+            <div class="chapter pending">
+                <div class="when">August 2026 · context</div>
+                <h3>The end of the line</h3>
+                <p>Lexus ended LC production in August 2026, with no successor announced. Nine years after it was built, the car is changing hands just as the model passes into the "they don't make them any more" category.</p>
+                <p class="src"><span class="tag maybe">Probable</span> <a href="https://www.carscoops.com/2026/01/lexus-is-killing-the-lc-500-after-2026/">Carscoops, January 2026</a>, citing a Lexus dealer letter: 2026 is the last model year and production ends August 2026.</p>
+            </div>
+
+            <div class="chapter pending">
+                <div class="when">To come · Cape Town</div>
+                <h3>Delivery</h3>
+                <p>Investec finance approval is due by 21 October. Then covered transport from Gauteng, the vehicle delivery document signed on the car in Cape Town, and the first drive. <em>Placeholder: handover photo, odometer at delivery, first road.</em></p>
+            </div>
+        </section>
+
+        <!-- ───────────────────────── PHOTOS ───────────────────────── -->
+        <section id="gallery">
+            <h2>Photos</h2>
+            <p class="section-intro">Sent by Halfway Lexus on 16 and 17 October 2026. The number plate has been blacked out.</p>
+            <div class="gallery">
+                <a href="img/04-front-three-quarter.jpg"><img loading="lazy" src="img/04-front-three-quarter.jpg" alt="Front three-quarter, showroom"></a>
+                <a href="img/05-rear-three-quarter.jpg"><img loading="lazy" src="img/05-rear-three-quarter.jpg" alt="Rear three-quarter, showroom"></a>
+                <a href="img/07-front-side.jpg"><img loading="lazy" src="img/07-front-side.jpg" alt="Front and side, showroom"></a>
+                <a href="img/06-rear.jpg"><img loading="lazy" src="img/06-rear.jpg" alt="Rear view"></a>
+                <a href="img/02-showroom-three-quarter.jpg"><img loading="lazy" src="img/02-showroom-three-quarter.jpg" alt="Under the 'Congratulations, you've arrived' sign"></a>
+                <a href="img/03-showroom-nose.jpg"><img loading="lazy" src="img/03-showroom-nose.jpg" alt="Nose-on, showroom"></a>
+                <a href="img/01-outside-multifire.jpg"><img loading="lazy" src="img/01-outside-multifire.jpg" alt="Outside, on brick paving"></a>
+                <a href="img/11-cabin.jpg"><img loading="lazy" src="img/11-cabin.jpg" alt="Cabin from the passenger side"></a>
+                <a href="img/08-driver-seat.jpg"><img loading="lazy" src="img/08-driver-seat.jpg" alt="Driver's seat"></a>
+                <a href="img/09-passenger-seat.jpg"><img loading="lazy" src="img/09-passenger-seat.jpg" alt="Passenger seat"></a>
+                <a href="img/10-door-card.jpg"><img loading="lazy" src="img/10-door-card.jpg" alt="Door card"></a>
+            </div>
+            <div class="videos">
+                <video controls preload="none" playsinline poster="video/01-showroom-walkup.jpg" src="video/01-showroom-walkup.mp4"></video>
+                <video controls preload="none" playsinline poster="video/02-walkaround.jpg" src="video/02-walkaround.mp4"></video>
+                <video controls preload="none" playsinline poster="video/03-detail.jpg" src="video/03-detail.mp4"></video>
+                <video controls preload="none" playsinline poster="video/04-detail.jpg" src="video/04-detail.mp4"></video>
+            </div>
+            <p class="caption">Videos: showroom walk-up (16 Oct, 20:15), walk-around (17 Oct, 07:00), two detail clips (17 Oct, 10:38 and 10:42).</p>
+        </section>
+
+        <!-- ───────────────────────── SERVICE RECORD ───────────────────────── -->
+        <section id="record">
+            <h2>Service record</h2>
+            <p class="section-intro">Transcribed from the Lexus SA service-history screen. Registration numbers are left out. Dealer codes are as recorded: 45060 is Lexus Kingsmead and 45250 is Halfway Lexus Pretoria. The others are still to be identified.</p>
+
+            <div class="chart" role="img" aria-label="Odometer readings from 2017 to 2026, rising from 0 to about 19,900 km">
+                <svg viewBox="0 0 640 240">
+                    <g stroke="rgba(255,255,255,.07)">
+                        <line x1="48" y1="16" x2="624" y2="16"/><line x1="48" y1="64" x2="624" y2="64"/><line x1="48" y1="112" x2="624" y2="112"/><line x1="48" y1="160" x2="624" y2="160"/><line x1="48" y1="208" x2="624" y2="208"/>
+                    </g>
+                    <g text-anchor="end"><text x="42" y="20">20 000</text><text x="42" y="68">15 000</text><text x="42" y="116">10 000</text><text x="42" y="164">5 000</text><text x="42" y="212">0 km</text></g>
+                    <g text-anchor="middle"><text x="83" y="228">2018</text><text x="143" y="228">2019</text><text x="203" y="228">2020</text><text x="264" y="228">2021</text><text x="324" y="228">2022</text><text x="384" y="228">2023</text><text x="444" y="228">2024</text><text x="504" y="228">2025</text><text x="564" y="228">2026</text></g>
+                    <path d="M61.8,208.0 L127.3,173.3 L186.1,157.5 L252.1,137.9 L318.2,90.8 L376.2,77.3 L437.2,65.0" fill="none" stroke="#f2b705" stroke-width="2.5" stroke-linejoin="round"/>
+                    <path d="M437.2,65.0 L611.3,17.0" fill="none" stroke="#f2b705" stroke-width="2" stroke-dasharray="5 5"/>
+                    <g fill="#f2b705"><circle cx="61.8" cy="208" r="3.5"/><circle cx="127.3" cy="173.3" r="3.5"/><circle cx="186.1" cy="157.5" r="3.5"/><circle cx="252.1" cy="137.9" r="3.5"/><circle cx="318.2" cy="90.8" r="3.5"/><circle cx="376.2" cy="77.3" r="3.5"/><circle cx="437.2" cy="65" r="3.5"/></g>
+                    <circle cx="611.3" cy="17" r="4" fill="none" stroke="#f2b705" stroke-width="2"/>
+                    <text x="600" y="46" text-anchor="end">19 900 (advertised)</text>
+                </svg>
+                <p class="caption">Odometer at each logged service. The dashed segment runs to the advertised figure; services in 2024 and 2025 logged no reading.</p>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Date</th><th>Work</th><th>Dealer</th><th class="num">km</th></tr></thead>
+                    <tbody>
+                        <tr><td class="date">2017-08-24</td><td>Sold new; service plan starts (6 yr / 100 000 km)</td><td>45060 Kingsmead</td><td class="num">—</td></tr>
+                        <tr><td class="date">2018-09-26</td><td>15 000 km service</td><td>45060 Kingsmead</td><td class="num">3 617</td></tr>
+                        <tr class="flag"><td class="date">2018-11-12</td><td>Air-con inoperative</td><td>45060 Kingsmead</td><td class="num"></td></tr>
+                        <tr class="flag"><td class="date">2019-02-25</td><td>Check air-con, not cooling</td><td>45050</td><td class="num"></td></tr>
+                        <tr><td class="date">2019-09-18</td><td>30 000 km service</td><td>26291</td><td class="num">5 258</td></tr>
+                        <tr class="flag"><td class="date">2019-09-25</td><td>Replace front discs</td><td>26291</td><td class="num"></td></tr>
+                        <tr class="flag"><td class="date">2020-01-07</td><td>Warranty: check air-con leak</td><td>26291</td><td class="num"></td></tr>
+                        <tr><td class="date">2020-10-23</td><td>45 000 km service</td><td>45000</td><td class="num">7 299</td></tr>
+                        <tr><td class="date">2021-10-05</td><td>Extended warranty starts (4 yr, paid upfront)</td><td>—</td><td class="num"></td></tr>
+                        <tr><td class="date">2021-11-29</td><td>60 000 km service</td><td>45130</td><td class="num">12 205</td></tr>
+                        <tr class="flag"><td class="date">2022-08-23</td><td>Complaint: repair as per Dean</td><td>45000</td><td class="num"></td></tr>
+                        <tr><td class="date">2022-11-16</td><td>75 000 km service</td><td>45000</td><td class="num">13 617</td></tr>
+                        <tr><td class="date">2023-07-18</td><td>Sound system</td><td>45000</td><td class="num"></td></tr>
+                        <tr><td class="date">2023-08-24</td><td>Service plan expires</td><td>—</td><td class="num"></td></tr>
+                        <tr><td class="date">2023-11-22</td><td>90 000 km service</td><td>45000</td><td class="num">14 896</td></tr>
+                        <tr><td class="date">2024-11-21</td><td>Lexus Value Service (105 000)</td><td>45000</td><td class="num"></td></tr>
+                        <tr><td class="date">2025-01-31</td><td>Order wheel nut ×1</td><td>45000</td><td class="num"></td></tr>
+                        <tr><td class="date">2025-06-19</td><td>Respray all four rims</td><td>45000</td><td class="num"></td></tr>
+                        <tr><td class="date">2025-10-04</td><td>First extended warranty ends</td><td>—</td><td class="num"></td></tr>
+                        <tr><td class="date">2025-11-26</td><td>Lexus Value Service (120 000)</td><td>45000</td><td class="num"></td></tr>
+                        <tr><td class="date">2026-02-20</td><td>Lexus Unlimited extended warranty starts (36 months, to 2029-02-19)</td><td>—</td><td class="num"></td></tr>
+                        <tr><td class="date">2026-03-24</td><td>Fit Apple CarPlay (since removed)</td><td>45250 Halfway</td><td class="num"></td></tr>
+                        <tr><td class="date">2026-08-12</td><td>Warranty: armrest not reclining</td><td>45250 Halfway</td><td class="num"></td></tr>
+                        <tr><td class="date">2026-10</td><td>Advertised, AutoTrader listing 28792894</td><td>45250 Halfway</td><td class="num">19 900</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="caption">Shaded rows are repairs and complaints, as opposed to scheduled services. Service-interval labels (15 000, 30 000 …) are Lexus's interval names, not odometer readings.</p>
+        </section>
+
+        <!-- ───────────────────────── CORRESPONDENCE ───────────────────────── -->
+        <section id="correspondence">
+            <h2>Correspondence</h2>
+            <p class="section-intro">Emails exchanged with Tylor van der Merwe (Sales Executive, Halfway Lexus Pretoria) on 17 October 2026, with their attachments. Identity numbers, addresses, phone numbers, signatures and banking details are redacted. Times are SAST.</p>
+
+            <article class="msg from-dealer missing">
+                <div class="msg-head"><span><strong>Tylor van der Merwe</strong> → Attie</span><span>Sat 17 Oct 2026, 11:00 · <em>LC DEPOSIT</em></span></div>
+                <div class="msg-body"><p><em>Body to be pasted in.</em> The email sent offer to purchase O13782788, version 1 (generated 10:54), and the dealer's banking confirmation letter. Version 1 totalled R2 026 904.64, including a Platinum Pack, Tracker Care, a delivery fee and Johannesburg–Cape Town transport.</p></div>
+                <div class="attach"><a href="docs/otp-v1-redacted.pdf">OTP O13782788 v1 (redacted)</a><span>Bank confirmation letter, held privately</span></div>
+            </article>
+
+            <article class="msg from-me">
+                <div class="msg-head"><span><strong>Attie</strong> → Tylor</span><span>Sat 17 Oct 2026, 11:25 · <em>Re: LC DEPOSIT</em></span></div>
+                <div class="msg-body">
+                    <p>Tylor, I’m a buyer today at R1 999 900 incl. VAT, delivered to Cape Town. Please send OTP v2 with:</p>
+                    <ol>
+                        <li>Platinum Pack, Tracker Care and delivery fee removed. Price includes covered transport to Cape Town, with risk staying with Halfway until I accept the car.</li>
+                        <li>Subject to Investec finance approval by 21/10/2026.</li>
+                        <li>R300 000 deposit fully refundable within 3 business days if finance is declined or any condition here isn’t met.</li>
+                        <li>Written confirmation before delivery that all Lexus recalls and campaigns are done.</li>
+                        <li>Confirmation that the Lexus extended warranty (to 19/02/2029) can be transferred to me at your cost, with the km limit stated.</li>
+                        <li>VIN, reg number and odometer filled in.</li>
+                    </ol>
+                    <p>Sign that and send it and I’ll pay the deposit today after confirming the account with your accounts department. Please take the ad down.</p>
+                    <p>Attie</p>
+                </div>
+            </article>
+
+            <article class="msg from-dealer missing">
+                <div class="msg-head"><span><strong>Tylor van der Merwe</strong> → Attie</span><span>Sat 17 Oct 2026, ≈11:50</span></div>
+                <div class="msg-body"><p><em>Body to be pasted in.</em> Offer to purchase version 2, generated at 11:46: R2 000 000.01 including VAT, with a dealer discount and Johannesburg–Cape Town transport. The Lexus Unlimited Warranty wording followed shortly after.</p></div>
+                <div class="attach"><span>OTP O13782788 v2, unsigned (superseded by the signed copy below)</span><a href="docs/lexus-unlimited-warranty-wording.pdf">Lexus Unlimited Warranty wording (LUA-202503-V1.2)</a></div>
+            </article>
+
+            <article class="msg from-dealer">
+                <div class="msg-head"><span><strong>Tylor van der Merwe</strong> → Attie</span><span>Sat 17 Oct 2026, 12:14 · <em>Re: LC DEPOSIT</em></span></div>
+                <div class="msg-body">
+                    <p>Hi Attie</p>
+                    <p>As discussed</p>
+                    <p>THIS OFFER IS SUBJECT TO INVESTEC FINANCE APPROVAL. SHOULD FINANCE BE DECLINED, THE DEPOSIT WILL BE REFUNDED IN FULL WITHIN 3 WORKING DAYS.</p>
+                    <p>Kind regards</p>
+                </div>
+            </article>
+
+            <article class="msg from-me missing">
+                <div class="msg-head"><span><strong>Attie</strong> → Tylor</span><span>Sat 17 Oct 2026, ≈12:25</span></div>
+                <div class="msg-body"><p><em>Body to be pasted in.</em> The signed version 2 went back by email. An earlier signed copy (12:19) wrongly signed the vehicle delivery document as well. It was replaced at 12:24 by a copy with that page left blank and marked “To be signed on physical delivery in Cape Town.”</p></div>
+                <div class="attach"><a href="docs/otp-v2-signed-redacted.pdf">OTP O13782788 v2, signed (redacted)</a></div>
+            </article>
+
+            <p class="caption">WhatsApp, 16 and 17 October: photos, videos, a voice note and the service screens, all reproduced above. One exchange is summarised rather than shown because it names a third party: another dealer's attempt to hold the car for his own client.</p>
+        </section>
+
+        <!-- ───────────────────────── DOCUMENTS ───────────────────────── -->
+        <section id="documents">
+            <h2>Documents</h2>
+            <p class="section-intro">What is on file. Redacted copies are linked. Dashed cards are held privately and will not be published.</p>
+            <div class="docs">
+                <a class="doc" href="docs/otp-v2-signed-redacted.pdf" style="text-decoration:none;color:inherit">
+                    <img loading="lazy" src="docs/otp-v2-signed-redacted-p1.jpg" alt="Offer to purchase, version 2, page 1, redacted">
+                    <div class="doc-body"><strong>Offer to purchase v2, signed</strong><p>O13782788 · 17 Oct 2026 · 7 pages incl. MIO addendum, conditions of sale, delivery document, finance illustration</p></div>
+                </a>
+                <a class="doc" href="docs/otp-v1-redacted.pdf" style="text-decoration:none;color:inherit">
+                    <img loading="lazy" src="docs/otp-v1-redacted-p1.jpg" alt="Offer to purchase, version 1, page 1, redacted">
+                    <div class="doc-body"><strong>Offer to purchase v1</strong><p>The dealer's opening paper, 10:54. Kept to show what changed.</p></div>
+                </a>
+                <a class="doc" href="docs/lexus-service-history-redacted.jpg" style="text-decoration:none;color:inherit">
+                    <img loading="lazy" src="docs/lexus-service-history-redacted.jpg" alt="Lexus SA service history screen, registration numbers redacted">
+                    <div class="doc-body"><strong>Lexus SA service history</strong><p>Dealer-system screen, 17 Oct 2026. Registration numbers redacted.</p></div>
+                </a>
+                <a class="doc" href="docs/lexus-ebook-of-life.jpg" style="text-decoration:none;color:inherit">
+                    <img loading="lazy" src="docs/lexus-ebook-of-life.jpg" alt="Lexus eBook of Life, service plan and warranty screen">
+                    <div class="doc-body"><strong>eBook of Life, plans and warranties</strong><p>Service intervals stamped, service plan expired, extended warranty active.</p></div>
+                </a>
+                <a class="doc" href="docs/lexus-extended-warranty.jpg" style="text-decoration:none;color:inherit">
+                    <img loading="lazy" src="docs/lexus-extended-warranty.jpg" alt="Extended warranty table">
+                    <div class="doc-body"><strong>Extended warranty record</strong><p>2021-10-05 → 2025-10-04 (48 months) and 2026-02-20 → 2029-02-19 (36 months), unlimited km, paid upfront.</p></div>
+                </a>
+                <a class="doc" href="docs/lexus-unlimited-warranty-wording.pdf" style="text-decoration:none;color:inherit">
+                    <img loading="lazy" src="docs/lexus-unlimited-warranty-p1.jpg" alt="Lexus Unlimited Warranty booklet cover">
+                    <div class="doc-body"><strong>Lexus Unlimited Warranty wording</strong><p>17 pages. Transfers with the car, no km limit, no excess; excludes wear items and modifications.</p></div>
+                </a>
+                <div class="doc private"><div class="doc-body"><strong>Dealer bank confirmation</strong><p>Standard Bank letter for the dealer's trading company, used to verify the deposit account. Private.</p></div></div>
+                <div class="doc private"><div class="doc-body"><strong>Vehicle details screen</strong><p>Engine number, previous registrations, option codes. Private. Its facts are reproduced under <a href="#car">The car</a>.</p></div></div>
+                <div class="doc private"><div class="doc-body"><strong>Salesman's voice note</strong><p>Afrikaans, 17 Oct 2026, on cosmetic work and condition. Private; paraphrased in the story.</p></div></div>
+            </div>
+        </section>
+
+        <!-- ───────────────────────── WANTED ───────────────────────── -->
+        <section id="wanted">
+            <h2>Wanted</h2>
+            <p class="section-intro">Placeholders for records worth adding. Each card turns solid when its record is found.</p>
+            <div class="wanted">
+                <div class="want"><h3>eNaTIS registration history <span class="tag open">Open</span></h3><p>First registration date, the registered owner type (a dealer or Toyota SA fleet?), the number of owners and the plates.</p><p class="how">Ask Halfway for the printout, or get it at registration in Cape Town.</p></div>
+                <div class="want"><h3>Launch-car confirmation <span class="tag open">Open</span></h3><p>Was this VIN the yellow car on Gauteng press plates at the June 2017 Franschhoek launch?</p><p class="how">Toyota SA / Lexus SA press office, fleet records by VIN.</p></div>
+                <div class="want"><h3>Original invoice or window sticker <span class="tag open">Open</span></h3><p>The August 2017 Kingsmead sale: price, options, first owner's spec choices.</p><p class="how">Lexus Kingsmead archive, or the original document wallet.</p></div>
+                <div class="want"><h3>Warranty certificate <span class="tag open">Due Mon 19 Oct</span></h3><p>Lexus Unlimited, in the new owner's name, with the end date and km limit stated.</p><p class="how">Promised by Halfway.</p></div>
+                <div class="want"><h3>Finance approval <span class="tag open">Due 21 Oct</span></h3><p>Investec approval, the condition the sale hangs on.</p></div>
+                <div class="want"><h3>Recall and campaign clearance <span class="tag open">Open</span></h3><p>Written confirmation that every Lexus recall and campaign is done. This is OTP condition 4.</p></div>
+                <div class="want"><h3>CarPlay and armrest job cards <span class="tag open">Open</span></h3><p>The March 2026 CarPlay fitment and its later removal (no removal job is logged), and the August 2026 armrest repair.</p></div>
+                <div class="want"><h3>Front discs, 2019 <span class="tag open">Open</span></h3><p>Why were the front discs replaced at about 5 000 km? The job card from dealer 26291 would say.</p></div>
+                <div class="want"><h3>Cosmetic work record <span class="tag open">Open</span></h3><p>When was the chrome blacked out, and by whom? What finish were the rims resprayed in? This matters for the warranty's modification exclusion.</p></div>
+                <div class="want"><h3>Previous owners' stories <span class="tag open">Open</span></h3><p>Durban and Gauteng. A line or a photo from each, if they're willing, through the dealer.</p></div>
+                <div class="want"><h3>2017 brochure and press kit <span class="tag open">Open</span></h3><p>The South African launch material, price list and spec sheet.</p></div>
+                <div class="want"><h3>Books, keys and pack <span class="tag open">Open</span></h3><p>Owner's manual, service book, both keys, the tyre-repair kit, and anything original that came with the car.</p></div>
+                <div class="want"><h3>Transport and delivery <span class="tag open">To come</span></h3><p>Transporter, dates, condition report, odometer at handover, and the delivery document signed in Cape Town.</p></div>
+                <div class="want"><h3>Handover photo <span class="tag open">To come</span></h3><p>Cape Town, with its new owner.</p></div>
+                <div class="want"><h3>The first drive <span class="tag open">To come</span></h3><p>Where it went, and what it sounded like.</p></div>
+            </div>
+        </section>
+
+        <!-- ───────────────────────── OPEN QUESTIONS ───────────────────────── -->
+        <section id="questions">
+            <h2>Open questions</h2>
+            <ol class="questions">
+                <li>Is this the launch car? <span>The build date, the delivery hold and the low first-year mileage all fit. The plate and VIN still have to be matched.</span></li>
+                <li>One owner or two? <span>The plates change from KZN to a Gauteng personalised plate (2021) to the current Gauteng number (2022). That fits a move as well as a sale.</span></li>
+                <li>Who did dealer codes 45000, 45050, 45130 and 26291 belong to? <span>This would place the car geographically year by year.</span></li>
+                <li>The warranty wording says 7 years maximum and a 10-year vehicle-age cap, while the system shows cover to 19 February 2029. <span>The certificate should settle which applies.</span></li>
+                <li>What was “complaint: repair as per Dean” in August 2022?</li>
+            </ol>
+        </section>
+
+        <!-- ───────────────────────── SOURCES ───────────────────────── -->
+        <section id="sources">
+            <h2>Sources</h2>
+            <ul class="sources">
+                <li>Lexus South Africa dealer system: vehicle details, service plan, service history and extended plan screens, photographed by Halfway Lexus Pretoria, 17 Oct 2026.</li>
+                <li>Halfway Lexus Pretoria: offer to purchase O13782788, versions 1 and 2; email and WhatsApp correspondence, 16–17 Oct 2026.</li>
+                <li><a href="https://www.cars.co.za/motoring-news/lexus-lc-500-2017-launch-review/47666/">Cars.co.za: Lexus LC 500 (2017) launch review</a></li>
+                <li><a href="https://www.timeslive.co.za/motoring/reviews/2017-06-21-first-drive-2017-lexus-lc-500-coup/">TimesLive: First Drive, 2017 Lexus LC 500 Coupé (21 June 2017)</a></li>
+                <li><a href="https://www.news24.com/life/motoring/new-models/stunning-lexus-lc-500-in-sa-next-gen-gt-launched-20170612">News24: Lexus LC 500 launched in SA (12 June 2017)</a></li>
+                <li><a href="https://www.carscoops.com/2026/01/lexus-is-killing-the-lc-500-after-2026/">Carscoops: Lexus is killing the LC 500 after 2026</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Lexus_LC">Wikipedia: Lexus LC</a></li>
+                <li>AutoTrader listing 28792894 (October 2026, now withdrawn).</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>Unlisted working file. Third-party press photographs are linked, not reproduced.</footer>
+
+    <div class="lb" id="lb" aria-hidden="true"><img alt=""></div>
+    <script>
+        // Click-to-enlarge for gallery photos; links still work without JS.
+        (function () {
+            var lb = document.getElementById('lb'), img = lb.querySelector('img');
+            document.querySelectorAll('.gallery a').forEach(function (a) {
+                a.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    img.src = a.getAttribute('href');
+                    img.alt = a.querySelector('img').alt;
+                    lb.classList.add('on');
+                });
+            });
+            lb.addEventListener('click', function () { lb.classList.remove('on'); img.removeAttribute('src'); });
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') lb.click(); });
+        })();
+    </script>
+</body>
+</html>
