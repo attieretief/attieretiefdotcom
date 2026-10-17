@@ -2,483 +2,545 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Naples Yellow — a 2017 Lexus LC 500</title>
-    <!-- Unlisted: not in sitemap.xml, not linked from the home page, not in the feed. -->
+    <!-- Unlisted for now: not in sitemap.xml, not linked from the home page, not in the feed. -->
     <meta name="robots" content="noindex, nofollow, noarchive">
-    <meta name="description" content="Provenance file for a 2017 Lexus LC 500 in Naples Yellow: build record, ownership arc, service history and the records still to find.">
+    <meta name="description" content="Lexus South Africa's 2017 LC 500 launch car, in Naples Yellow: its story, its record, and why it matters now the LC is gone.">
     <link rel="canonical" href="https://attieretief.com/p/d78a95d992aa/">
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="Naples Yellow — a 2017 Lexus LC 500">
-    <meta property="og:description" content="Provenance file for Lexus South Africa's 2017 LC 500 launch car.">
+    <meta property="og:description" content="Lexus South Africa's 2017 LC 500 launch car.">
     <meta property="og:url" content="https://attieretief.com/p/d78a95d992aa/">
     <meta property="og:image" content="https://attieretief.com/p/d78a95d992aa/img/04-front-three-quarter.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Naples Yellow — a 2017 Lexus LC 500">
-    <meta name="twitter:description" content="Provenance file for Lexus South Africa's 2017 LC 500 launch car.">
+    <meta name="twitter:description" content="Lexus South Africa's 2017 LC 500 launch car.">
     <meta name="twitter:image" content="https://attieretief.com/p/d78a95d992aa/img/04-front-three-quarter.jpg">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+
     <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
+        /* Layout: a photo essay. Wide grotesque display set like a badge, serif prose for the story,
+           one full-bleed Naples Yellow band as the single loud moment, everything else graphite and quiet. */
         :root {
-            --bg: #0a0a0f;
-            --surface: rgba(18, 18, 26, 0.75);
-            --border: rgba(255, 255, 255, 0.07);
-            --text: #e8e8ed;
-            --muted: #8a8a9a;
-            --accent: #6366f1;
-            --yellow: #f2b705;
-            --yellow-soft: rgba(242, 183, 5, 0.12);
-            --ok: #34d399;
-            --ok-soft: rgba(52, 211, 153, 0.12);
-            --maybe: #fbbf24;
-            --maybe-soft: rgba(251, 191, 36, 0.12);
-            --open: #a5b4fc;
-            --open-soft: rgba(99, 102, 241, 0.14);
-            --serif: "Georgia", "Times New Roman", serif;
+            color-scheme: dark;
+            --graphite: #16150f;       /* page: warm, like the black FA20 trim */
+            --graphite-2: #1f1d16;     /* raised surfaces */
+            --naples: #f2b705;         /* 5C1 Naples Yellow */
+            --naples-ink: #1a1400;     /* type on yellow */
+            --bone: #ece8dc;           /* primary text */
+            --ash: #9c9584;            /* secondary text */
+            --line: rgba(236, 232, 220, 0.12);
+
+            --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+            --serif: "Newsreader", Georgia, "Times New Roman", serif;
+            --gutter: max(20px, env(safe-area-inset-left, 0px));
+            --gutter-r: max(20px, env(safe-area-inset-right, 0px));
         }
 
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
+        body { background: var(--graphite); color: var(--bone); font-family: var(--display); font-stretch: 100%; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+        img, video { max-width: 100%; display: block; }
+        a { color: inherit; text-decoration-color: var(--naples); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+        a:hover { color: var(--naples); }
+        :focus-visible { outline: 2px solid var(--naples); outline-offset: 3px; }
+
+        .wrap { max-width: 1180px; margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter-r); }
+
+        /* ── Topbar ── */
+        .topbar { position: absolute; inset: 0 0 auto; z-index: 3; display: flex; align-items: center; justify-content: space-between; padding: 1.1rem var(--gutter-r) 1.1rem var(--gutter); padding-top: calc(1.1rem + env(safe-area-inset-top, 0px)); font-size: .9rem; }
+        .topbar a { text-decoration: none; color: var(--bone); opacity: .85; }
+        .topbar a:hover { opacity: 1; color: var(--bone); }
+        .topbar .vin { font-variant-numeric: tabular-nums; color: rgba(236,232,220,.6); font-stretch: 112%; letter-spacing: .04em; }
+
+        /* ── Hero ── */
+        .hero { position: relative; min-height: min(92vh, 900px); display: flex; align-items: flex-end; overflow: hidden; isolation: isolate; }
+        .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; z-index: -2; }
+        .hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(22,21,15,.55) 0%, rgba(22,21,15,0) 22%, rgba(22,21,15,0) 48%, rgba(22,21,15,.94) 100%); }
+        .hero-inner { width: 100%; padding-bottom: clamp(2rem, 5vw, 3.5rem); }
+        .hero h1 { font-family: var(--display); font-stretch: 125%; font-weight: 850; font-size: clamp(3.1rem, 12.5vw, 11rem); line-height: .84; letter-spacing: -.035em; color: var(--bone); text-wrap: balance; }
+        .hero h1 span { display: block; }
+        .hero .sub { margin-top: 1.4rem; display: flex; flex-wrap: wrap; gap: .4rem 2.5rem; align-items: baseline; }
+        .hero .sub p { font-family: var(--serif); font-size: clamp(1.15rem, 2.2vw, 1.5rem); font-style: italic; color: rgba(236,232,220,.85); max-width: 34ch; }
+        .hero .sub dl { display: flex; gap: 2rem; font-variant-numeric: tabular-nums; }
+        .hero .sub dt { font-size: .78rem; color: var(--ash); }
+        .hero .sub dd { font-stretch: 112%; font-weight: 600; font-size: 1.05rem; }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .hero h1 span { animation: rise 1.1s cubic-bezier(.2,.7,.1,1) both; }
+            .hero h1 span + span { animation-delay: .12s; }
+            @keyframes rise { from { transform: translateY(.35em); opacity: .001; letter-spacing: .02em; } to { transform: none; opacity: 1; } }
         }
-        a { color: var(--yellow); text-underline-offset: 3px; }
-        a:hover { color: #ffd54a; }
 
-        .topbar { display: flex; align-items: center; gap: .6rem; padding: 1.1rem 1.5rem; border-bottom: 1px solid var(--border); }
-        .topbar-brand { display: flex; align-items: center; gap: .55rem; text-decoration: none; color: var(--text); font-weight: 600; font-size: .95rem; }
-        .topbar-brand .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--yellow); box-shadow: 0 0 12px var(--yellow-soft); }
-        .topbar-section { color: var(--muted); font-size: .95rem; }
-        .topbar-flag { margin-left: auto; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--border); padding: .2rem .55rem; border-radius: 999px; }
+        /* ── Lede ── */
+        .lede { padding-block: clamp(4rem, 9vw, 7.5rem) clamp(3rem, 6vw, 5rem); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 3rem; align-items: start; }
+        .lede h2 { font-stretch: 118%; font-weight: 750; font-size: clamp(1.4rem, 2.4vw, 1.9rem); line-height: 1.15; letter-spacing: -.01em; text-wrap: balance; }
+        .lede p { font-family: var(--serif); font-size: clamp(1.2rem, 1.9vw, 1.45rem); line-height: 1.6; color: rgba(236,232,220,.9); max-width: 58ch; }
+        .lede p + p { margin-top: 1.1rem; }
 
-        .hero { position: relative; max-height: 78vh; overflow: hidden; border-bottom: 1px solid var(--border); }
-        .hero img { width: 100%; height: 78vh; object-fit: cover; object-position: center 60%; display: block; filter: saturate(1.05); }
-        .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,10,15,0) 45%, rgba(10,10,15,.92) 100%); }
-        .hero-text { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; padding: 2rem 1.5rem 2.2rem; max-width: 900px; margin: 0 auto; }
-        .kicker { font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--yellow); font-weight: 600; }
-        h1 { font-size: clamp(2rem, 6vw, 3.4rem); font-weight: 700; letter-spacing: -.035em; line-height: 1.05; margin: .4rem 0 .6rem; }
-        .hero-sub { font-family: var(--serif); font-style: italic; color: rgba(255,255,255,.72); font-size: 1.08rem; max-width: 60ch; }
+        /* ── Story ── */
+        .story { padding-bottom: clamp(3rem, 7vw, 6rem); }
+        .chapter { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 3rem; padding-block: clamp(2rem, 4vw, 3.2rem); border-top: 1px solid var(--line); }
+        .chapter .year { font-stretch: 125%; font-weight: 300; font-size: clamp(2.6rem, 6vw, 4.6rem); line-height: .95; letter-spacing: -.03em; color: var(--naples); font-variant-numeric: tabular-nums; }
+        .chapter .place { margin-top: .5rem; color: var(--ash); font-size: .95rem; }
+        .chapter h3 { font-stretch: 112%; font-weight: 700; font-size: 1.35rem; margin-bottom: .6rem; }
+        .chapter p { font-family: var(--serif); font-size: 1.18rem; line-height: 1.65; color: rgba(236,232,220,.86); max-width: 60ch; }
+        .chapter .src { font-family: var(--display); font-size: .82rem; color: var(--ash); margin-top: .8rem; line-height: 1.5; }
+        .chapter.next .year { color: transparent; -webkit-text-stroke: 1px var(--naples); }
 
-        nav.toc { position: sticky; top: 0; z-index: 5; background: rgba(10,10,15,.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
-        nav.toc ul { list-style: none; display: flex; gap: 1.2rem; overflow-x: auto; padding: .7rem 1.5rem; max-width: 900px; margin: 0 auto; scrollbar-width: none; }
-        nav.toc a { color: var(--muted); text-decoration: none; font-size: .88rem; white-space: nowrap; }
-        nav.toc a:hover { color: var(--text); }
+        .plate { margin-block: clamp(1rem, 3vw, 2rem); }
+        .plate img { width: 100%; height: clamp(320px, 62vw, 760px); object-fit: cover; }
+        .plate figcaption { padding: .7rem var(--gutter-r) 0 var(--gutter); font-size: .82rem; color: var(--ash); max-width: 1180px; margin: 0 auto; }
 
-        main { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
-        section { margin-bottom: 4rem; scroll-margin-top: 3.5rem; }
-        h2 { font-size: 1.45rem; letter-spacing: -.02em; margin-bottom: .35rem; }
-        .section-intro { color: var(--muted); margin-bottom: 1.6rem; max-width: 65ch; }
-        h3 { font-size: 1.05rem; margin-bottom: .4rem; }
-        p + p { margin-top: .8rem; }
+        /* ── Yellow band: the one loud moment ── */
+        .band { background: var(--naples); color: var(--naples-ink); padding-block: clamp(4rem, 9vw, 7rem); }
+        .band h2 { font-stretch: 125%; font-weight: 850; font-size: clamp(2.6rem, 8vw, 6.5rem); line-height: .9; letter-spacing: -.035em; max-width: 12ch; }
+        .figures { margin-top: clamp(2.5rem, 5vw, 4rem); display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2.2rem 2rem; }
+        .figure b { display: block; white-space: nowrap; font-stretch: 118%; font-weight: 800; font-size: clamp(2.1rem, 3.6vw, 3.1rem); line-height: 1; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+        .figure span { display: block; margin-top: .55rem; font-size: .98rem; line-height: 1.4; max-width: 24ch; }
+        .band .prose { margin-top: clamp(3rem, 6vw, 4.5rem); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2.5rem; border-top: 2px solid var(--naples-ink); padding-top: 2rem; }
+        .band .prose h3 { font-stretch: 118%; font-weight: 750; font-size: 1.35rem; margin-bottom: .6rem; }
+        .band .prose p { font-family: var(--serif); font-size: 1.16rem; line-height: 1.6; }
+        .band .notes { margin-top: 2rem; font-size: .8rem; opacity: .75; line-height: 1.6; max-width: 90ch; }
+        .band a { text-decoration-color: var(--naples-ink); }
+        .band a:hover { color: var(--naples-ink); text-decoration-thickness: 2px; }
 
-        .status-note { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--yellow); border-radius: 10px; padding: 1rem 1.2rem; font-size: .92rem; color: rgba(255,255,255,.78); margin-bottom: 3rem; }
-        .legend { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .6rem; }
+        /* ── Build sheet ── */
+        .sheet-wrap { padding-block: clamp(4rem, 8vw, 6.5rem); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 3rem; align-items: start; }
+        .section-head h2 { font-stretch: 118%; font-weight: 750; font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -.01em; line-height: 1.1; }
+        .section-head p { margin-top: .7rem; font-family: var(--serif); font-size: 1.1rem; color: var(--ash); max-width: 38ch; }
+        .sheet { background: var(--bone); color: #22201a; border-radius: 3px; padding: clamp(1.2rem, 3vw, 2rem); box-shadow: 0 30px 60px -30px rgba(0,0,0,.6); }
+        .sheet-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; border-bottom: 2px solid #22201a; padding-bottom: .8rem; }
+        .sheet-top strong { font-stretch: 125%; font-weight: 800; font-size: 1.25rem; letter-spacing: -.01em; }
+        .sheet-top span { font-stretch: 112%; font-variant-numeric: tabular-nums; font-size: .95rem; letter-spacing: .05em; }
+        .sheet dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .sheet dl div { padding: .75rem 0; border-bottom: 1px solid rgba(34,32,26,.18); display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: .8rem; align-items: baseline; }
+        .sheet dl div:nth-child(odd) { padding-right: 1.2rem; }
+        .sheet dl div:nth-child(even) { padding-left: 1.2rem; border-left: 1px solid rgba(34,32,26,.18); }
+        .sheet dt { font-size: .8rem; color: #6b6556; }
+        .sheet dd { font-size: .98rem; font-weight: 500; font-variant-numeric: tabular-nums; }
+        .sheet dd code { font-family: var(--display); font-stretch: 112%; font-weight: 700; letter-spacing: .03em; }
+        .swatch { display: inline-block; width: .85em; height: .85em; border-radius: 50%; background: var(--naples); vertical-align: -.08em; margin-right: .35em; box-shadow: inset 0 0 0 1px rgba(0,0,0,.15); }
+        .swatch.black { background: #1b1a17; }
 
-        .tag { display: inline-block; font-size: .68rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; padding: .15rem .5rem; border-radius: 999px; vertical-align: .12em; white-space: nowrap; }
-        .tag.ok { color: var(--ok); background: var(--ok-soft); }
-        .tag.maybe { color: var(--maybe); background: var(--maybe-soft); }
-        .tag.open { color: var(--open); background: var(--open-soft); }
+        /* ── This car: photo mosaic ── */
+        .photos { padding-bottom: clamp(3rem, 6vw, 5rem); }
+        .photos .section-head { margin-bottom: 1.8rem; }
+        .mosaic { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); grid-auto-rows: clamp(120px, 15vw, 200px); gap: 6px; }
+        .mosaic a { display: block; overflow: hidden; background: var(--graphite-2); }
+        .mosaic img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+        .mosaic a:hover img { transform: scale(1.025); }
+        .m-xl { grid-column: span 4; grid-row: span 3; }
+        .m-tall { grid-column: span 2; grid-row: span 3; }
+        .m-wide { grid-column: span 3; grid-row: span 2; }
+        .m-sq { grid-column: span 2; grid-row: span 2; }
+        .reels { margin-top: 6px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+        .reels video { width: 100%; aspect-ratio: 9 / 16; object-fit: cover; background: #000; }
+        .caption { margin-top: .8rem; font-size: .82rem; color: var(--ash); }
 
-        /* Facts grid */
-        .facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-        .fact { background: #101017; padding: .85rem 1rem; }
-        .fact dt { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-        .fact dd { font-size: .98rem; margin-top: .15rem; font-variant-numeric: tabular-nums; word-break: break-word; }
+        /* ── The breed: filmstrip ── */
+        .breed { padding-block: clamp(3rem, 6vw, 5rem); border-top: 1px solid var(--line); }
+        .breed .section-head { margin-bottom: 1.6rem; }
+        .strip { display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 1rem; padding-left: var(--gutter); padding-right: var(--gutter-r); scrollbar-color: var(--naples) transparent; }
+        .strip a { flex: 0 0 auto; height: clamp(220px, 34vw, 420px); scroll-snap-align: start; overflow: hidden; background: var(--graphite-2); }
+        .strip img { height: 100%; width: auto; max-width: none; }
+        .strip-wrap { position: relative; }
+        .strip-wrap::after { content: ""; position: absolute; top: 0; right: 0; bottom: 1rem; width: 12vw; max-width: 140px; pointer-events: none; background: linear-gradient(90deg, rgba(22,21,15,0), var(--graphite)); }
+        .strip { cursor: grab; }
+        .strip a { position: relative; }
+        .strip-nav { display: flex; gap: .5rem; }
+        .breed .head-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.6rem; }
+        .breed .head-row .section-head { margin-bottom: 0; }
+        .btn-round { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line); background: var(--graphite-2); color: var(--bone); font: inherit; font-size: 1.2rem; cursor: pointer; display: grid; place-items: center; }
+        .btn-round:hover { border-color: var(--naples); color: var(--naples); }
+        .breed-note { font-size: .82rem; color: var(--ash); margin-top: .4rem; max-width: 80ch; }
 
-        /* Story */
-        .chapter { position: relative; padding: 0 0 2.2rem 2rem; border-left: 1px solid var(--border); margin-left: .4rem; }
-        .chapter:last-child { padding-bottom: 0; }
-        .chapter::before { content: ""; position: absolute; left: -6px; top: .45rem; width: 11px; height: 11px; border-radius: 50%; background: var(--bg); border: 2px solid var(--yellow); }
-        .chapter.pending::before { border-color: var(--muted); border-style: dashed; }
-        .chapter .when { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--yellow); font-weight: 600; }
-        .chapter h3 { font-size: 1.2rem; margin: .15rem 0 .5rem; }
-        .chapter p { color: rgba(255,255,255,.82); max-width: 68ch; }
-        .chapter .src { font-size: .82rem; color: var(--muted); margin-top: .55rem; }
+        /* ── Logbook ── */
+        .logbook { padding-block: clamp(4rem, 8vw, 6rem); border-top: 1px solid var(--line); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 3rem; align-items: start; }
+        .chart svg { width: 100%; height: auto; display: block; overflow: visible; }
+        .chart text { font-family: var(--display); font-size: 11px; fill: var(--ash); }
+        .chart .grid line { stroke: var(--line); }
+        .chart .lbl { fill: var(--bone); font-size: 12px; font-weight: 600; }
+        details { margin-top: 1.8rem; border-top: 1px solid var(--line); }
+        summary { cursor: pointer; padding: 1rem 0; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 1rem; }
+        summary::-webkit-details-marker { display: none; }
+        summary::after { content: "+"; font-weight: 400; font-size: 1.3rem; line-height: 1; color: var(--naples); }
+        details[open] summary::after { content: "–"; }
+        .log { list-style: none; font-variant-numeric: tabular-nums; }
+        .log li { display: grid; grid-template-columns: 6.8rem minmax(0, 1fr) auto; gap: 1rem; padding: .55rem 0; border-bottom: 1px solid var(--line); font-size: .93rem; }
+        .log time { color: var(--ash); }
+        .log .km { color: var(--ash); text-align: right; white-space: nowrap; }
+        .log li.mark span:first-of-type { color: var(--naples); }
 
-        /* Gallery */
-        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: .5rem; }
-        .gallery a { display: block; border-radius: 8px; overflow: hidden; aspect-ratio: 4/3; background: #111; }
-        .gallery img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s; }
-        .gallery a:hover img { transform: scale(1.03); }
-        .videos { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: .5rem; margin-top: .5rem; }
-        .videos video { width: 100%; border-radius: 8px; background: #000; aspect-ratio: 9/16; object-fit: cover; }
-        .caption { font-size: .82rem; color: var(--muted); margin-top: .6rem; }
+        /* ── Sources ── */
+        .sources { padding-block: 3rem 4rem; border-top: 1px solid var(--line); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 3rem; }
+        .sources h2 { font-stretch: 112%; font-weight: 700; font-size: 1.05rem; }
+        .sources ul { list-style: none; font-size: .88rem; color: var(--ash); columns: 2 260px; column-gap: 2.5rem; }
+        .sources li { break-inside: avoid; padding-bottom: .55rem; }
+        .sources li a { color: var(--bone); }
+        footer { padding: 2rem var(--gutter-r) calc(2.5rem + env(safe-area-inset-bottom, 0px)) var(--gutter); text-align: center; font-size: .8rem; color: var(--ash); border-top: 1px solid var(--line); }
 
-        /* Tables */
-        .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; }
-        table { width: 100%; border-collapse: collapse; font-size: .88rem; font-variant-numeric: tabular-nums; }
-        th, td { text-align: left; padding: .55rem .8rem; border-bottom: 1px solid var(--border); vertical-align: top; }
-        th { font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; background: #101017; }
-        tr:last-child td { border-bottom: none; }
-        td.num { text-align: right; white-space: nowrap; }
-        td.date { white-space: nowrap; }
-        tr.flag td { background: rgba(242,183,5,.04); }
-
-        .chart { background: #101017; border: 1px solid var(--border); border-radius: 12px; padding: 1rem; margin: 1.2rem 0; }
-        .chart svg { width: 100%; height: auto; display: block; }
-        .chart text { font-size: 11px; fill: var(--muted); font-family: inherit; }
-
-        /* Correspondence */
-        .msg { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1.25rem; margin-bottom: .8rem; }
-        .msg-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .3rem 1rem; font-size: .85rem; color: var(--muted); margin-bottom: .6rem; }
-        .msg-head strong { color: var(--text); font-weight: 600; }
-        .msg-body { font-size: .93rem; color: rgba(255,255,255,.85); }
-        .msg-body ol { padding-left: 1.3rem; margin: .5rem 0; }
-        .msg-body li + li { margin-top: .25rem; }
-        .msg.from-me { border-left: 3px solid var(--accent); }
-        .msg.from-dealer { border-left: 3px solid var(--yellow); }
-        .msg.missing { border-style: dashed; }
-        .attach { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .8rem; }
-        .attach a, .attach span { font-size: .8rem; padding: .25rem .6rem; border-radius: 6px; border: 1px solid var(--border); text-decoration: none; color: var(--text); background: rgba(255,255,255,.03); }
-        .attach span { color: var(--muted); }
-        .attach a::before { content: "📎 "; }
-
-        /* Docs */
-        .docs { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: .8rem; }
-        .doc { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
-        .doc img { width: 100%; aspect-ratio: 4/3; object-fit: cover; object-position: top; background: #fff; display: block; }
-        .doc .doc-body { padding: .8rem 1rem 1rem; font-size: .86rem; flex: 1; }
-        .doc .doc-body strong { display: block; font-size: .95rem; margin-bottom: .2rem; }
-        .doc .doc-body p { color: var(--muted); }
-        .doc.private { border-style: dashed; }
-        .doc.private .doc-body { display: flex; flex-direction: column; justify-content: center; }
-
-        /* Wanted */
-        .wanted { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: .8rem; }
-        .want { border: 1px dashed rgba(255,255,255,.16); border-radius: 12px; padding: 1rem 1.1rem; }
-        .want.got { border-style: solid; border-color: rgba(52,211,153,.35); }
-        .want h3 { font-size: .98rem; display: flex; justify-content: space-between; gap: .6rem; align-items: baseline; }
-        .want p { font-size: .86rem; color: var(--muted); margin-top: .35rem; }
-        .want .how { color: rgba(255,255,255,.7); }
-
-        .questions li { margin: 0 0 .7rem 1.2rem; max-width: 70ch; }
-        .questions li span { color: var(--muted); font-size: .88rem; }
-
-        .sources li { margin: 0 0 .45rem 1.2rem; font-size: .9rem; }
-        footer { border-top: 1px solid var(--border); padding: 2rem 1.5rem; text-align: center; color: var(--muted); font-size: .82rem; }
-
-        /* Lightbox */
-        .lb { position: fixed; inset: 0; background: rgba(0,0,0,.92); display: none; align-items: center; justify-content: center; z-index: 50; padding: 1rem; cursor: zoom-out; }
+        /* ── Lightbox ── */
+        .lb { position: fixed; inset: 0; z-index: 50; background: #0a0a07; display: none; flex-direction: column; padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px); }
         .lb.on { display: flex; }
-        .lb img { max-width: 100%; max-height: 100%; border-radius: 6px; }
+        .lb-stage { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; padding: 3.5rem 0 0; touch-action: pan-y; }
+        .lb-stage img { max-width: 100vw; max-height: 100%; width: auto; height: auto; object-fit: contain; user-select: none; -webkit-user-drag: none; }
+        .lb-bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem max(20px, env(safe-area-inset-left, 0px)) 1.2rem; }
+        .lb-cap { font-size: .92rem; color: var(--bone); min-width: 0; }
+        .lb-cap small { display: block; color: var(--ash); font-size: .8rem; font-variant-numeric: tabular-nums; margin-top: .15rem; }
+        .lb-ctrls { display: flex; gap: .5rem; flex-shrink: 0; }
+        .lb-close { position: absolute; top: calc(.8rem + env(safe-area-inset-top, 0px)); right: calc(.8rem + env(safe-area-inset-right, 0px)); }
+        .lb-side { position: absolute; top: 50%; transform: translateY(-50%); width: 56px; height: 56px; }
+        .lb-side.prev { left: calc(1rem + env(safe-area-inset-left, 0px)); }
+        .lb-side.next { right: calc(1rem + env(safe-area-inset-right, 0px)); }
+        @media (max-width: 700px) { .lb-side { display: none; } }
 
-        @media (max-width: 560px) {
-            .hero img { height: 62vh; }
-            main { padding: 2rem 1rem 4rem; }
-            .chapter { padding-left: 1.4rem; }
-            th, td { padding: .5rem .6rem; }
+        @media (max-width: 820px) {
+            .hero img { object-position: 28% 60%; }
+            .lede, .chapter, .sheet-wrap, .logbook, .sources, .band .prose { grid-template-columns: minmax(0, 1fr); gap: 1.2rem; }
+            .chapter { gap: .6rem; }
+            .sheet dl { grid-template-columns: minmax(0, 1fr); }
+            .sheet dl div:nth-child(odd), .sheet dl div:nth-child(even) { padding-left: 0; padding-right: 0; border-left: 0; }
+            .mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 42vw; }
+            .m-xl { grid-column: span 2; grid-row: span 1; }
+            .m-tall { grid-column: span 1; grid-row: span 2; }
+            .m-wide, .m-sq { grid-column: span 1; grid-row: span 1; }
+            .reels { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .hero .sub dl { gap: 1.4rem; }
+        }
+        @media (max-width: 480px) {
+            .log li { grid-template-columns: 5.6rem minmax(0, 1fr); }
+            .log .km { grid-column: 2; text-align: left; }
+            .sheet dl div { grid-template-columns: 6rem minmax(0, 1fr); }
         }
     </style>
 </head>
 <body>
     <header class="topbar">
-        <a href="/" class="topbar-brand"><span class="dot"></span>Attie Retief</a>
-        <span class="topbar-section">/ LC 500</span>
-        <span class="topbar-flag">Provenance</span>
+        <a href="/">Attie Retief</a>
+        <span class="vin">JTHHP5AY70A000554</span>
     </header>
 
-    <div class="hero">
-        <img src="img/04-front-three-quarter.jpg" alt="Naples Yellow Lexus LC 500, front three-quarter view, in the Halfway Lexus Pretoria showroom">
-        <div class="hero-text">
-            <div class="kicker">Provenance file · VIN JTHHP5AY70A000554</div>
-            <h1>Naples Yellow</h1>
-            <p class="hero-sub">A 2017 Lexus LC 500, the car Lexus South Africa launched the model with in June 2017, and one of roughly forty that came to the country that year. It now belongs to a man who set out to buy a sports car under a million rand.</p>
-        </div>
-    </div>
-
-    <nav class="toc" aria-label="Sections">
-        <ul>
-            <li><a href="#car">The car</a></li>
-            <li><a href="#story">Story</a></li>
-            <li><a href="#rarity">Rarity</a></li>
-            <li><a href="#gallery">Photos</a></li>
-            <li><a href="#breed">The breed</a></li>
-            <li><a href="#record">Service record</a></li>
-            <li><a href="#wanted">Wanted</a></li>
-            <li><a href="#questions">Open questions</a></li>
-            <li><a href="#sources">Sources</a></li>
-        </ul>
-    </nav>
-
-    <main>
-        <div class="status-note">
-            A living record, last updated <strong>17 October 2026</strong>. Every claim carries a confidence tag, and the tags change as records come in.
-            <div class="legend">
-                <span class="tag ok">Verified</span> <span style="font-size:.85rem;color:var(--muted)">in a Lexus or dealer record</span>
-                <span class="tag maybe">Probable</span> <span style="font-size:.85rem;color:var(--muted)">well supported, not yet documented</span>
-                <span class="tag open">Unverified</span> <span style="font-size:.85rem;color:var(--muted)">a lead or hypothesis</span>
+    <!-- ───────── Hero ───────── -->
+    <section class="hero">
+        <img src="img/04-front-three-quarter.jpg" alt="The Naples Yellow Lexus LC 500, front three-quarter view, in a dealer showroom" fetchpriority="high">
+        <div class="hero-inner wrap">
+            <h1><span>Naples</span><span>Yellow</span></h1>
+            <div class="sub">
+                <p>The Lexus LC 500 that launched the model in South Africa, June 2017.</p>
+                <dl>
+                    <div><dt>Built</dt><dd>3 May 2017</dd></div>
+                    <div><dt>Engine</dt><dd>5.0 V8</dd></div>
+                    <div><dt>Odometer</dt><dd>19 900 km</dd></div>
+                </dl>
             </div>
         </div>
+    </section>
 
-        <!-- ───────────────────────── THE CAR ───────────────────────── -->
-        <section id="car">
-            <h2>The car</h2>
-            <p class="section-intro">From the Lexus South Africa vehicle record (dealer system screens, photographed by Halfway Lexus, 17 October 2026).</p>
-            <dl class="facts">
-                <div class="fact"><dt>Model</dt><dd>Lexus LC 500 coupé</dd></div>
-                <div class="fact"><dt>Model code</dt><dd>URZ100R-ACUBHQ</dd></div>
-                <div class="fact"><dt>VIN</dt><dd>JTHHP5AY70A000554</dd></div>
-                <div class="fact"><dt>Build date</dt><dd>3 May 2017</dd></div>
-                <div class="fact"><dt>Plant</dt><dd>Motomachi, Toyota City <span class="tag maybe">Probable</span></dd></div>
-                <div class="fact"><dt>Engine</dt><dd>2UR-GSE 5.0 V8, naturally aspirated, 351 kW / 540 Nm</dd></div>
-                <div class="fact"><dt>Gearbox</dt><dd>10-speed automatic</dd></div>
-                <div class="fact"><dt>Paint</dt><dd>5C1 Naples Yellow</dd></div>
-                <div class="fact"><dt>Trim</dt><dd>FA20 Black</dd></div>
-                <div class="fact"><dt>Factory options</dt><dd>X4803 · X7391 floor mats · X7392 homologation</dd></div>
-                <div class="fact"><dt>NAAMSA month</dt><dd>August 2017</dd></div>
-                <div class="fact"><dt>Selling dealer</dt><dd>Lexus Kingsmead, Durban (45060)</dd></div>
-                <div class="fact"><dt>First sold</dt><dd>24 August 2017</dd></div>
-                <div class="fact"><dt>Odometer</dt><dd>≈ 19 900 km (October 2026)</dd></div>
-                <div class="fact"><dt>Extended warranty</dt><dd>Lexus Unlimited, to 19 Feb 2029, no km limit</dd></div>
-            </dl>
-        </section>
+    <!-- ───────── Lede ───────── -->
+    <section class="lede wrap">
+        <h2>One of about forty that came to South Africa in 2017. The first one the country saw.</h2>
+        <div>
+            <p>The LC 500 was Lexus showing off: a concept car put into production almost unchanged, with a naturally aspirated five-litre V8 that revs past 7 000 rpm. This one was built in Japan in May 2017, painted Naples Yellow over black, and flagged to be held from delivery. That June it was the car Lexus used to launch the LC to the South African press at Franschhoek.</p>
+            <p>It then spent nine years in Durban and Gauteng, never far from a Lexus workshop and rarely far from home. In October 2026, two months after Lexus built its last LC, it went to Cape Town.</p>
+        </div>
+    </section>
 
-        <!-- ───────────────────────── STORY ───────────────────────── -->
-        <section id="story">
-            <h2>Story</h2>
-            <p class="section-intro">The arc in broad strokes. The detail is in the <a href="#record">service record</a>. Dashed markers are still to come.</p>
-
-            <div class="chapter">
-                <div class="when">May 2017 · Japan</div>
+    <!-- ───────── Story ───────── -->
+    <section class="story wrap" aria-label="Story">
+        <article class="chapter">
+            <div><div class="year">2017</div><div class="place">Toyota City, Japan</div></div>
+            <div>
                 <h3>Built</h3>
-                <p>The car was built in the LC's first production year as a right-hand-drive South African car, in Naples Yellow over black.</p>
-                <p class="src"><span class="tag ok">Verified</span> Lexus SA vehicle record.</p>
+                <p>Assembled in the LC's first production year as a right-hand-drive car for South Africa, at the Motomachi plant that once built the LFA. Its order carried a hold on delivery.</p>
+                <p class="src">Lexus South Africa vehicle record; <a href="https://en.wikipedia.org/wiki/Lexus_LC">Wikipedia</a>.</p>
             </div>
-
-            <div class="chapter">
-                <div class="when">June 2017 · Franschhoek</div>
+        </article>
+        <article class="chapter">
+            <div><div class="year">2017</div><div class="place">Franschhoek</div></div>
+            <div>
                 <h3>The launch car</h3>
-                <p>Lexus South Africa launched the LC 500 to the press at the Franschhoek Motor Museum, with about forty cars coming to the country that year. This was the launch car.</p>
-                <p class="src"><span class="tag maybe">Probable</span> Confirmed verbally by Halfway Lexus; paperwork still <a href="#wanted">wanted</a>. Coverage: <a href="https://www.cars.co.za/motoring-news/lexus-lc-500-2017-launch-review/47666/">Cars.co.za</a>, <a href="https://www.timeslive.co.za/motoring/reviews/2017-06-21-first-drive-2017-lexus-lc-500-coup/">TimesLive</a>.</p>
+                <p>Lexus South Africa introduced the LC 500 to the motoring press at the Franschhoek Motor Museum in June 2017, from R1 729 600. This was the launch car.</p>
+                <p class="src">Confirmed by Halfway Lexus Pretoria, October 2026. Launch coverage: <a href="https://www.cars.co.za/motoring-news/lexus-lc-500-2017-launch-review/47666/">Cars.co.za</a>, <a href="https://www.timeslive.co.za/motoring/reviews/2017-06-21-first-drive-2017-lexus-lc-500-coup/">TimesLive</a>.</p>
             </div>
+        </article>
+    </section>
 
-            <div class="chapter">
-                <div class="when">2017 – 2020 · Durban</div>
+    <figure class="plate">
+        <img loading="lazy" src="img/07-front-side.jpg" alt="The LC 500 in profile from the front quarter">
+    </figure>
+
+    <section class="story wrap" aria-label="Story, continued">
+        <article class="chapter">
+            <div><div class="year">2017–20</div><div class="place">Durban</div></div>
+            <div>
                 <h3>First owner</h3>
-                <p>Sold new by Lexus Kingsmead in August 2017 and kept in KwaZulu-Natal. It was driven sparingly and serviced by Lexus.</p>
-                <p class="src"><span class="tag ok">Verified</span> Lexus SA records.</p>
+                <p>Sold new by Lexus Kingsmead on 24 August 2017 and registered in KwaZulu-Natal. Three years on it had covered barely 7 300 km, every one of them serviced by Lexus.</p>
             </div>
-
-            <div class="chapter">
-                <div class="when">2021 – 2026 · Gauteng</div>
+        </article>
+        <article class="chapter">
+            <div><div class="year">2021–26</div><div class="place">Gauteng</div></div>
+            <div>
                 <h3>The collector</h3>
-                <p>The car moved to Gauteng and ended up with a collector who keeps his cars at Halfway Lexus Pretoria. He kept it under extended warranty and serviced by Lexus, and still drove it only about 1 300 km a year.</p>
-                <p class="src"><span class="tag ok">Verified</span> Lexus SA records. <span class="tag maybe">Probable</span> the owner: dealer, 17 Oct 2026.</p>
+                <p>The car moved north and ended up with a collector who keeps his cars at Halfway Lexus Pretoria, alongside Lamborghinis, Ferraris and several one-off Lexus models. He kept it under extended warranty and drove it about 1 300 km a year. The chrome was blacked out along the way.</p>
             </div>
-
-            <div class="chapter">
-                <div class="when">August 2026</div>
+        </article>
+        <article class="chapter">
+            <div><div class="year">2026</div><div class="place">Pretoria to Cape Town</div></div>
+            <div>
                 <h3>The end of the line</h3>
-                <p>Lexus South Africa had already dropped the LC from its line-up by early 2024. In August 2026 Lexus ended LC production worldwide, with no successor announced.</p>
-                <p class="src"><span class="tag maybe">Probable</span> <a href="https://www.carscoops.com/2026/01/lexus-is-killing-the-lc-500-after-2026/">Carscoops</a>, citing a Lexus dealer letter.</p>
+                <p>Lexus South Africa had already dropped the LC by early 2024, and in August 2026 Lexus ended production worldwide. In October the collector agreed to let this one go. A buyer in Cape Town, who had set out to find a sports car for under a million rand, signed for it within a day. Another dealer was trying to secure it for his own client that same morning.</p>
             </div>
-
-            <div class="chapter">
-                <div class="when">October 2026 · Pretoria</div>
-                <h3>Sold</h3>
-                <p>The car was never really for sale. The salesman persuaded the owner to name a price, and it went on the floor with 19 900 km. A buyer in Cape Town who had set out to find a sports car under a million rand signed for it within a day. Another dealer was trying to secure it for his own client that same morning.</p>
-                <p class="src"><span class="tag ok">Verified</span> dealer correspondence, 16–17 Oct 2026.</p>
+        </article>
+        <article class="chapter next">
+            <div><div class="year">Next</div><div class="place">Cape Town</div></div>
+            <div>
+                <h3>Chapman's Peak, presumably</h3>
+                <p>Covered transport south, the handover, and the first drive.</p>
             </div>
+        </article>
+    </section>
 
-            <div class="chapter pending">
-                <div class="when">To come · Cape Town</div>
-                <h3>Delivery</h3>
-                <p>Covered transport south, and the handover. <em>Placeholder: handover photo and first drive.</em></p>
+    <!-- ───────── The yellow band ───────── -->
+    <section class="band">
+        <div class="wrap">
+            <h2>They don't make them any more.</h2>
+            <div class="figures">
+                <div class="figure"><b>~40</b><span>LCs allocated to South Africa in its launch year</span></div>
+                <div class="figure"><b>2024</b><span>Gone from the South African line-up</span></div>
+                <div class="figure"><b>Aug 2026</b><span>Production ends worldwide, no successor announced</span></div>
+                <div class="figure"><b>15 000</b><span>Roughly how many were sold worldwide, 2017–2025</span></div>
+                <div class="figure"><b>5.0</b><span>The last naturally aspirated V8 in a Lexus</span></div>
             </div>
-        </section>
+            <div class="prose">
+                <div>
+                    <h3>Why it should hold its value</h3>
+                    <p>Everything that matters here is unrepeatable: a discontinued model, the last of Lexus's atmospheric V8s, tiny local numbers, and on top of that the launch car itself, in the launch colour, with under 20 000 km and an unbroken Lexus service history.</p>
+                </div>
+                <div>
+                    <h3>Why nobody can promise it</h3>
+                    <p>So far most LCs have depreciated like any luxury GT. A low-mileage 2018 LC 500h sold at auction in the US in July 2026 for about two-thirds of its price new. Collector premiums go to the V8 cars, the special editions and the cars with a story. This one has two of the three.</p>
+                </div>
+            </div>
+            <p class="notes">Sources: <a href="https://www.timeslive.co.za/motoring/reviews/2017-06-21-first-drive-2017-lexus-lc-500-coup/">TimesLive</a> (2017 allocation) · <a href="https://www.cars.co.za/motoring-news/its-official-lexus-rc-and-ls-discontinued-in-sa/199299/">Cars.co.za, January 2024</a> · <a href="https://lexusenthusiast.com/2026/01/28/report-lexus-ends-lc-production-this-year/">Lexus Enthusiast</a> · <a href="https://tflcar.com/2026/01/lexus-lc-officially-discontinued-news/">TFLcar</a> · <a href="https://www.autoevolution.com/news/someone-paid-over-102k-for-this-lexus-lc-new-car-sold-for-65k-5400-miles-later-272809.html">autoevolution, July 2026</a></p>
+        </div>
+    </section>
 
-        <!-- ───────────────────────── RARITY ───────────────────────── -->
-        <section id="rarity">
-            <h2>Rarity</h2>
-            <p class="section-intro">Why this one is worth keeping a file on.</p>
-            <dl class="facts">
-                <div class="fact"><dt>South Africa, 2017</dt><dd>About 40 cars allocated in the launch year</dd></div>
-                <div class="fact"><dt>South Africa, 2024</dt><dd>LC no longer listed in the local line-up</dd></div>
-                <div class="fact"><dt>Worldwide</dt><dd>Production ended August 2026, with no successor announced</dd></div>
-                <div class="fact"><dt>Total built</dt><dd>Just over 15 000 sold worldwide, 2017–2025</dd></div>
-                <div class="fact"><dt>The engine</dt><dd>The last Lexus with the naturally aspirated 5.0 V8</dd></div>
-                <div class="fact"><dt>This car</dt><dd>The SA launch car, Naples Yellow, under 20 000 km, full Lexus history</dd></div>
+    <!-- ───────── Build sheet ───────── -->
+    <section class="sheet-wrap wrap">
+        <div class="section-head">
+            <h2>Build sheet</h2>
+            <p>As Lexus South Africa has it on record.</p>
+        </div>
+        <div class="sheet">
+            <div class="sheet-top"><strong>LEXUS LC 500</strong><span>JTHHP5AY70A000554</span></div>
+            <dl>
+                <div><dt>Model code</dt><dd><code>URZ100R-ACUBHQ</code></dd></div>
+                <div><dt>Built</dt><dd>3 May 2017</dd></div>
+                <div><dt>Paint</dt><dd><span class="swatch"></span><code>5C1</code> Naples Yellow</dd></div>
+                <div><dt>Trim</dt><dd><span class="swatch black"></span><code>FA20</code> Black</dd></div>
+                <div><dt>Engine</dt><dd><code>2UR-GSE</code> 5.0 V8, 351 kW, 540 Nm</dd></div>
+                <div><dt>Gearbox</dt><dd>10-speed automatic</dd></div>
+                <div><dt>Options</dt><dd><code>X4803</code> <code>X7391</code> <code>X7392</code></dd></div>
+                <div><dt>Market</dt><dd>South Africa, right-hand drive</dd></div>
+                <div><dt>First sold</dt><dd>24 Aug 2017, Lexus Kingsmead</dd></div>
+                <div><dt>Warranty</dt><dd>Lexus extended, to Feb 2029</dd></div>
             </dl>
-            <p class="caption">Sources: <a href="https://www.timeslive.co.za/motoring/reviews/2017-06-21-first-drive-2017-lexus-lc-500-coup/">TimesLive</a> (2017 allocation); <a href="https://www.cars.co.za/motoring-news/its-official-lexus-rc-and-ls-discontinued-in-sa/199299/">Cars.co.za, 19 Jan 2024</a> (LC no longer available in SA); <a href="https://lexusenthusiast.com/2026/01/28/report-lexus-ends-lc-production-this-year/">Lexus Enthusiast</a> and <a href="https://en.wikipedia.org/wiki/Lexus_LC">Wikipedia</a> (end of production); <a href="https://tflcar.com/2026/01/lexus-lc-officially-discontinued-news/">TFLcar</a> (sales total, last NA V8).</p>
+        </div>
+    </section>
 
-            <h3 style="margin-top:1.8rem">Collectability</h3>
-            <p>The case for the car holding or growing its value is a stack of things that cannot be repeated. It is a discontinued model. It has the last naturally aspirated V8 Lexus made. It sold in tiny numbers in South Africa and was withdrawn here early. And this car was the launch car, in the launch colour, with low mileage and an unbroken dealer history.</p>
-            <p>The case against is the market so far. LCs have mostly depreciated like other luxury GTs; a low-mileage 2018 LC 500h sold at auction in the US in July 2026 for about two-thirds of its price new. Collector premiums tend to go to the V8 cars, special editions and cars with a story. This car has two of the three. Nobody can promise appreciation. A well-documented history is what gives it the best chance.</p>
-            <p class="src"><span class="tag open">Opinion</span> Market example: <a href="https://www.autoevolution.com/news/someone-paid-over-102k-for-this-lexus-lc-new-car-sold-for-65k-5400-miles-later-272809.html">autoevolution, 14 July 2026</a>.</p>
-        </section>
+    <!-- ───────── This car ───────── -->
+    <section class="photos wrap">
+        <div class="section-head"><h2>This car</h2><p>Halfway Lexus Pretoria, October 2026.</p></div>
+        <div class="mosaic">
+            <a class="m-xl" href="img/05-rear-three-quarter.jpg"><img loading="lazy" src="img/05-rear-three-quarter.jpg" alt="Rear three-quarter view"></a>
+            <a class="m-tall" href="img/06-rear.jpg"><img loading="lazy" src="img/06-rear.jpg" alt="Straight-on rear view"></a>
+            <a class="m-wide" href="img/02-showroom-three-quarter.jpg"><img loading="lazy" src="img/02-showroom-three-quarter.jpg" alt="In the showroom under the arrival sign"></a>
+            <a class="m-wide" href="img/01-outside-multifire.jpg"><img loading="lazy" src="img/01-outside-multifire.jpg" alt="Outside on brick paving"></a>
+            <a class="m-sq" href="img/11-cabin.jpg"><img loading="lazy" src="img/11-cabin.jpg" alt="The cabin from the passenger side"></a>
+            <a class="m-sq" href="img/10-door-card.jpg"><img loading="lazy" src="img/10-door-card.jpg" alt="Door card"></a>
+            <a class="m-sq" href="img/03-showroom-nose.jpg"><img loading="lazy" src="img/03-showroom-nose.jpg" alt="Nose-on in the showroom"></a>
+            <a class="m-wide" href="img/08-driver-seat.jpg"><img loading="lazy" src="img/08-driver-seat.jpg" alt="Driver's seat"></a>
+            <a class="m-wide" href="img/09-passenger-seat.jpg"><img loading="lazy" src="img/09-passenger-seat.jpg" alt="Passenger seat"></a>
+        </div>
+        <div class="reels">
+            <video controls preload="none" playsinline poster="video/01-showroom-walkup.jpg" src="video/01-showroom-walkup.mp4" aria-label="Walking up to the car in the showroom"></video>
+            <video controls preload="none" playsinline poster="video/02-walkaround.jpg" src="video/02-walkaround.mp4" aria-label="Walk-around"></video>
+            <video controls preload="none" playsinline poster="video/03-detail.jpg" src="video/03-detail.mp4" aria-label="Interior detail"></video>
+            <video controls preload="none" playsinline poster="video/04-detail.jpg" src="video/04-detail.mp4" aria-label="Exterior detail"></video>
+        </div>
+    </section>
 
-        <!-- ───────────────────────── PHOTOS ───────────────────────── -->
-        <section id="gallery">
-            <h2>Photos</h2>
-            <p class="section-intro">Sent by Halfway Lexus on 16 and 17 October 2026. The number plate has been blacked out.</p>
-            <div class="gallery">
-                <a href="img/04-front-three-quarter.jpg"><img loading="lazy" src="img/04-front-three-quarter.jpg" alt="Front three-quarter, showroom"></a>
-                <a href="img/05-rear-three-quarter.jpg"><img loading="lazy" src="img/05-rear-three-quarter.jpg" alt="Rear three-quarter, showroom"></a>
-                <a href="img/07-front-side.jpg"><img loading="lazy" src="img/07-front-side.jpg" alt="Front and side, showroom"></a>
-                <a href="img/06-rear.jpg"><img loading="lazy" src="img/06-rear.jpg" alt="Rear view"></a>
-                <a href="img/02-showroom-three-quarter.jpg"><img loading="lazy" src="img/02-showroom-three-quarter.jpg" alt="Under the 'Congratulations, you've arrived' sign"></a>
-                <a href="img/03-showroom-nose.jpg"><img loading="lazy" src="img/03-showroom-nose.jpg" alt="Nose-on, showroom"></a>
-                <a href="img/01-outside-multifire.jpg"><img loading="lazy" src="img/01-outside-multifire.jpg" alt="Outside, on brick paving"></a>
-                <a href="img/11-cabin.jpg"><img loading="lazy" src="img/11-cabin.jpg" alt="Cabin from the passenger side"></a>
-                <a href="img/08-driver-seat.jpg"><img loading="lazy" src="img/08-driver-seat.jpg" alt="Driver's seat"></a>
-                <a href="img/09-passenger-seat.jpg"><img loading="lazy" src="img/09-passenger-seat.jpg" alt="Passenger seat"></a>
-                <a href="img/10-door-card.jpg"><img loading="lazy" src="img/10-door-card.jpg" alt="Door card"></a>
-            </div>
-            <div class="videos">
-                <video controls preload="none" playsinline poster="video/01-showroom-walkup.jpg" src="video/01-showroom-walkup.mp4"></video>
-                <video controls preload="none" playsinline poster="video/02-walkaround.jpg" src="video/02-walkaround.mp4"></video>
-                <video controls preload="none" playsinline poster="video/03-detail.jpg" src="video/03-detail.mp4"></video>
-                <video controls preload="none" playsinline poster="video/04-detail.jpg" src="video/04-detail.mp4"></video>
-            </div>
-            <p class="caption">Videos: showroom walk-up (16 Oct, 20:15), walk-around (17 Oct, 07:00), two detail clips (17 Oct, 10:38 and 10:42).</p>
-        </section>
+    <!-- ───────── The breed ───────── -->
+    <section class="breed">
+        <div class="wrap head-row">
+            <div class="section-head"><h2>The breed</h2><p>Other Naples Yellow LCs, from Lexus and the motoring press. None of these is this car.</p></div>
+            <div class="strip-nav"><button class="btn-round" type="button" data-dir="-1" aria-label="Scroll photos back">&#8592;</button><button class="btn-round" type="button" data-dir="1" aria-label="Scroll photos forward">&#8594;</button></div>
+        </div>
+        <div class="strip-wrap"><div class="strip" id="strip">
+            <a href="img/breed/01-naples-road.jpg"><img loading="lazy" src="img/breed/01-naples-road.jpg" alt="Naples Yellow LC 500 on a mountain road"></a>
+            <a href="img/breed/05-wheat.jpg"><img loading="lazy" src="img/breed/05-wheat.jpg" alt="LC 500 passing wheat fields"></a>
+            <a href="img/breed/07-engine.jpg"><img loading="lazy" src="img/breed/07-engine.jpg" alt="The 5.0 V8 under the bonnet"></a>
+            <a href="img/breed/03-profile.jpg"><img loading="lazy" src="img/breed/03-profile.jpg" alt="LC 500 in profile"></a>
+            <a href="img/breed/06-lights.jpg"><img loading="lazy" src="img/breed/06-lights.jpg" alt="Headlights lit"></a>
+            <a href="img/breed/04-country.jpg"><img loading="lazy" src="img/breed/04-country.jpg" alt="LC 500 in open country"></a>
+            <a href="img/breed/08-wheel.jpg"><img loading="lazy" src="img/breed/08-wheel.jpg" alt="Steering wheel and instruments"></a>
+            <a href="img/breed/12-rear.jpg"><img loading="lazy" src="img/breed/12-rear.jpg" alt="LC 500 rear"></a>
+            <a href="img/breed/13-studio.jpg"><img loading="lazy" src="img/breed/13-studio.jpg" alt="LC 500 in a studio"></a>
+            <a href="img/breed/10-console.jpg"><img loading="lazy" src="img/breed/10-console.jpg" alt="Centre console"></a>
+            <a href="img/breed/11-pan.jpg"><img loading="lazy" src="img/breed/11-pan.jpg" alt="Panning shot at speed"></a>
+            <a href="img/breed/14-studio-profile.jpg"><img loading="lazy" src="img/breed/14-studio-profile.jpg" alt="Studio profile"></a>
+            <a href="img/breed/02-front.jpg"><img loading="lazy" src="img/breed/02-front.jpg" alt="LC 500 front"></a>
+            <a href="img/breed/09-dash.jpg"><img loading="lazy" src="img/breed/09-dash.jpg" alt="Dashboard and screen"></a>
+            <a href="img/breed/15-yellow-edition.jpg"><img loading="lazy" src="img/breed/15-yellow-edition.jpg" alt="2019 LC Yellow Edition"></a>
+            <a href="img/breed/16-yellow-edition-cabin.jpg"><img loading="lazy" src="img/breed/16-yellow-edition-cabin.jpg" alt="2019 LC Yellow Edition cabin"></a>
+            <a href="img/breed/17-yellow-edition-sill.jpg"><img loading="lazy" src="img/breed/17-yellow-edition-sill.jpg" alt="2019 LC Yellow Edition scuff plate"></a>
+        </div></div>
+        <div class="wrap"><p class="breed-note">The last three show the 2019 LC Yellow Edition, a limited run with a white and yellow cabin. Photographs belong to their owners.</p></div>
+    </section>
 
-        <!-- ───────────────────────── THE BREED ───────────────────────── -->
-        <section id="breed">
-            <h2>The breed</h2>
-            <p class="section-intro">Other Naples Yellow LC 500s, from Lexus press material and road tests. None of these is this car. The last three show the 2019 LC Yellow Edition, a limited run with a white and yellow cabin; this car has the standard black interior. Photographs belong to their owners.</p>
-            <div class="gallery">
-                <a href="img/breed/01-naples-road.jpg"><img loading="lazy" src="img/breed/01-naples-road.jpg" alt="Naples Yellow LC 500 on the road"></a>
-                <a href="img/breed/02-front.jpg"><img loading="lazy" src="img/breed/02-front.jpg" alt="LC 500 front"></a>
-                <a href="img/breed/03-profile.jpg"><img loading="lazy" src="img/breed/03-profile.jpg" alt="LC 500 profile"></a>
-                <a href="img/breed/04-country.jpg"><img loading="lazy" src="img/breed/04-country.jpg" alt="LC 500 in open country"></a>
-                <a href="img/breed/05-wheat.jpg"><img loading="lazy" src="img/breed/05-wheat.jpg" alt="LC 500 passing wheat fields"></a>
-                <a href="img/breed/06-lights.jpg"><img loading="lazy" src="img/breed/06-lights.jpg" alt="LC 500 headlights at night"></a>
-                <a href="img/breed/07-engine.jpg"><img loading="lazy" src="img/breed/07-engine.jpg" alt="The 5.0 V8 under the bonnet"></a>
-                <a href="img/breed/08-wheel.jpg"><img loading="lazy" src="img/breed/08-wheel.jpg" alt="Steering wheel and instruments"></a>
-                <a href="img/breed/09-dash.jpg"><img loading="lazy" src="img/breed/09-dash.jpg" alt="Dashboard and infotainment screen"></a>
-                <a href="img/breed/10-console.jpg"><img loading="lazy" src="img/breed/10-console.jpg" alt="Centre console and gear selector"></a>
-                <a href="img/breed/11-pan.jpg"><img loading="lazy" src="img/breed/11-pan.jpg" alt="LC 500 panning shot"></a>
-                <a href="img/breed/12-rear.jpg"><img loading="lazy" src="img/breed/12-rear.jpg" alt="LC 500 rear"></a>
-                <a href="img/breed/13-studio.jpg"><img loading="lazy" src="img/breed/13-studio.jpg" alt="LC 500 in a studio"></a>
-                <a href="img/breed/14-studio-profile.jpg"><img loading="lazy" src="img/breed/14-studio-profile.jpg" alt="LC 500 studio profile"></a>
-                <a href="img/breed/15-yellow-edition.jpg"><img loading="lazy" src="img/breed/15-yellow-edition.jpg" alt="LC Yellow Edition, front three-quarter"></a>
-                <a href="img/breed/16-yellow-edition-cabin.jpg"><img loading="lazy" src="img/breed/16-yellow-edition-cabin.jpg" alt="LC Yellow Edition cabin"></a>
-                <a href="img/breed/17-yellow-edition-sill.jpg"><img loading="lazy" src="img/breed/17-yellow-edition-sill.jpg" alt="LC Yellow Edition scuff plate"></a>
-            </div>
-        </section>
-
-        <!-- ───────────────────────── SERVICE RECORD ───────────────────────── -->
-        <section id="record">
-            <h2>Service record</h2>
-            <p class="section-intro">Transcribed from the Lexus SA service-history screen. Registration numbers are left out. Dealer codes are as recorded: 45060 is Lexus Kingsmead and 45250 is Halfway Lexus Pretoria. The others are still to be identified.</p>
-
-            <div class="chart" role="img" aria-label="Odometer readings from 2017 to 2026, rising from 0 to about 19,900 km">
-                <svg viewBox="0 0 640 240">
-                    <g stroke="rgba(255,255,255,.07)">
+    <!-- ───────── Logbook ───────── -->
+    <section class="logbook wrap">
+        <div class="section-head">
+            <h2>Logbook</h2>
+            <p>Nine years, under 20 000 km, every service at a Lexus dealer.</p>
+        </div>
+        <div>
+            <div class="chart" role="img" aria-label="Odometer at each service, rising from 3,617 km in 2018 to 14,896 km in 2023, and 19,900 km in 2026">
+                <svg viewBox="0 0 640 250">
+                    <g class="grid">
                         <line x1="48" y1="16" x2="624" y2="16"/><line x1="48" y1="64" x2="624" y2="64"/><line x1="48" y1="112" x2="624" y2="112"/><line x1="48" y1="160" x2="624" y2="160"/><line x1="48" y1="208" x2="624" y2="208"/>
                     </g>
-                    <g text-anchor="end"><text x="42" y="20">20 000</text><text x="42" y="68">15 000</text><text x="42" y="116">10 000</text><text x="42" y="164">5 000</text><text x="42" y="212">0 km</text></g>
-                    <g text-anchor="middle"><text x="83" y="228">2018</text><text x="143" y="228">2019</text><text x="203" y="228">2020</text><text x="264" y="228">2021</text><text x="324" y="228">2022</text><text x="384" y="228">2023</text><text x="444" y="228">2024</text><text x="504" y="228">2025</text><text x="564" y="228">2026</text></g>
-                    <path d="M61.8,208.0 L127.3,173.3 L186.1,157.5 L252.1,137.9 L318.2,90.8 L376.2,77.3 L437.2,65.0" fill="none" stroke="#f2b705" stroke-width="2.5" stroke-linejoin="round"/>
-                    <path d="M437.2,65.0 L611.3,17.0" fill="none" stroke="#f2b705" stroke-width="2" stroke-dasharray="5 5"/>
-                    <g fill="#f2b705"><circle cx="61.8" cy="208" r="3.5"/><circle cx="127.3" cy="173.3" r="3.5"/><circle cx="186.1" cy="157.5" r="3.5"/><circle cx="252.1" cy="137.9" r="3.5"/><circle cx="318.2" cy="90.8" r="3.5"/><circle cx="376.2" cy="77.3" r="3.5"/><circle cx="437.2" cy="65" r="3.5"/></g>
-                    <circle cx="611.3" cy="17" r="4" fill="none" stroke="#f2b705" stroke-width="2"/>
-                    <text x="600" y="46" text-anchor="end">19 900 (advertised)</text>
+                    <g text-anchor="end"><text x="40" y="20">20 000</text><text x="40" y="68">15 000</text><text x="40" y="116">10 000</text><text x="40" y="164">5 000</text><text x="40" y="212">0 km</text></g>
+                    <g text-anchor="middle"><text x="83" y="232">2018</text><text x="143" y="232">2019</text><text x="203" y="232">2020</text><text x="264" y="232">2021</text><text x="324" y="232">2022</text><text x="384" y="232">2023</text><text x="444" y="232">2024</text><text x="504" y="232">2025</text><text x="564" y="232">2026</text></g>
+                    <path d="M61.8,208 L127.3,173.3 L186.1,157.5 L252.1,137.9 L318.2,90.8 L376.2,77.3 L437.2,65 L437.2,208 Z" fill="rgba(242,183,5,.10)"/>
+                    <path d="M61.8,208 L127.3,173.3 L186.1,157.5 L252.1,137.9 L318.2,90.8 L376.2,77.3 L437.2,65" fill="none" stroke="#f2b705" stroke-width="2.5" stroke-linejoin="round"/>
+                    <path d="M437.2,65 L611.3,17" fill="none" stroke="#f2b705" stroke-width="1.5" stroke-dasharray="4 5"/>
+                    <g fill="#f2b705"><circle cx="127.3" cy="173.3" r="3.5"/><circle cx="186.1" cy="157.5" r="3.5"/><circle cx="252.1" cy="137.9" r="3.5"/><circle cx="318.2" cy="90.8" r="3.5"/><circle cx="376.2" cy="77.3" r="3.5"/><circle cx="437.2" cy="65" r="3.5"/></g>
+                    <circle cx="611.3" cy="17" r="5" fill="#16150f" stroke="#f2b705" stroke-width="2"/>
+                    <text class="lbl" x="600" y="42" text-anchor="end">19 900 km</text>
                 </svg>
-                <p class="caption">Odometer at each logged service. The dashed segment runs to the advertised figure; services in 2024 and 2025 logged no reading.</p>
             </div>
+            <details>
+                <summary>Service and warranty history</summary>
+                <ol class="log">
+                    <li class="mark"><time>2017-08-24</time><span>Sold new by Lexus Kingsmead</span><span class="km"></span></li>
+                    <li><time>2018-09-26</time><span>First service</span><span class="km">3 617 km</span></li>
+                    <li><time>2018–2020</time><span>Air-conditioning attended to, finally fixed under warranty</span><span class="km"></span></li>
+                    <li><time>2019-09-18</time><span>Second service</span><span class="km">5 258 km</span></li>
+                    <li><time>2019-09-25</time><span>Front brake discs replaced</span><span class="km"></span></li>
+                    <li><time>2020-10-23</time><span>Third service</span><span class="km">7 299 km</span></li>
+                    <li class="mark"><time>2021-10-05</time><span>Four-year extended warranty</span><span class="km"></span></li>
+                    <li><time>2021-11-29</time><span>Fourth service</span><span class="km">12 205 km</span></li>
+                    <li><time>2022-11-16</time><span>Fifth service</span><span class="km">13 617 km</span></li>
+                    <li><time>2023-07-18</time><span>Sound system attended to</span><span class="km"></span></li>
+                    <li><time>2023-08-24</time><span>Six-year service plan completed</span><span class="km"></span></li>
+                    <li><time>2023-11-22</time><span>Sixth service</span><span class="km">14 896 km</span></li>
+                    <li><time>2024-11-21</time><span>Lexus Value Service</span><span class="km"></span></li>
+                    <li><time>2025-06-19</time><span>All four wheels refinished</span><span class="km"></span></li>
+                    <li><time>2025-11-26</time><span>Lexus Value Service</span><span class="km"></span></li>
+                    <li class="mark"><time>2026-02-20</time><span>Lexus extended warranty to February 2029</span><span class="km"></span></li>
+                    <li><time>2026-08-12</time><span>Armrest repaired under warranty, Halfway Lexus</span><span class="km"></span></li>
+                    <li class="mark"><time>2026-10</time><span>Sold to Cape Town</span><span class="km">19 900 km</span></li>
+                </ol>
+            </details>
+        </div>
+    </section>
 
-            <div class="table-wrap">
-                <table>
-                    <thead><tr><th>Date</th><th>Work</th><th>Dealer</th><th class="num">km</th></tr></thead>
-                    <tbody>
-                        <tr><td class="date">2017-08-24</td><td>Sold new; service plan starts (6 yr / 100 000 km)</td><td>45060 Kingsmead</td><td class="num">—</td></tr>
-                        <tr><td class="date">2018-09-26</td><td>15 000 km service</td><td>45060 Kingsmead</td><td class="num">3 617</td></tr>
-                        <tr class="flag"><td class="date">2018-11-12</td><td>Air-con inoperative</td><td>45060 Kingsmead</td><td class="num"></td></tr>
-                        <tr class="flag"><td class="date">2019-02-25</td><td>Check air-con, not cooling</td><td>45050</td><td class="num"></td></tr>
-                        <tr><td class="date">2019-09-18</td><td>30 000 km service</td><td>26291</td><td class="num">5 258</td></tr>
-                        <tr class="flag"><td class="date">2019-09-25</td><td>Replace front discs</td><td>26291</td><td class="num"></td></tr>
-                        <tr class="flag"><td class="date">2020-01-07</td><td>Warranty: check air-con leak</td><td>26291</td><td class="num"></td></tr>
-                        <tr><td class="date">2020-10-23</td><td>45 000 km service</td><td>45000</td><td class="num">7 299</td></tr>
-                        <tr><td class="date">2021-10-05</td><td>Extended warranty starts (4 yr, paid upfront)</td><td>—</td><td class="num"></td></tr>
-                        <tr><td class="date">2021-11-29</td><td>60 000 km service</td><td>45130</td><td class="num">12 205</td></tr>
-                        <tr class="flag"><td class="date">2022-08-23</td><td>Repair following an owner complaint</td><td>45000</td><td class="num"></td></tr>
-                        <tr><td class="date">2022-11-16</td><td>75 000 km service</td><td>45000</td><td class="num">13 617</td></tr>
-                        <tr><td class="date">2023-07-18</td><td>Sound system</td><td>45000</td><td class="num"></td></tr>
-                        <tr><td class="date">2023-08-24</td><td>Service plan expires</td><td>—</td><td class="num"></td></tr>
-                        <tr><td class="date">2023-11-22</td><td>90 000 km service</td><td>45000</td><td class="num">14 896</td></tr>
-                        <tr><td class="date">2024-11-21</td><td>Lexus Value Service (105 000)</td><td>45000</td><td class="num"></td></tr>
-                        <tr><td class="date">2025-01-31</td><td>Order wheel nut ×1</td><td>45000</td><td class="num"></td></tr>
-                        <tr><td class="date">2025-06-19</td><td>Respray all four rims</td><td>45000</td><td class="num"></td></tr>
-                        <tr><td class="date">2025-10-04</td><td>First extended warranty ends</td><td>—</td><td class="num"></td></tr>
-                        <tr><td class="date">2025-11-26</td><td>Lexus Value Service (120 000)</td><td>45000</td><td class="num"></td></tr>
-                        <tr><td class="date">2026-02-20</td><td>Lexus Unlimited extended warranty starts (36 months, to 2029-02-19)</td><td>—</td><td class="num"></td></tr>
-                        <tr><td class="date">2026-03-24</td><td>Fit Apple CarPlay (since removed)</td><td>45250 Halfway</td><td class="num"></td></tr>
-                        <tr><td class="date">2026-08-12</td><td>Warranty: armrest not reclining</td><td>45250 Halfway</td><td class="num"></td></tr>
-                        <tr><td class="date">2026-10</td><td>Advertised, AutoTrader listing 28792894</td><td>45250 Halfway</td><td class="num">19 900</td></tr>
-                    </tbody>
-                </table>
-            </div>
-            <p class="caption">Shaded rows are repairs and complaints, as opposed to scheduled services. Service-interval labels (15 000, 30 000 …) are Lexus's interval names, not odometer readings.</p>
-        </section>
+    <!-- ───────── Sources ───────── -->
+    <section class="sources wrap">
+        <h2>Sources</h2>
+        <ul>
+            <li>Lexus South Africa dealer records: vehicle, service and warranty history.</li>
+            <li>Halfway Lexus Pretoria, October 2026.</li>
+            <li><a href="https://www.cars.co.za/motoring-news/lexus-lc-500-2017-launch-review/47666/">Cars.co.za: LC 500 launch review, 2017</a></li>
+            <li><a href="https://www.timeslive.co.za/motoring/reviews/2017-06-21-first-drive-2017-lexus-lc-500-coup/">TimesLive: First drive, 21 June 2017</a></li>
+            <li><a href="https://www.news24.com/life/motoring/new-models/stunning-lexus-lc-500-in-sa-next-gen-gt-launched-20170612">News24: LC 500 launched in SA, June 2017</a></li>
+            <li><a href="https://www.cars.co.za/motoring-news/its-official-lexus-rc-and-ls-discontinued-in-sa/199299/">Cars.co.za: Lexus line-up changes, January 2024</a></li>
+            <li><a href="https://lexusenthusiast.com/2026/01/28/report-lexus-ends-lc-production-this-year/">Lexus Enthusiast: LC production ends, January 2026</a></li>
+            <li><a href="https://tflcar.com/2026/01/lexus-lc-officially-discontinued-news/">TFLcar: LC officially discontinued</a></li>
+            <li><a href="https://en.wikipedia.org/wiki/Lexus_LC">Wikipedia: Lexus LC</a></li>
+        </ul>
+    </section>
 
-        <!-- ───────────────────────── WANTED ───────────────────────── -->
-        <section id="wanted">
-            <h2>Wanted</h2>
-            <p class="section-intro">Placeholders for records worth adding. Each card turns solid when its record is found.</p>
-            <div class="wanted">
-                <div class="want"><h3>eNaTIS registration history <span class="tag open">Open</span></h3><p>First registration date, the registered owner type (a dealer or Toyota SA fleet?), the number of owners and the plates.</p><p class="how">Ask Halfway for the printout, or get it at registration in Cape Town.</p></div>
-                <div class="want"><h3>Launch-car paperwork <span class="tag maybe">Confirmed verbally</span></h3><p>The dealer confirmed it on 17 Oct 2026. Still wanted: a document tying this VIN to the press plate seen in the June 2017 Franschhoek launch photographs.</p><p class="how">The eNaTIS history (first registered to Toyota SA?), the Toyota SA / Lexus SA press office, or a launch photo where the VIN or plate can be matched.</p></div>
-                <div class="want"><h3>Original invoice or window sticker <span class="tag open">Open</span></h3><p>The August 2017 Kingsmead sale: price, options, first owner's spec choices.</p><p class="how">Lexus Kingsmead archive, or the original document wallet.</p></div>
-                <div class="want"><h3>Cosmetic work record <span class="tag open">Open</span></h3><p>When was the chrome blacked out, and by whom? What finish were the rims resprayed in? This matters for the warranty's modification exclusion.</p></div>
-                <div class="want"><h3>Previous owners' stories <span class="tag open">Open</span></h3><p>Durban and Gauteng. A line or a photo from each, if they're willing, through the dealer.</p></div>
-                <div class="want"><h3>2017 brochure and press kit <span class="tag open">Open</span></h3><p>The South African launch material, price list and spec sheet.</p></div>
-                <div class="want"><h3>Books, keys and pack <span class="tag open">Open</span></h3><p>Owner's manual, service book, both keys, the tyre-repair kit, and anything original that came with the car.</p></div>
-                <div class="want"><h3>Handover photo <span class="tag open">To come</span></h3><p>Cape Town, with its new owner.</p></div>
-                <div class="want"><h3>The first drive <span class="tag open">To come</span></h3><p>Where it went, and what it sounded like.</p></div>
-            </div>
-        </section>
+    <footer>attieretief.com</footer>
 
-        <!-- ───────────────────────── OPEN QUESTIONS ───────────────────────── -->
-        <section id="questions">
-            <h2>Open questions</h2>
-            <ol class="questions">
-                <li>Which launch roles did it play? <span>The dealer confirms it is the launch car. Was it the yellow car in the Franschhoek photos, the TimesLive test car, or both? And was it on a press loan between June and August 2017?</span></li>
-                <li>One owner or two? <span>The plates change from KZN to a Gauteng personalised plate (2021) to the current Gauteng number (2022). That fits a move as well as a sale.</span></li>
-                <li>Who did dealer codes 45000, 45050, 45130 and 26291 belong to? <span>This would place the car geographically year by year.</span></li>
-            </ol>
-        </section>
-
-        <!-- ───────────────────────── SOURCES ───────────────────────── -->
-        <section id="sources">
-            <h2>Sources</h2>
-            <ul class="sources">
-                <li>Lexus South Africa dealer system: vehicle details, service plan, service history and extended plan screens, photographed by Halfway Lexus Pretoria, 17 Oct 2026.</li>
-                <li>Halfway Lexus Pretoria: phone call and WhatsApp voice notes from Tylor van der Merwe, 17 Oct 2026, covering the launch-car confirmation, the owner and the car's condition.</li>
-                <li>Halfway Lexus Pretoria: email and WhatsApp correspondence, 16–17 Oct 2026.</li>
-                <li><a href="https://www.cars.co.za/motoring-news/lexus-lc-500-2017-launch-review/47666/">Cars.co.za: Lexus LC 500 (2017) launch review</a></li>
-                <li><a href="https://www.timeslive.co.za/motoring/reviews/2017-06-21-first-drive-2017-lexus-lc-500-coup/">TimesLive: First Drive, 2017 Lexus LC 500 Coupé (21 June 2017)</a></li>
-                <li><a href="https://www.news24.com/life/motoring/new-models/stunning-lexus-lc-500-in-sa-next-gen-gt-launched-20170612">News24: Lexus LC 500 launched in SA (12 June 2017)</a></li>
-                <li><a href="https://www.carscoops.com/2026/01/lexus-is-killing-the-lc-500-after-2026/">Carscoops: Lexus is killing the LC 500 after 2026</a></li>
-                <li><a href="https://en.wikipedia.org/wiki/Lexus_LC">Wikipedia: Lexus LC</a></li>
-                <li>AutoTrader listing 28792894 (October 2026, now withdrawn).</li>
-            </ul>
-        </section>
-    </main>
-
-    <footer>Photographs under “The breed” are third-party press and review images, shown for reference.</footer>
-
-    <div class="lb" id="lb" aria-hidden="true"><img alt=""></div>
+    <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+        <button class="btn-round lb-close" type="button" data-act="close" aria-label="Close">&#10005;</button>
+        <div class="lb-stage"><img alt=""></div>
+        <button class="btn-round lb-side prev" type="button" data-act="prev" aria-label="Previous photo">&#8592;</button>
+        <button class="btn-round lb-side next" type="button" data-act="next" aria-label="Next photo">&#8594;</button>
+        <div class="lb-bar">
+            <div class="lb-cap"><span></span><small></small></div>
+            <div class="lb-ctrls"><button class="btn-round" type="button" data-act="prev" aria-label="Previous photo">&#8592;</button><button class="btn-round" type="button" data-act="next" aria-label="Next photo">&#8594;</button></div>
+        </div>
+    </div>
     <script>
-        // Click-to-enlarge for gallery photos; links still work without JS.
+        // Photo viewer: full screen, per-gallery sequence, arrows/keys/swipe. Links still work without JS.
         (function () {
-            var lb = document.getElementById('lb'), img = lb.querySelector('img');
-            document.querySelectorAll('.gallery a').forEach(function (a) {
-                a.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    img.src = a.getAttribute('href');
-                    img.alt = a.querySelector('img').alt;
-                    lb.classList.add('on');
+            var lb = document.getElementById('lb'), img = lb.querySelector('.lb-stage img'),
+                cap = lb.querySelector('.lb-cap span'), count = lb.querySelector('.lb-cap small'),
+                set = [], i = 0, label = '', lastFocus = null;
+            function show(n) {
+                i = (n + set.length) % set.length;
+                var a = set[i];
+                img.src = a.getAttribute('href');
+                img.alt = a.querySelector('img').alt;
+                cap.textContent = img.alt;
+                count.textContent = label + ' · ' + (i + 1) + ' of ' + set.length;
+                var next = set[(i + 1) % set.length]; (new Image()).src = next.getAttribute('href');
+            }
+            function open(group, a, name) {
+                set = Array.prototype.slice.call(group); label = name; lastFocus = a;
+                lb.hidden = false; lb.classList.add('on'); document.body.style.overflow = 'hidden';
+                show(set.indexOf(a)); lb.querySelector('.lb-close').focus();
+            }
+            function close() {
+                lb.classList.remove('on'); lb.hidden = true; document.body.style.overflow = '';
+                img.removeAttribute('src'); if (lastFocus) lastFocus.focus();
+            }
+            [['.mosaic a', 'This car'], ['.strip a', 'The breed']].forEach(function (g) {
+                var group = document.querySelectorAll(g[0]);
+                group.forEach(function (a) {
+                    a.addEventListener('click', function (e) { e.preventDefault(); open(group, a, g[1]); });
                 });
             });
-            lb.addEventListener('click', function () { lb.classList.remove('on'); img.removeAttribute('src'); });
-            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') lb.click(); });
+            lb.addEventListener('click', function (e) {
+                var act = e.target.closest('[data-act]');
+                if (act) { var k = act.dataset.act; if (k === 'close') close(); else show(i + (k === 'next' ? 1 : -1)); return; }
+                if (e.target.classList.contains('lb-stage')) close();
+            });
+            document.addEventListener('keydown', function (e) {
+                if (lb.hidden) return;
+                if (e.key === 'Escape') close();
+                else if (e.key === 'ArrowRight') show(i + 1);
+                else if (e.key === 'ArrowLeft') show(i - 1);
+            });
+            var x0 = null;
+            lb.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+            lb.addEventListener('touchend', function (e) {
+                if (x0 === null) return; var dx = e.changedTouches[0].clientX - x0; x0 = null;
+                if (Math.abs(dx) > 40) show(i + (dx < 0 ? 1 : -1));
+            });
+
+            // Filmstrip: arrow buttons and drag-to-scroll with a mouse.
+            var strip = document.getElementById('strip');
+            document.querySelectorAll('.strip-nav button').forEach(function (b) {
+                b.addEventListener('click', function () { strip.scrollBy({ left: +b.dataset.dir * strip.clientWidth * 0.8, behavior: 'smooth' }); });
+            });
+            var down = false, sx = 0, sl = 0, moved = false;
+            strip.addEventListener('mousedown', function (e) { down = true; moved = false; sx = e.pageX; sl = strip.scrollLeft; strip.style.scrollSnapType = 'none'; });
+            window.addEventListener('mouseup', function () { if (down) { down = false; strip.style.scrollSnapType = ''; } });
+            strip.addEventListener('mousemove', function (e) {
+                if (!down) return; var d = e.pageX - sx; if (Math.abs(d) > 5) moved = true; strip.scrollLeft = sl - d; e.preventDefault();
+            });
+            strip.addEventListener('click', function (e) { if (moved) { e.stopImmediatePropagation(); e.preventDefault(); moved = false; } }, true);
+            strip.querySelectorAll('img').forEach(function (im) { im.draggable = false; });
         })();
     </script>
 </body>
