@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All updates — Attie Retief</title>
+    <meta name="description" content="Everything new from Attie Retief, newest first: papers, short films, poems, music, projects and the genealogy.">
+    <link rel="canonical" href="https://attieretief.com/updates/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="All updates — Attie Retief">
+    <meta property="og:description" content="Papers, short films, poems, music, projects and the genealogy, newest first.">
+    <meta property="og:url" content="https://attieretief.com/updates/">
+    <meta property="og:image" content="https://attieretief.com/avatar.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="All updates — Attie Retief">
+    <meta name="twitter:description" content="Papers, short films, poems, music, projects and the genealogy, newest first.">
+    <meta name="twitter:image" content="https://attieretief.com/avatar.png">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --color-bg: #0a0a0f;
+            --color-border: rgba(255, 255, 255, 0.06);
+            --color-text: #e8e8ed;
+            --color-text-muted: #8a8a9a;
+            --color-accent: #6366f1;
+            --color-accent-glow: rgba(99, 102, 241, 0.15);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            min-height: 100vh;
+        }
+
+        .topbar { display: flex; align-items: center; gap: 0.6rem; padding: 1.1rem 1.5rem; border-bottom: 1px solid var(--color-border); }
+        .topbar-brand { display: flex; align-items: center; gap: 0.55rem; text-decoration: none; color: var(--color-text); font-weight: 600; font-size: 0.95rem; }
+        .topbar-brand .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--color-accent); box-shadow: 0 0 12px var(--color-accent-glow); }
+        .topbar-section { color: var(--color-text-muted); font-size: 0.95rem; }
+
+        .page { max-width: 680px; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+        h1 { font-size: 1.8rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 0.4rem; }
+        .lede { color: var(--color-text-muted); line-height: 1.6; margin-bottom: 1.5rem; }
+        .lede a { color: var(--color-text); text-decoration: none; border-bottom: 1px solid rgba(99, 102, 241, 0.5); }
+
+        .filters { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 2rem; }
+        .filters button { font: inherit; font-size: 0.8rem; padding: 0.35rem 0.8rem; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.1); background: none; color: var(--color-text-muted); cursor: pointer; }
+        .filters button:hover { color: var(--color-text); }
+        .filters button[aria-pressed="true"] { color: var(--color-text); border-color: var(--color-accent); background: rgba(99, 102, 241, 0.12); }
+
+        h2 { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-text-muted); margin: 2rem 0 0.5rem; }
+        ol { list-style: none; }
+        li { display: grid; grid-template-columns: 3.5rem 1fr; gap: 1rem; padding: 0.7rem 0; border-top: 1px solid var(--color-border); }
+        li:first-child { border-top: 0; }
+        .date { color: var(--color-text-muted); font-size: 0.8rem; font-variant-numeric: tabular-nums; padding-top: 0.1rem; }
+        .kind { display: block; color: var(--color-text-muted); font-size: 0.72rem; margin-bottom: 0.15rem; }
+        .title { color: var(--color-text); text-decoration: none; font-weight: 500; line-height: 1.4; }
+        .title:hover { color: var(--color-accent); }
+        .blurb { display: block; color: var(--color-text-muted); font-size: 0.85rem; line-height: 1.5; margin-top: 0.2rem; }
+        .empty { color: var(--color-text-muted); }
+
+        .filters button:focus-visible, .title:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <a href="/" class="topbar-brand">
+            <span class="dot"></span>
+            <span>Attie Retief</span>
+        </a>
+        <span class="topbar-section">/ Updates</span>
+    </header>
+
+    <main class="page">
+        <h1>All updates</h1>
+        <p class="lede">Everything new on the site and around it, newest first. For the ones worth an email, <a href="/#join">get the updates</a>.</p>
+        <div class="filters" id="filters" role="group" aria-label="Filter by kind"></div>
+        <div id="list"><p class="empty">Loading&hellip;</p></div>
+    </main>
+
+    <script>
+        // Reads the same feed.json the home page does (built by feed/build.js).
+        (function () {
+            const MONTHS = ["January", "February", "March", "April", "May", "June", "July",
+                            "August", "September", "October", "November", "December"];
+            const LABEL = { video: "Video", research: "Research", projects: "Projects", writing: "Writing",
+                            music: "Music", genealogy: "Genealogy", book: "Book", news: "News" };
+            const label = (s) => LABEL[s] || s.charAt(0).toUpperCase() + s.slice(1);
+
+            let feed = [];
+            let active = "all";
+
+            function render() {
+                const list = document.getElementById("list");
+                list.textContent = "";
+                const items = active === "all" ? feed : feed.filter((i) => i.source === active);
+                let month = "", ol = null;
+                for (const item of items) {
+                    const [y, m, d] = item.date.split("-");
+                    const key = y + "-" + m;
+                    if (key !== month) {
+                        month = key;
+                        const h = document.createElement("h2");
+                        h.textContent = MONTHS[Number(m) - 1] + " " + y;
+                        ol = document.createElement("ol");
+                        list.append(h, ol);
+                    }
+                    const li = document.createElement("li");
+                    const date = document.createElement("span");
+                    date.className = "date";
+                    date.textContent = Number(d) + " " + MONTHS[Number(m) - 1].slice(0, 3);
+                    const main = document.createElement("div");
+                    const kind = document.createElement("span");
+                    kind.className = "kind";
+                    kind.textContent = label(item.source);
+                    const a = document.createElement("a");
+                    a.className = "title";
+                    a.href = item.url;
+                    a.textContent = item.title;
+                    if (!item.url.startsWith("https://attieretief.com")) { a.target = "_blank"; a.rel = "noopener"; }
+                    main.append(kind, a);
+                    if (item.blurb) {
+                        const b = document.createElement("span");
+                        b.className = "blurb";
+                        b.textContent = item.blurb;
+                        main.appendChild(b);
+                    }
+                    li.append(date, main);
+                    ol.appendChild(li);
+                }
+            }
+
+            function filters() {
+                const box = document.getElementById("filters");
+                const counts = {};
+                feed.forEach((i) => { counts[i.source] = (counts[i.source] || 0) + 1; });
+                const kinds = ["all", ...Object.keys(counts).sort((a, b) => counts[b] - counts[a])];
+                for (const k of kinds) {
+                    const btn = document.createElement("button");
+                    btn.type = "button";
+                    btn.textContent = k === "all" ? "All" : label(k);
+                    btn.setAttribute("aria-pressed", String(k === active));
+                    btn.addEventListener("click", () => {
+                        active = k;
+                        box.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+                        render();
+                    });
+                    box.appendChild(btn);
+                }
+            }
+
+            fetch("/feed.json", { cache: "no-cache" })
+                .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
+                .then((data) => { feed = data; filters(); render(); })
+                .catch(() => {
+                    document.getElementById("list").innerHTML = '<p class="empty">The update list could not be loaded.</p>';
+                });
+        })();
+    </script>
+    <script data-goatcounter="https://attieretief.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

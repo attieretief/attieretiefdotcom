@@ -10,7 +10,7 @@ poet, and author of the forthcoming book *Reasonable Wonder*.
 
 ## Layout
 
-- `index.html` — landing page (ten-card link grid + a "Recent" timeline read from
+- `index.html` — landing page (ten-card link grid; a "Latest" line and new-dots on cards read from
   `feed.json`; rotating Unsplash landscape backgrounds).
 - `feed/` — the update-feed aggregator (`build.js`, `news.json`) that writes `feed.json`.
 - `cosmic-wonder/` — *Reasonable Wonder* book page (physics-meets-faith), with an audio
@@ -51,7 +51,8 @@ unless asked.
 
 `feed/build.js` is a Node script with no dependencies. It aggregates every source the site
 contains or points to into `feed.json` at the repo root; `index.html` fetches that file and
-renders the "Recent" timeline under the link cards.
+shows the newest item under the signup form and a dot on each card with something from
+the last 30 days. `updates/index.html` lists the whole feed, filterable by source.
 
 ```sh
 node feed/build.js
@@ -61,8 +62,7 @@ node feed/build.js
   omitted, never failing the run. The one guard is a floor: fewer than four producing sources
   exits non-zero.
 - Items normalise to `{date, source, title, url, blurb}`, sorted newest first. `feed.json`
-  holds everything; the page shows 20, capped at 4 per source (5 for `research`) so no burst
-  crowds the rest.
+  holds everything; `updates/` shows all of it, grouped by month.
 - `research/` and `projects/` are **event-shaped** and share one reader, `datedHistory()`:
   each `<article id="…">` carries an `<ol class="paper-history">` / `<ol class="project-history">`
   whose `<li>`s hold a `<time datetime>` and the event in words, and the adapter emits one feed
