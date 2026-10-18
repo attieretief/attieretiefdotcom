@@ -53,7 +53,6 @@ unless asked.
 contains or points to into `feed.json` at the repo root; `index.html` fetches that file and
 shows the newest item under the signup form.
 `updates/index.html` lists the whole feed, filterable by source.
-`updates/index.html` lists the whole feed, filterable by source.
 
 ```sh
 node feed/build.js
