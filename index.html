@@ -740,19 +740,15 @@
 
         /* Signup sits between the bio and the cards: one glass strip, the
            same material as the cards, so it reads as part of the hero. */
-        .signup { margin: 0 0 1.25rem; padding: 0.9rem 1rem 0.9rem 1.25rem; display: flex; align-items: center; gap: 1rem; text-align: left; background: rgba(10, 10, 15, 0.55); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(99, 102, 241, 0.35); border-radius: 14px; }
-        .signup-lede { flex: 1 1 auto; color: var(--color-text-muted); font-size: 0.85rem; line-height: 1.45; }
+        .signup { margin: 0 0 1.25rem; padding: 1.1rem 1.25rem; display: flex; flex-direction: column; align-items: center; gap: 0.75rem; text-align: center; background: rgba(10, 10, 15, 0.55); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(99, 102, 241, 0.35); border-radius: 14px; }
+        .signup-lede { color: var(--color-text-muted); font-size: 0.88rem; line-height: 1.5; max-width: 52ch; }
         .signup-lede strong { color: var(--color-text); font-weight: 600; }
-        .signup form { display: flex; gap: 0.5rem; flex: 0 0 auto; }
-        .signup input[type=email] { width: 210px; min-width: 0; padding: 0.6rem 0.85rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.12); background: rgba(0,0,0,0.35); color: var(--color-text); font: inherit; font-size: 0.9rem; }
+        .signup form { display: flex; gap: 0.5rem; justify-content: center; width: 100%; max-width: 420px; }
+        .signup input[type=email] { flex: 1 1 auto; min-width: 0; padding: 0.6rem 0.85rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.12); background: rgba(0,0,0,0.35); color: var(--color-text); font: inherit; font-size: 0.9rem; }
         .signup input:focus { outline: none; border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-glow); }
         .signup button { padding: 0.6rem 1.1rem; border: 0; border-radius: 10px; background: var(--color-accent); color: #fff; font: inherit; font-weight: 600; font-size: 0.9rem; cursor: pointer; }
         .signup button:hover { filter: brightness(1.1); }
         .signup .hp { position: absolute; left: -9999px; }
-        @media (max-width: 700px) {
-            .signup { flex-direction: column; align-items: stretch; gap: 0.7rem; }
-            .signup input[type=email] { flex: 1 1 auto; width: auto; }
-        }
     </style>
 </head>
 <body>
