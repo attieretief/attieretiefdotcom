@@ -101,7 +101,7 @@
             --color-accent-glow: rgba(99, 102, 241, 0.15);
             /* The floating Recent panel's footprint. Read by the panel itself
                and by the body padding that keeps the container clear of it. */
-            --panel-w: 360px;
+            --panel-w: 320px;
             --panel-gap: 1.5rem;
         }
 
@@ -425,17 +425,17 @@
             position: absolute;
             right: 0;
             bottom: 0;
-            width: 360px;
+            width: 320px;
             max-height: 70vh;
             overflow-y: auto;
             overscroll-behavior: contain;
             padding: 1rem 1.1rem 1.1rem;
-            background: rgba(10, 10, 15, 0.8);
+            background: rgba(10, 10, 15, 0.6);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(99, 102, 241, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45), 0 0 20px var(--color-accent-glow);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
             opacity: 0;
             visibility: hidden;
             transform: translateY(8px);
@@ -496,62 +496,37 @@
         /* Date above the entry, not beside it — the panel is too narrow for a
            side column. */
         .timeline li {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.15rem;
-            padding: 0.6rem 0;
+            padding: 0.55rem 0;
             border-top: 1px solid var(--color-border);
         }
 
         .timeline li:first-child {
             border-top: 0;
+            padding-top: 0;
         }
 
-        .t-date {
+        .t-meta {
+            display: block;
             color: var(--color-text-muted);
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             font-variant-numeric: tabular-nums;
-            white-space: nowrap;
-        }
-
-        .t-main {
-            min-width: 0;
-        }
-
-        .t-badge {
-            display: inline-block;
-            font-size: 0.6rem;
-            font-weight: 600;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            padding: 0.1rem 0.45rem;
-            margin-right: 0.5rem;
-            border: 1px solid var(--color-border);
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.04);
-            color: var(--color-text-muted);
-            vertical-align: 1px;
+            margin-bottom: 0.15rem;
         }
 
         .t-link {
-            font-size: 0.88rem;
-            font-weight: 600;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            font-size: 0.85rem;
+            font-weight: 500;
+            line-height: 1.4;
             color: var(--color-text);
             text-decoration: none;
         }
 
         .t-link:hover {
             color: var(--color-accent);
-        }
-
-        .t-blurb {
-            display: block;
-            margin-top: 0.15rem;
-            font-size: 0.76rem;
-            color: var(--color-text-muted);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
 
         footer {
@@ -609,8 +584,8 @@
            780px wide and centred in whatever the body's right padding leaves.
            Measured left/right edges and the gap between them:
 
-             1600px  panel 360, no padding   container  410–1190, gap 26px
-             1280px  panel 360, padding 360  container   70– 850, gap 46px
+             1600px  panel 320, no padding   container  410–1190, gap 66px
+             1280px  panel 320, padding 360  container   70– 850, gap 86px
              1024px  panel 300, padding 348  container    0– 676, gap 24px
 
            Above 1600px natural centring already clears the panel, so nothing
@@ -763,16 +738,21 @@
             footer { margin-top: 1rem; }
         }
 
-        .signup { margin: 2.5rem 0 1.5rem; padding: 1.5rem; border: 1px solid var(--color-border); border-radius: 14px; background: var(--color-surface, #12121a); }
-        .signup h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.4rem; }
-        .signup p { color: var(--color-text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 1rem; }
-        .signup form { display: flex; flex-wrap: wrap; gap: 0.6rem; }
-        .signup input[type=email], .signup input[type=text] { flex: 1 1 200px; min-width: 0; padding: 0.7rem 0.9rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.12); background: var(--color-bg); color: var(--color-text); font: inherit; font-size: 0.95rem; }
+        /* Signup sits between the bio and the cards: one glass strip, the
+           same material as the cards, so it reads as part of the hero. */
+        .signup { margin: 0 0 1.25rem; padding: 0.9rem 1rem 0.9rem 1.25rem; display: flex; align-items: center; gap: 1rem; text-align: left; background: rgba(10, 10, 15, 0.55); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(99, 102, 241, 0.35); border-radius: 14px; }
+        .signup-lede { flex: 1 1 auto; color: var(--color-text-muted); font-size: 0.85rem; line-height: 1.45; }
+        .signup-lede strong { color: var(--color-text); font-weight: 600; }
+        .signup form { display: flex; gap: 0.5rem; flex: 0 0 auto; }
+        .signup input[type=email] { width: 210px; min-width: 0; padding: 0.6rem 0.85rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.12); background: rgba(0,0,0,0.35); color: var(--color-text); font: inherit; font-size: 0.9rem; }
         .signup input:focus { outline: none; border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-glow); }
-        .signup button { padding: 0.7rem 1.2rem; border: 0; border-radius: 10px; background: var(--color-accent); color: #fff; font: inherit; font-weight: 600; font-size: 0.95rem; cursor: pointer; }
+        .signup button { padding: 0.6rem 1.1rem; border: 0; border-radius: 10px; background: var(--color-accent); color: #fff; font: inherit; font-weight: 600; font-size: 0.9rem; cursor: pointer; }
         .signup button:hover { filter: brightness(1.1); }
         .signup .hp { position: absolute; left: -9999px; }
-        .signup small { display: block; margin-top: 0.7rem; color: var(--color-text-muted); font-size: 0.78rem; }
+        @media (max-width: 700px) {
+            .signup { flex-direction: column; align-items: stretch; gap: 0.7rem; }
+            .signup input[type=email] { flex: 1 1 auto; width: auto; }
+        }
     </style>
 </head>
 <body>
@@ -781,6 +761,16 @@
         <h1>Attie Retief</h1>
 
         <p class="bio">Wouldabeen clinical psychologist, couldabeen concert pianist, shouldabeen theoretical physicist. Reluctant ERP artist by day; by night, writing and composing on science, faith and wonder &mdash; a book, papers, hymns and short films. Father of four, poet &mdash; and benign web participant.</p>
+
+        <section class="signup" id="join">
+            <p class="signup-lede"><strong>Get the updates</strong> &mdash; new papers, short films and chapters of <em>Reasonable Wonder</em>. A few emails a month at most.</p>
+            <form method="post" action="https://list.attieretief.com/subscription/form">
+                <input type="hidden" name="l" value="6f83ed13-26dc-474d-849c-986742cb40dd">
+                <input type="text" name="nonce" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+                <input type="email" name="email" placeholder="you@example.com" required autocomplete="email" aria-label="Email">
+                <button type="submit">Subscribe</button>
+            </form>
+        </section>
 
         <div class="links">
             <a href="https://linc.co.za" target="_blank" rel="noopener" class="link-card">
@@ -894,19 +884,6 @@
             </a>
         </div>
 
-        <section class="signup" id="join">
-            <h2>Get the updates</h2>
-            <p>New papers, short films and chapters of <em>Reasonable Wonder</em>, when there is something worth sending. A few times a month at most.</p>
-            <form method="post" action="https://list.attieretief.com/subscription/form">
-                <input type="hidden" name="l" value="6f83ed13-26dc-474d-849c-986742cb40dd">
-                <input type="text" name="nonce" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-                <input type="text" name="name" placeholder="Name" autocomplete="name" aria-label="Name">
-                <input type="email" name="email" placeholder="you@example.com" required autocomplete="email" aria-label="Email">
-                <button type="submit">Subscribe</button>
-            </form>
-            <small>You'll get one email to confirm. Unsubscribe from any email.</small>
-        </section>
-
         <footer>&copy; 2026 Attie Retief &middot; <a href="https://github.com/attieretief" target="_blank" rel="noopener">GitHub</a></footer>
     </div>
 
@@ -965,19 +942,19 @@
         // "Recent" timeline. feed.json is built by feed/build.js and refreshed
         // by .github/workflows/feed.yml; it holds every item, newest first.
         (function () {
-            const SHOWN = 20;
+            const SHOWN = 6;
             // A single source can publish dozens of pages on one day (the
             // genealogy build did), which would otherwise fill the whole list.
             // Cap each source so all of them stay visible. research/ gets one
             // more than the rest because it emits one item per dated event —
             // a paper submitted and later accepted is two — and four slots cut
             // the run of 2026 submissions off mid-list.
-            const PER_SOURCE_DEFAULT = 4;
-            const PER_SOURCE = { research: 5 };
+            const PER_SOURCE_DEFAULT = 2;
+            const PER_SOURCE = { research: 3 };
             // And no more than three from one source on any single day, so a
             // batch published together cannot take the top of the list — and
             // with it the pill headline — from the rest of that day's news.
-            const PER_SOURCE_PER_DAY = 3;
+            const PER_SOURCE_PER_DAY = 2;
             const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
                             "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -988,7 +965,7 @@
             const DESKTOP_MIN_WIDTH = 1024;
             const ENTRANCE_DELAY = 1200;
             // Long enough to outlast the 0.6s slide and the last item's
-            // stagger (19 x 40ms + 0.4s), after which .entering comes off.
+            // stagger (5 x 40ms + 0.4s), after which .entering comes off.
             const ENTRANCE_LIFETIME = 1600;
             const ITEM_STAGGER = 40;
 
@@ -1005,12 +982,6 @@
                 });
             }
 
-            function formatDate(iso) {
-                const parts = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
-                if (!parts) return iso;
-                return Number(parts[3]) + " " + MONTHS[Number(parts[2]) - 1] + " " + parts[1];
-            }
-
             // The pill shows only day and month — the year is noise at a glance.
             function formatShortDate(iso) {
                 const parts = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
@@ -1025,16 +996,10 @@
                     // Only bites while .entering is on the dock.
                     li.style.animationDelay = (i * ITEM_STAGGER) + "ms";
 
-                    const date = document.createElement("span");
-                    date.className = "t-date";
-                    date.textContent = formatDate(item.date);
-
-                    const main = document.createElement("div");
-                    main.className = "t-main";
-
-                    const badge = document.createElement("span");
-                    badge.className = "t-badge";
-                    badge.textContent = item.source;
+                    const meta = document.createElement("span");
+                    meta.className = "t-meta";
+                    const kind = item.source.charAt(0).toUpperCase() + item.source.slice(1);
+                    meta.textContent = formatShortDate(item.date) + " \u00b7 " + kind;
 
                     const link = document.createElement("a");
                     link.className = "t-link";
@@ -1045,16 +1010,7 @@
                         link.rel = "noopener";
                     }
 
-                    main.append(badge, link);
-
-                    if (item.blurb) {
-                        const blurb = document.createElement("span");
-                        blurb.className = "t-blurb";
-                        blurb.textContent = item.blurb;
-                        main.appendChild(blurb);
-                    }
-
-                    li.append(date, main);
+                    li.append(meta, link);
                     list.appendChild(li);
                 });
 
