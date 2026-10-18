@@ -416,10 +416,11 @@
            same material as the cards, so it reads as part of the hero. */
         .signup { margin: 0 0 1.25rem; padding: 0.6rem; background: rgba(10, 10, 15, 0.55); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; }
         .signup form { display: flex; gap: 0.5rem; }
-        .signup input[type=email] { flex: 1 1 auto; min-width: 0; padding: 0.6rem 0.85rem; border-radius: 10px; border: 0; background: none; color: var(--color-text); font: inherit; font-size: 0.92rem; }
-        .signup input::placeholder { color: var(--color-text-muted); }
-        .signup:focus-within { border-color: rgba(99, 102, 241, 0.5); }
-        .signup input:focus { outline: none; }
+        /* The field reads as a field: lighter well, its own edge, a hover. */
+        .signup input[type=email] { flex: 1 1 auto; min-width: 0; padding: 0.6rem 0.85rem; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.16); background: rgba(255, 255, 255, 0.07); box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3); color: var(--color-text); font: inherit; font-size: 0.92rem; transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease; }
+        .signup input[type=email]:hover { border-color: rgba(255, 255, 255, 0.28); background: rgba(255, 255, 255, 0.09); }
+        .signup input::placeholder { color: rgba(255, 255, 255, 0.5); }
+        .signup input:focus { outline: none; border-color: var(--color-accent); background: rgba(255, 255, 255, 0.1); box-shadow: 0 0 0 3px var(--color-accent-glow); }
         .signup button { padding: 0.6rem 1.1rem; border: 0; border-radius: 10px; background: var(--color-accent); color: #fff; font: inherit; font-weight: 600; font-size: 0.9rem; cursor: pointer; }
         .signup button:hover { filter: brightness(1.1); }
         .signup .hp { position: absolute; left: -9999px; }
