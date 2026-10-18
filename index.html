@@ -423,10 +423,10 @@
         .signup-latest a { color: var(--color-text); text-decoration: none; border-bottom: 1px solid rgba(99, 102, 241, 0.5); }
         .signup-latest a:hover { color: var(--color-accent); }
 
-        /* A card with something published in the last 30 days gets a dot. */
-        .link-card { position: relative; }
-        .fresh-dot { position: absolute; top: 0.7rem; right: 0.7rem; width: 7px; height: 7px; border-radius: 50%; background: var(--color-accent); box-shadow: 0 0 8px var(--color-accent); }
-        .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+        /* For 30 days after something is published, its card says so in
+           place of its usual description, and links straight to it. */
+        .link-desc { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .link-desc .new { color: var(--color-accent); font-weight: 600; margin-right: 0.35rem; }
         .signup .hp { position: absolute; left: -9999px; }
     </style>
 </head>
@@ -600,9 +600,10 @@
     </script>
     <script>
         // feed.json (built by feed/build.js) drives two quiet signals: the
-        // newest item under the signup form, and a dot on every card that has
-        // had something published in the last 30 days. The full list lives
-        // at /updates/.
+        // newest item under the signup form, and, on every card with something
+        // published in the last 30 days, that item in place of the card's
+        // description, with the card linking to it. After 30 days the card
+        // reverts by itself. The full list lives at /updates/.
         (function () {
             const FRESH_DAYS = 30;
             const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -656,14 +657,16 @@
                         const card = document.querySelector('.link-card[href="' + href + '"]');
                         if (!card) continue;
                         marked.add(href);
-                        const dot = document.createElement("span");
-                        dot.className = "fresh-dot";
-                        dot.title = "New: " + item.title;
-                        const sr = document.createElement("span");
-                        sr.className = "sr-only";
-                        sr.textContent = " (new)";
-                        card.querySelector(".link-title").appendChild(sr);
-                        card.appendChild(dot);
+                        card.href = item.url;
+                        const external = !item.url.startsWith("https://attieretief.com");
+                        card.target = external ? "_blank" : "";
+                        card.rel = external ? "noopener" : "";
+                        const desc = card.querySelector(".link-desc");
+                        const tag = document.createElement("span");
+                        tag.className = "new";
+                        tag.textContent = "New";
+                        desc.replaceChildren(tag, item.title);
+                        desc.title = item.title;
                     }
                 })
                 // No feed, no signals; the page is complete without them.
