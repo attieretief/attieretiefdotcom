@@ -10,7 +10,7 @@ poet, and author of the forthcoming book *Reasonable Wonder*.
 
 ## Layout
 
-- `index.html` — landing page (ten-card link grid; a "Latest" line read from
+- `index.html` — landing page (ten-card link grid + one-row signup; footer links `updates/`, which reads
   `feed.json`; rotating Unsplash landscape backgrounds).
 - `feed/` — the update-feed aggregator (`build.js`, `news.json`) that writes `feed.json`.
 - `cosmic-wonder/` — *Reasonable Wonder* book page (physics-meets-faith), with an audio
@@ -50,9 +50,8 @@ unless asked.
 ## The home-page update feed (has a build step)
 
 `feed/build.js` is a Node script with no dependencies. It aggregates every source the site
-contains or points to into `feed.json` at the repo root; `index.html` fetches that file and
-shows the newest item under the signup form.
-`updates/index.html` lists the whole feed, filterable by source.
+contains or points to into `feed.json` at the repo root; `updates/index.html` fetches that file
+and lists the whole feed, filterable by source. The home page no longer reads it.
 
 ```sh
 node feed/build.js

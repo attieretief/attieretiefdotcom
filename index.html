@@ -162,15 +162,15 @@
         }
 
         .avatar {
-            width: 150px;
-            height: 150px;
+            width: 168px;
+            height: 168px;
             flex-shrink: 0;
             border-radius: 50%;
             margin: 0;
             overflow: hidden;
             border: 3px solid rgba(255, 255, 255, 0.15);
             box-shadow: 0 0 40px var(--color-accent-glow);
-            animation: fadeUp 0.6s ease both, float 6s ease-in-out infinite 1s;
+            animation: fadeUp 0.6s ease both;
         }
 
         @keyframes float {
@@ -217,9 +217,12 @@
         .bio {
             font-family: "Georgia", "Times New Roman", serif;
             font-size: 1.15rem;
-            line-height: 1.85;
+            line-height: 1.6;
             color: rgba(255, 255, 255, 0.55);
             font-style: italic;
+            /* Drop the last line's trailing leading, so the avatar centres on
+               the text you see rather than on its line boxes. */
+            margin-bottom: -0.3em;
         }
 
         .links {
@@ -411,20 +414,14 @@
 
         /* Signup sits between the bio and the cards: one glass strip, the
            same material as the cards, so it reads as part of the hero. */
-        .signup { margin: 0 0 1.25rem; padding: 1.1rem 1.25rem; display: flex; flex-direction: column; align-items: center; gap: 0.75rem; text-align: center; background: rgba(10, 10, 15, 0.55); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(99, 102, 241, 0.35); border-radius: 14px; }
-        .signup-lede { color: var(--color-text-muted); font-size: 0.88rem; line-height: 1.5; max-width: 52ch; }
-        .signup-lede strong { color: var(--color-text); font-weight: 600; }
-        .signup form { display: flex; gap: 0.5rem; justify-content: center; width: 100%; max-width: 420px; }
-        .signup input[type=email] { flex: 1 1 auto; min-width: 0; padding: 0.6rem 0.85rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.12); background: rgba(0,0,0,0.35); color: var(--color-text); font: inherit; font-size: 0.9rem; }
-        .signup input:focus { outline: none; border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-glow); }
+        .signup { margin: 0 0 1.25rem; padding: 0.6rem; background: rgba(10, 10, 15, 0.55); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; }
+        .signup form { display: flex; gap: 0.5rem; }
+        .signup input[type=email] { flex: 1 1 auto; min-width: 0; padding: 0.6rem 0.85rem; border-radius: 10px; border: 0; background: none; color: var(--color-text); font: inherit; font-size: 0.92rem; }
+        .signup input::placeholder { color: var(--color-text-muted); }
+        .signup:focus-within { border-color: rgba(99, 102, 241, 0.5); }
+        .signup input:focus { outline: none; }
         .signup button { padding: 0.6rem 1.1rem; border: 0; border-radius: 10px; background: var(--color-accent); color: #fff; font: inherit; font-weight: 600; font-size: 0.9rem; cursor: pointer; }
         .signup button:hover { filter: brightness(1.1); }
-        .signup-latest { font-size: 0.8rem; color: var(--color-text-muted); }
-        .signup-latest a { color: var(--color-text); text-decoration: none; border-bottom: 1px solid rgba(99, 102, 241, 0.5); }
-        .signup-latest a:hover { color: var(--color-accent); }
-
-        /* For 30 days after something is published, its card says so in
-           place of its usual description, and links straight to it. */
         .signup .hp { position: absolute; left: -9999px; }
     </style>
 </head>
@@ -439,14 +436,12 @@
         </div>
 
         <section class="signup" id="join">
-            <p class="signup-lede"><strong>Get the updates</strong> &mdash; new papers, short films and chapters of <em>Reasonable Wonder</em>. A few emails a month at most.</p>
             <form method="post" action="https://list.attieretief.com/subscription/form">
                 <input type="hidden" name="l" value="6f83ed13-26dc-474d-849c-986742cb40dd">
                 <input type="text" name="nonce" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-                <input type="email" name="email" placeholder="you@example.com" required autocomplete="email" aria-label="Email">
+                <input type="email" name="email" placeholder="Email me new papers, films and chapters" required autocomplete="email" aria-label="Email address for updates: new papers, short films and chapters of Reasonable Wonder">
                 <button type="submit">Subscribe</button>
             </form>
-            <p class="signup-latest" id="latest" hidden></p>
         </section>
 
         <div class="links">
@@ -595,38 +590,6 @@
                 });
             });
         }
-    </script>
-    <script>
-        // The newest item in feed.json (built by feed/build.js), under the
-        // signup form. The full list lives at /updates/.
-        (function () {
-            const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-            function shortDate(iso) {
-                const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
-                return m ? Number(m[3]) + " " + MONTHS[Number(m[2]) - 1] : iso;
-            }
-
-            fetch("/feed.json", { cache: "no-cache" })
-                .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-                .then((feed) => {
-                    if (!feed.length) return;
-
-                    const newest = feed[0];
-                    const latest = document.getElementById("latest");
-                    const link = document.createElement("a");
-                    link.href = newest.url;
-                    link.textContent = newest.title;
-                    if (!newest.url.startsWith("https://attieretief.com")) {
-                        link.target = "_blank";
-                        link.rel = "noopener";
-                    }
-                    latest.append("Latest: ", link, " \u00b7 " + shortDate(newest.date));
-                    latest.hidden = false;
-                })
-                // No feed, no line; the page is complete without it.
-                .catch(() => {});
-        })();
     </script>
     <script data-goatcounter="https://attieretief.goatcounter.com/count"
             async src="//gc.zgo.at/count.js"></script>
