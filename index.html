@@ -425,8 +425,6 @@
 
         /* For 30 days after something is published, its card says so in
            place of its usual description, and links straight to it. */
-        .link-desc { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .link-desc .new { color: var(--color-accent); font-weight: 600; margin-right: 0.35rem; }
         .signup .hp { position: absolute; left: -9999px; }
     </style>
 </head>
@@ -599,36 +597,14 @@
         }
     </script>
     <script>
-        // feed.json (built by feed/build.js) drives two quiet signals: the
-        // newest item under the signup form, and, on every card with something
-        // published in the last 30 days, that item in place of the card's
-        // description, with the card linking to it. After 30 days the card
-        // reverts by itself. The full list lives at /updates/.
+        // The newest item in feed.json (built by feed/build.js), under the
+        // signup form. The full list lives at /updates/.
         (function () {
-            const FRESH_DAYS = 30;
             const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
                             "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-            // Feed source -> the card it belongs to (matched on href).
-            const CARD = {
-                video: "https://video.attieretief.com",
-                research: "/research/",
-                projects: "/projects/",
-                writing: "/writing/",
-                music: "/music/",
-                genealogy: "/genealogy/",
-                book: "/cosmic-wonder/",
-            };
-
             function shortDate(iso) {
                 const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
                 return m ? Number(m[3]) + " " + MONTHS[Number(m[2]) - 1] : iso;
-            }
-
-            // news items carry no card of their own; place them by URL.
-            function cardFor(item) {
-                if (CARD[item.source]) return CARD[item.source];
-                const path = item.url.replace(/^https:\/\/attieretief\.com/, "");
-                return Object.values(CARD).find((href) => href.startsWith("/") && path.startsWith(href));
             }
 
             fetch("/feed.json", { cache: "no-cache" })
@@ -647,29 +623,8 @@
                     }
                     latest.append("Latest: ", link, " \u00b7 " + shortDate(newest.date));
                     latest.hidden = false;
-
-                    const cutoff = new Date(Date.now() - FRESH_DAYS * 864e5).toISOString().slice(0, 10);
-                    const marked = new Set();
-                    for (const item of feed) {
-                        if (item.date < cutoff) break;
-                        const href = cardFor(item);
-                        if (!href || marked.has(href)) continue;
-                        const card = document.querySelector('.link-card[href="' + href + '"]');
-                        if (!card) continue;
-                        marked.add(href);
-                        card.href = item.url;
-                        const external = !item.url.startsWith("https://attieretief.com");
-                        card.target = external ? "_blank" : "";
-                        card.rel = external ? "noopener" : "";
-                        const desc = card.querySelector(".link-desc");
-                        const tag = document.createElement("span");
-                        tag.className = "new";
-                        tag.textContent = "New";
-                        desc.replaceChildren(tag, item.title);
-                        desc.title = item.title;
-                    }
                 })
-                // No feed, no signals; the page is complete without them.
+                // No feed, no line; the page is complete without it.
                 .catch(() => {});
         })();
     </script>
