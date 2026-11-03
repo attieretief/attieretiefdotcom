@@ -459,6 +459,22 @@ const ADAPTERS = [
  * unguarded it silently shrinks the published feed. (It already did once: the
  * Actions token 403'd on the gists API and the feed lost all 13 scores.)
  */
+/**
+ * Sources whose upstream is a third party that flaps for days at a time. When
+ * the fetch itself fails (an HTTP error, not an empty feed), their items from
+ * the last run are kept instead of tripping the regression guard below, and the
+ * run emits an Actions warning. YouTube's channel Atom feed returned 404/500 on
+ * every daily run from 23 Oct 2026, which froze the whole feed for 12 days.
+ * An adapter that answers cleanly with zero items still trips the guard.
+ */
+const CARRY_FORWARD = new Set(['video']);
+
+function previousItems(source) {
+    const previous = readFile('feed.json');
+    if (!previous) return [];
+    return JSON.parse(previous).filter((item) => item.source === source);
+}
+
 function checkForRegression(counts) {
     const previous = readFile('feed.json');
     if (!previous) return [];
@@ -478,7 +494,15 @@ async function main() {
             for (const item of got) counts[item.source] = (counts[item.source] || 0) + 1;
             console.log(`${name.padEnd(11)} ${String(got.length).padStart(3)} items`);
         } catch (err) {
-            console.log(`${name.padEnd(11)}   – skipped: ${err.message}`);
+            const kept = CARRY_FORWARD.has(name) ? previousItems(name) : [];
+            if (kept.length) {
+                items.push(...kept);
+                counts[name] = kept.length;
+                console.log(`${name.padEnd(11)} ${String(kept.length).padStart(3)} items (carried forward: ${err.message})`);
+                console.log(`::warning::${name} source unreachable (${err.message}); kept last run's ${kept.length} items`);
+            } else {
+                console.log(`${name.padEnd(11)}   – skipped: ${err.message}`);
+            }
         }
     }
 
