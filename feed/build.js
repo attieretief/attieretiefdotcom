@@ -458,13 +458,29 @@ const ADAPTERS = [
  * source going quiet is not "one source being down" — it is a break, and left
  * unguarded it silently shrinks the published feed. (It already did once: the
  * Actions token 403'd on the gists API and the feed lost all 13 scores.)
+ *
+ * One miss is tolerated: YouTube's channel feed 404s on some days and is back
+ * the next (Nov 2026: runs 108, 109, 112). The lost source's last items are
+ * carried forward, marked `carried`, so the feed stays whole and the other
+ * sources still refresh. A source that was already carried and is still
+ * missing is a break, and the run refuses to write.
  */
 function checkForRegression(counts) {
     const previous = readFile('feed.json');
-    if (!previous) return [];
-    const before = new Set();
-    for (const item of JSON.parse(previous)) before.add(item.source);
-    return [...before].filter((source) => !counts[source]);
+    if (!previous) return { carry: [], broken: [] };
+    const before = new Map();
+    for (const item of JSON.parse(previous)) {
+        if (!before.has(item.source)) before.set(item.source, []);
+        before.get(item.source).push(item);
+    }
+    const carry = [];
+    const broken = [];
+    for (const [source, prior] of before) {
+        if (counts[source]) continue;
+        if (prior.some((item) => item.carried)) broken.push(source);
+        else carry.push(...prior.map((item) => ({ ...item, carried: true })));
+    }
+    return { carry, broken };
 }
 
 async function main() {
@@ -484,11 +500,15 @@ async function main() {
 
     const produced = Object.keys(counts).length;
 
-    const lost = checkForRegression(counts);
-    if (lost.length) {
-        console.error(`\nRefusing to write: ${lost.join(', ')} produced items last run and none now.`);
+    const { carry, broken } = checkForRegression(counts);
+    if (broken.length) {
+        console.error(`\nRefusing to write: ${broken.join(', ')} missing two runs running.`);
         process.exit(1);
     }
+    for (const source of new Set(carry.map((item) => item.source))) {
+        console.log(`${source.padEnd(11)}   ↻ carried forward from last run (one miss tolerated)`);
+    }
+    items.push(...carry);
 
     // Two-tier de-duplication. Within a source, an item is identified by URL +
     // title + date: research/ emits several events for one paper — submitted,
